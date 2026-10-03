@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[margin=22mm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,amsmath,amssymb,booktabs,longtable,graphicx,microtype,array}
@@ -9,18 +9,35 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{4pt}
 \setlength{\emergencystretch}{2em}
-\pagestyle{fancy}\fancyhf{}\lhead{Tree-Type Neural Networks Revisited}\rhead{2025EEA3026}\cfoot{\thepage}
+\pagestyle{fancy}\fancyhf{}\lhead{Tree-Type Neural Networks}\rhead{2025EEA3026}\cfoot{\thepage}
 \newcommand{\ind}{\mathbf{1}}
-\title{Tree-Type Neural Networks Revisited\\[3pt]\large Neural correction nodes, interpolation and compression\\on CIFAR-10 and Cats vs Dogs}
-\author{Durgesh Singh\\2025EEA3026\\Department of Electrical Engineering, IIT Delhi}
-\date{3 October 2026}
 \begin{document}
-\maketitle\thispagestyle{empty}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+{\Large \textbf{ASSIGNMENT 4}}\\[2cm]
+{\large \textbf{MACHINE LEARNING AND OPTIMIZATION (ELL7285)}}\\[1cm]
+{\Large \textbf{TREE-TYPE NEURAL NETWORKS}}\\[0.4cm]
+{\large Neural correction nodes, interpolation and compression\\on CIFAR-10 and Cats vs Dogs}\\[2cm]
+
+\textbf{Submitted by}\\[0.5cm]
+{\large Durgesh Singh (2025EEA3026)}\\[2cm]
+
+\textbf{Under the guidance of}\\[0.2cm]
+{\large Prof. Jayadeva}\\[2cm]
+
+\textit{In partial fulfilment of the requirements for the award of the degree of}\\[0.3cm]
+\textbf{Master of Technology}\\[1.5cm]
+
+\IfFileExists{iitd_logo.png}{\includegraphics[width=0.25\linewidth]{iitd_logo.png}\\[1cm]}{\vspace{2cm}}
+Department of Electrical Engineering\\[0.2cm]
+\textbf{Indian Institute of Technology Delhi}\\[0.5cm]
+\textbf{October 2026}
+\end{titlepage}
 \begin{abstract}
 This assignment implements the correction-tree construction from the class notes using small neural networks at every learned node. A frozen ImageNet-pretrained MobileNetV3-Small supplies a shared 576-dimensional representation. Children learn the false-negative and false-positive correction tasks of their parent; a constrained logistic output refit combines their decisions. Across three training seeds, trees with hidden width 16 on CIFAR-10 and width 8 on Cats vs Dogs achieve zero training errors on 45,000 and 17,476 images, respectively. Greedy pruning retains perfect training fit and reduces these models to 11--12 nodes and two nodes. Their mean test accuracies are 88.09\% and 97.52\%; a two-node width-16 Cats vs Dogs model reaches 97.85\%. Wider root-only CIFAR-10 networks generalize better. The width sweeps repeatedly show a validation-log-loss peak near interpolation followed by a decline, but do not establish classic double descent in classification error. Node visualizations, root-refitting controls and exact prediction-skipping bounds clarify what the branches contribute and what they do not.
 \end{abstract}
-\textbf{Private GitHub repository:} \input{repository.tex}
-
+\textbf{GitHub repository:} \input{repository.tex}
 \section{Question, approach and relation to the earlier assignment}
 The earlier assignment asked for a generic optimization formulation of a tree whose nodes can themselves be classifiers. The present task additionally requires neural nodes, near-perfect image-training accuracy, a search for double descent, receptive-field visualizations and size reduction. The structure used here follows the supplied class note \cite{class}: children \emph{correct a parent's decisions}. It is not a conventional decision tree that sends each image down exactly one path.
 
@@ -172,7 +189,6 @@ All nodes consume the same globally pooled features. They therefore do not acqui
 
 $A.B$ is a negative correction for the \emph{local task of $A$}; its high activation on a dog does not mean the system has discovered a ``cat detector.'' The grandchild is subsequently pruned without loss of training fit or reported validation accuracy. Visual prominence does not imply that a node is necessary in the final composed classifier. These few top-ranked examples do not establish a general semantic specialization.
 
-\clearpage
 \subsection{CIFAR-10: the bird tree and a non-activating example}
 \begin{center}
 \includegraphics[width=.94\linewidth]{figures/cifar_class_2.png}\\[2mm]
@@ -196,10 +212,7 @@ The highest-ranked example shown for $A$ is an aircraft with local score $-0.485
 
 \section{Future directions and reproducibility}
 The next useful experiments would be: (i) compare flat and branched heads at explicitly matched parameter and optimization budgets; (ii) hold topology fixed while sweeping width, with denser sampling near interpolation; (iii) fit calibration on a separate validation subset to distinguish confidence changes from classification changes; (iv) compress or replace the trunk, since it dominates the compact binary model; and (v) evaluate node sensitivities on matched images, including corrected and spoiled cases, rather than only top activations. A small shared trunk trained from scratch would quantify dependence on ImageNet transfer.
-
-The accompanying package contains unchanged experiment core files, the cleaned-data tests, control/finalization helpers, run configurations, split/exclusion manifests, prediction audits, confusion matrices, all figures, CSV summaries and this LaTeX source. Original pre-cleaning core source is retained under \texttt{provenance/source\_v0\_1} for the earlier baseline records. Binary checkpoints, downloaded datasets and feature caches remain on the experiment machine and are not included in this report bundle. The README gives commands to regenerate them into a separate results directory; they must not overwrite the recorded experiment evidence. Exact bitwise reproduction across different backends/library versions is not guaranteed.
-
-The final protocol is \texttt{results/final\_evaluation\_protocol.json}. The full per-model evidence is in each run's \texttt{metrics.json}; the table/plot builder reads these files without training. The private repository URL is given on the first page. Evaluator access must be granted before submission; an invitation or access confirmation is not included in this package.
+\clearpage
 
 \begingroup\footnotesize
 \begin{thebibliography}{9}

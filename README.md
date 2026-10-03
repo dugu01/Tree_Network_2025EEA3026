@@ -1,14 +1,12 @@
-# Tree-Type Neural Networks Revisited — 2025EEA3026
+# Tree-Type Neural Networks — 2025EEA3026
 
 Durgesh Singh, IIT Delhi. Results compiled 3 October 2026.
 
-The experiments are complete. The private repository is
-https://github.com/dugu01/Tree_Network_Revisited_2025EEA3026.
-**Evaluator access must still be granted before submission.**
+The experiments are complete.
 
 ## Start here
 
-- `Tree_Network_Revisited_Report.pdf`: curated 11-page report, including exact test counts.
+- `Tree_Network_2025EEA3026_Report.pdf`: curated 12-page report, including exact test counts.
 - `report/main.tex`: editable LaTeX source; compile inside `report/`.
 - `report/figures/`, `report/tables/`: report assets and numeric CSV summaries.
 - `results/`: original experiment evidence, including all sweep points and 48 final test evaluations.
@@ -46,7 +44,6 @@ With the Python environment active:
 python extras/build_submission.py
 cd report
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
-pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 The output is `report/main.pdf`. Alternatively, upload the entire `report/` folder
@@ -54,7 +51,7 @@ to Overleaf and compile `main.tex`; all generated assets are included.
 
 The repository address is stored in `report/repository.tex` and included in the
 compiled PDF. After rebuilding, copy `report/main.pdf` to
-`Tree_Network_Revisited_Report.pdf`. The URL alone does not grant access: invite
+`Tree_Network_2025EEA3026_Report.pdf`. The URL alone does not grant access: invite
 the evaluator to the private repository before submission.
 
 `python run.py report` is the original automatic working-report generator. For the

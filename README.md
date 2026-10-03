@@ -44,6 +44,7 @@ With the Python environment active:
 python extras/build_submission.py
 cd report
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 The output is `report/main.pdf`. Alternatively, upload the entire `report/` folder
@@ -51,12 +52,19 @@ to Overleaf and compile `main.tex`; all generated assets are included.
 
 The repository address is stored in `report/repository.tex` and included in the
 compiled PDF. After rebuilding, copy `report/main.pdf` to
-`Tree_Network_2025EEA3026_Report.pdf`. The URL alone does not grant access: invite
-the evaluator to the private repository before submission.
+`Tree_Network_2025EEA3026_Report.pdf`.
 
 `python run.py report` is the original automatic working-report generator. For the
 curated final report, use `extras/build_submission.py` and the commands above.
 It is safe to regenerate tables: measurements always come from saved JSON files.
+
+## Checkpoints
+
+Trained head checkpoints for the Cats vs Dogs models are in `checkpoints/`
+(CHOOSE: or "are not included"). The larger CIFAR-10 checkpoints are not
+committed to git; they are attached to the repository's Releases page as
+`cifar10_checkpoints.zip` (CHOOSE: or "remain on the experiment machine").
+Dataset images and feature caches are never committed.
 
 ## Reproduce training in a clean environment
 

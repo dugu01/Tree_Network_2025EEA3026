@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "basis": "Three-seed training/validation sweep; no test scores used to choose this set.",
+  "interpretation": "Tree/pruned interpolation comparisons are reported alongside root controls; do not select models retrospectively using test scores.",
+  "pruning": "Greedy subtree removal: zero training-accuracy drop and at most 0.5 percentage-point validation drop from the unpruned model.",
+  "within_run_selection": "Existing finalize rule: highest validation accuracy, then fewer total parameters; all four variants receive test evaluation.",
+  "seed_policy": "17,29,43 for the three branched configurations; seed 17 fixed for the additional root-only comparators and visual examples.",
+  "core_source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+  "helper_sha256": "6f131f49ed6ba809170ca77e5b6cb2ce0c659d261d01879e5e1718de2e039065",
+  "runs": [
+    {
+      "dataset": "cifar10",
+      "width": 16,
+      "seed": 17,
+      "role": "branched comparison",
+      "run": "cifar10/main/sweep_capacity_clean_v1_w16_s17",
+      "root_checkpoint_sha256": "8a58868efc8fe22426b9e5edbb95a597cd3a9daec0ec11e65abfbb2e48a524f1",
+      "tree_checkpoint_sha256": "cfa3bbf5a434956bb6d4d599808eb2c2e6e6bf647bd99925134baf59cb7b6620",
+      "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb"
+    },
+    {
+      "dataset": "cifar10",
+      "width": 16,
+      "seed": 29,
+      "role": "branched comparison",
+      "run": "cifar10/main/sweep_capacity_clean_v1_w16_s29",
+      "root_checkpoint_sha256": "7a8e939e0e2a709ec6a7580bcf760bebab18aea995dd62a7d83fcd2084038401",
+      "tree_checkpoint_sha256": "cd67d24bb09b61cc3b5565e5f78f9a149071b6854690617b0d5b7cb563432759",
+      "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb"
+    },
+    {
+      "dataset": "cifar10",
+      "width": 16,
+      "seed": 43,
+      "role": "branched comparison",
+      "run": "cifar10/main/sweep_capacity_clean_v1_w16_s43",
+      "root_checkpoint_sha256": "a873fb37ba6689313eddafa3129525150ddc40b257abb5c89b5d63a215c584af",
+      "tree_checkpoint_sha256": "3f00f41d6d363773a550c4c3730393296fac1e143943f48fda4ea717b8bfbd44",
+      "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 8,
+      "seed": 17,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w8_s17",
+      "root_checkpoint_sha256": "8334e7bb5c215314bbc5491de85aaf5bb1bf538106db1a3e7ab9141f496a9f31",
+      "tree_checkpoint_sha256": "b5c414b7c6f4ab94a8fefa5cde272022ef3ec7cc1a7971f48d4143a0ecebb8f7",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 8,
+      "seed": 29,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w8_s29",
+      "root_checkpoint_sha256": "d0bd3c3bce4edf2b66c3f1428659dca05be4eebbdfda758aa408bfe6b6fc8840",
+      "tree_checkpoint_sha256": "c90a9ac8bac5c3b0728c9f75517af99e4708b2220abfe79a6fdf27c2d4816370",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 8,
+      "seed": 43,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w8_s43",
+      "root_checkpoint_sha256": "a4f3b649b30b1713e5e9ef9e9b978939687e667f5fc23e06257611339ead93ce",
+      "tree_checkpoint_sha256": "2c490cc9a65495f6fa5af05c379833b213fa6b07f9623e4466e43bca9dc44c60",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 16,
+      "seed": 17,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w16_s17",
+      "root_checkpoint_sha256": "ad3ab21bd613453345babc83575dcaf58f8eb5dde43f46f50114c8f2fc90a2fc",
+      "tree_checkpoint_sha256": "76b17496f478ed69bbe33ff91c6720f2236faa54a4c9c00bbe6791d7bb305226",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 16,
+      "seed": 29,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w16_s29",
+      "root_checkpoint_sha256": "a597ba6cc64047e281519d8fc386924e42eff93c5f08c5299defc281fda8239f",
+      "tree_checkpoint_sha256": "2e9bfa6322a9827177e596ac94c6bf6c2287398a2ea5dbcc7377ae7266823922",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 16,
+      "seed": 43,
+      "role": "branched comparison",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w16_s43",
+      "root_checkpoint_sha256": "bc48574ed0edfac695d100ecca3b21ae040abef19ebf677aba4cfe90f5ab357a",
+      "tree_checkpoint_sha256": "9daed9fbda5fd3fa157de054b250b1e879f4b950e7a204e1f9dca9678a9a1e6b",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    },
+    {
+      "dataset": "cifar10",
+      "width": 64,
+      "seed": 17,
+      "role": "smaller root-only comparator",
+      "run": "cifar10/main/sweep_capacity_clean_v1_w64_s17",
+      "root_checkpoint_sha256": "6a73ebad99cca4e0aebc870dde1f72c26ad851b12d7dc2dc4c05acf3c035c0e7",
+      "tree_checkpoint_sha256": "9c52e212a660613b58b13d77b188081df7b325af6309a4c7921aa12b8525565a",
+      "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb"
+    },
+    {
+      "dataset": "cifar10",
+      "width": 256,
+      "seed": 17,
+      "role": "highest mean validation accuracy in CIFAR sweep",
+      "run": "cifar10/main/sweep_capacity_clean_v1_w256_s17",
+      "root_checkpoint_sha256": "f5d51d24d81d98e531d642dbc8e81376c10f97261a03af9f4f18ed7defc5c185",
+      "tree_checkpoint_sha256": "a09e7afd72b9257dfe6964e5df19aa57f33d49cc625cdc25d60f5659926ab200",
+      "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb"
+    },
+    {
+      "dataset": "catsdogs",
+      "width": 32,
+      "seed": 17,
+      "role": "root-only comparator for seed 17",
+      "run": "catsdogs/main/sweep_capacity_clean_v1_w32_s17",
+      "root_checkpoint_sha256": "e99918f7a94a2306a4df8192ffcccff37d7a6df2e5b3cda5894936854cbebd4a",
+      "tree_checkpoint_sha256": "beecab73f9877c0df05650a1aba9e1ec3fccc0c2c2d99e8afaa93132f79a1901",
+      "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb"
+    }
+  ]
+}

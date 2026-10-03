@@ -1,0 +1,101 @@
+{
+  "dataset": "catsdogs",
+  "profile": "main",
+  "kind": "pruned",
+  "config": {
+    "width": 8,
+    "depth": 2,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 43,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb",
+  "head_parameters": 9251,
+  "trunk_parameters": 927008,
+  "nodes": 2,
+  "train": {
+    "accuracy": 1.0,
+    "errors": 0,
+    "n": 17476,
+    "log_loss": 2.919572704373668e-05,
+    "seconds": 0.0031544579978799447
+  },
+  "val": {
+    "accuracy": 0.9770360480640854,
+    "errors": 86,
+    "n": 3745,
+    "log_loss": 0.30430946527318214,
+    "seconds": 0.0011209590011276305
+  },
+  "training_seconds": 0.02674858299724292,
+  "test": {
+    "accuracy": 0.9735647530040054,
+    "errors": 99,
+    "n": 3745,
+    "log_loss": 0.33740213689952214,
+    "seconds": 0.0011913749913219362,
+    "confusion_matrix": [
+      [
+        1816,
+        56
+      ],
+      [
+        43,
+        1830
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 936259,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 3782,
+    "full_node_example_evaluations": 7490,
+    "fraction_saved": 0.49506008010680913,
+    "median_seconds": {
+      "full": 0.0007125829870346934,
+      "certified": 0.0004042080108774826
+    }
+  },
+  "pruning_events": [
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.9770360480640854
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9998283360036622,
+      "val_accuracy": 0.9770360480640854
+    }
+  ],
+  "test_evaluation_note": "Evaluation after within-run validation selection was frozen; do not tune against these test results."
+}

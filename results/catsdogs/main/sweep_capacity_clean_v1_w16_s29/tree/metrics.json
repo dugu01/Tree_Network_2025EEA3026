@@ -1,0 +1,85 @@
+{
+  "dataset": "catsdogs",
+  "profile": "main",
+  "kind": "tree",
+  "config": {
+    "width": 16,
+    "depth": 2,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 29,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb",
+  "head_parameters": 27749,
+  "trunk_parameters": 927008,
+  "nodes": 3,
+  "train": {
+    "accuracy": 1.0,
+    "errors": 0,
+    "n": 17476,
+    "log_loss": 2.4608128501841057e-05,
+    "seconds": 0.0056379999878117815
+  },
+  "val": {
+    "accuracy": 0.9783711615487316,
+    "errors": 81,
+    "n": 3745,
+    "log_loss": 0.2218644577332053,
+    "seconds": 0.0013054160081082955
+  },
+  "training_seconds": 2.408589917002246,
+  "test": {
+    "accuracy": 0.9775700934579439,
+    "errors": 84,
+    "n": 3745,
+    "log_loss": 0.22918277912238286,
+    "seconds": 0.0012575000000651926,
+    "confusion_matrix": [
+      [
+        1830,
+        42
+      ],
+      [
+        42,
+        1831
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 954757,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 3785,
+    "full_node_example_evaluations": 11235,
+    "fraction_saved": 0.6631063640409435,
+    "median_seconds": {
+      "full": 0.001095875006285496,
+      "certified": 0.000413708999985829
+    }
+  },
+  "test_evaluation_note": "Evaluation after within-run validation selection was frozen; do not tune against these test results."
+}

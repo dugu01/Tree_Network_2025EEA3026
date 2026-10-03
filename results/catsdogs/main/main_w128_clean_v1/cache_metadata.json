@@ -1,0 +1,50 @@
+{
+  "request": {
+    "dataset": "catsdogs",
+    "profile": "main",
+    "split_seed": 17,
+    "encoder": "mobilenet_v3_small_IMAGENET1K_V1_features_avgpool",
+    "caps": {
+      "train": 0,
+      "val": 0,
+      "test": 0
+    },
+    "data_root": "/Users/doodle/Downloads/Tree_Network_Revisited_2025EEA3026/data",
+    "cats_root": "/Users/doodle/Downloads/Tree_Network_Revisited_2025EEA3026/data",
+    "cleaning_policy": "decoded_sha256_exclude_all_label_conflicts_v1"
+  },
+  "dataset": "catsdogs",
+  "profile": "main",
+  "classes": [
+    "cat",
+    "dog"
+  ],
+  "counts": {
+    "train": 17476,
+    "val": 3745,
+    "test": 3745
+  },
+  "feature_dim": 576,
+  "trunk_parameters": 927008,
+  "device": "mps",
+  "seconds": 79.03904362499452,
+  "file_hashes": {
+    "train_X.npy": "faccf71236811049d785c7cdb506e45675f5a09c92252c815e6d7829cba7baad",
+    "train_y.npy": "8a871d839e8466f06a063586c86899ee477ccb5a47df85eb4b15efe8a76de6db",
+    "val_X.npy": "736817bd604bbc9631d0b962dc284c62f9e4739d1b9db5034e73b85a1f964e13",
+    "val_y.npy": "aafc73812bb9317114072968177871fcd91f1dabc340dfb9dd99cc496e7e4790",
+    "test_X.npy": "a77453f0658e3a4b6a9d1f54ecf1d15cd6ec70c72e540952c3fcaf297d023be7",
+    "test_y.npy": "72b745a8b79a210f5da0509874b23a1a917120e798af22a13b0b5b069f5fcbc1"
+  },
+  "manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb",
+  "excluded_count": 34,
+  "pretraining": "ImageNet-1K supervised; external data used",
+  "normalization": "official pretrained weights transforms",
+  "cleaning_policy": "decoded_sha256_exclude_all_label_conflicts_v1",
+  "exclusion_counts": {
+    "conflicting labels for identical decoded image": 6,
+    "duplicate decoded image": 26,
+    "unreadable image": 2
+  },
+  "conflicting_groups": 2
+}

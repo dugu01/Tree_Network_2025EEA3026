@@ -1,0 +1,94 @@
+{
+  "test_arrays_read": false,
+  "split_id_overlap": false,
+  "feature_checksums_verified": true,
+  "feature_extraction_seconds": 109.44230466700537,
+  "feature_extraction_device": "mps",
+  "counts": {
+    "train": 45000,
+    "val": 5000,
+    "test": 10000
+  },
+  "comparisons": {
+    "train": {
+      "root_to_root_refit": {
+        "prediction_disagreements": 1,
+        "corrected": 1,
+        "spoiled": 0
+      },
+      "root_refit_to_tree": {
+        "prediction_disagreements": 2,
+        "corrected": 2,
+        "spoiled": 0
+      },
+      "tree_to_pruned": {
+        "prediction_disagreements": 0,
+        "corrected": 0,
+        "spoiled": 0
+      }
+    },
+    "val": {
+      "root_to_root_refit": {
+        "prediction_disagreements": 72,
+        "corrected": 18,
+        "spoiled": 30
+      },
+      "root_refit_to_tree": {
+        "prediction_disagreements": 74,
+        "corrected": 19,
+        "spoiled": 40
+      },
+      "tree_to_pruned": {
+        "prediction_disagreements": 0,
+        "corrected": 0,
+        "spoiled": 0
+      }
+    }
+  },
+  "metrics_recomputed_from_checkpoints": {
+    "train": {
+      "root": {
+        "errors": 3,
+        "n": 45000,
+        "accuracy": 0.9999333333333333
+      },
+      "root_refit": {
+        "errors": 2,
+        "n": 45000,
+        "accuracy": 0.9999555555555556
+      },
+      "tree": {
+        "errors": 0,
+        "n": 45000,
+        "accuracy": 1.0
+      },
+      "pruned": {
+        "errors": 0,
+        "n": 45000,
+        "accuracy": 1.0
+      }
+    },
+    "val": {
+      "root": {
+        "errors": 525,
+        "n": 5000,
+        "accuracy": 0.895
+      },
+      "root_refit": {
+        "errors": 537,
+        "n": 5000,
+        "accuracy": 0.8926
+      },
+      "tree": {
+        "errors": 558,
+        "n": 5000,
+        "accuracy": 0.8884
+      },
+      "pruned": {
+        "errors": 558,
+        "n": 5000,
+        "accuracy": 0.8884
+      }
+    }
+  }
+}

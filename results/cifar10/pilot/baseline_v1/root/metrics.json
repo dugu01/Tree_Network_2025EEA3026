@@ -1,0 +1,68 @@
+{
+  "dataset": "cifar10",
+  "profile": "pilot",
+  "kind": "root",
+  "config": {
+    "width": 64,
+    "depth": 0,
+    "epochs": 30,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 17,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": false,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "d044b2b5a83456cf0f02310f560165eeb638af42805289dabca0f86481617ed5",
+  "head_parameters": 369930,
+  "trunk_parameters": 927008,
+  "nodes": 10,
+  "train": {
+    "accuracy": 0.99,
+    "errors": 20,
+    "n": 2000,
+    "log_loss": 0.035970170846199655,
+    "seconds": 0.0025209590021404438
+  },
+  "val": {
+    "accuracy": 0.87,
+    "errors": 65,
+    "n": 500,
+    "log_loss": 0.5180543446471068,
+    "seconds": 0.000964082995778881
+  },
+  "training_seconds": 0.5910778750039754,
+  "test": null,
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "c7c707c1e67d42656c3450f1d2b426e82b5bc9fe4942608c3f23d12ed716594a",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 1296938,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 5000,
+    "full_node_example_evaluations": 5000,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.0007310829969355837,
+      "certified": 0.0007619999960297719
+    }
+  }
+}

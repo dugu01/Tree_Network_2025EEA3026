@@ -1,0 +1,68 @@
+{
+  "dataset": "catsdogs",
+  "profile": "main",
+  "kind": "root",
+  "config": {
+    "width": 4,
+    "depth": 0,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 43,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb",
+  "head_parameters": 2313,
+  "trunk_parameters": 927008,
+  "nodes": 1,
+  "train": {
+    "accuracy": 0.9985122453650721,
+    "errors": 26,
+    "n": 17476,
+    "log_loss": 0.009170698361263495,
+    "seconds": 0.0014563330041710287
+  },
+  "val": {
+    "accuracy": 0.9770360480640854,
+    "errors": 86,
+    "n": 3745,
+    "log_loss": 0.07875273316520927,
+    "seconds": 0.0010638329986250028
+  },
+  "training_seconds": 1.3100172080012271,
+  "test": null,
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 929321,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 3745,
+    "full_node_example_evaluations": 3745,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.0007424170034937561,
+      "certified": 0.0006533340056193992
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "dataset": "catsdogs",
+  "profile": "main",
+  "kind": "root_refit",
+  "config": {
+    "width": 32,
+    "depth": 0,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 17,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "89cab25f46f76e89032349bb940f8aefa751d56ddc7d0f85c88cd530fbe8c5eb",
+  "head_parameters": 18497,
+  "trunk_parameters": 927008,
+  "nodes": 1,
+  "train": {
+    "accuracy": 1.0,
+    "errors": 0,
+    "n": 17476,
+    "log_loss": 9.023006610697151e-06,
+    "seconds": 0.0024505000037606806
+  },
+  "val": {
+    "accuracy": 0.9791722296395193,
+    "errors": 78,
+    "n": 3745,
+    "log_loss": 0.18738501362909787,
+    "seconds": 0.0004892080032732338
+  },
+  "training_seconds": 0.02928470900224056,
+  "test": {
+    "accuracy": 0.976502002670227,
+    "errors": 88,
+    "n": 3745,
+    "log_loss": 0.17462292380571723,
+    "seconds": 0.00034008400689344853,
+    "confusion_matrix": [
+      [
+        1826,
+        46
+      ],
+      [
+        42,
+        1831
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 945505,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 3745,
+    "full_node_example_evaluations": 3745,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.00035245800972916186,
+      "certified": 0.000349833004293032
+    }
+  },
+  "training_seconds_note": "Incremental output-refit and metric time only; original MLP training cost is separate.",
+  "control": "Original root MLP, frozen hidden layer, constrained logistic output refit; no children",
+  "test_evaluation_note": "Evaluation after within-run validation selection was frozen; do not tune against these test results."
+}

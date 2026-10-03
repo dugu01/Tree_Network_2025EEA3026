@@ -1,0 +1,226 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,booktabs,longtable,graphicx,microtype,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem,float}
+\usepackage{fancyhdr}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{fancy}\fancyhf{}\lhead{Tree-Type Neural Networks Revisited}\rhead{2025EEA3026}\cfoot{\thepage}
+\newcommand{\ind}{\mathbf{1}}
+\title{Tree-Type Neural Networks Revisited\\[3pt]\large Neural correction nodes, interpolation and compression\\on CIFAR-10 and Cats vs Dogs}
+\author{Durgesh Singh\\2025EEA3026\\Department of Electrical Engineering, IIT Delhi}
+\date{3 October 2026}
+\begin{document}
+\maketitle\thispagestyle{empty}
+\begin{abstract}
+This assignment implements the correction-tree construction from the class notes using small neural networks at every learned node. A frozen ImageNet-pretrained MobileNetV3-Small supplies a shared 576-dimensional representation. Children learn the false-negative and false-positive correction tasks of their parent; a constrained logistic output refit combines their decisions. Across three training seeds, trees with hidden width 16 on CIFAR-10 and width 8 on Cats vs Dogs achieve zero training errors on 45,000 and 17,476 images, respectively. Greedy pruning retains perfect training fit and reduces these models to 11--12 nodes and two nodes. Their mean test accuracies are 88.09\% and 97.52\%; a two-node width-16 Cats vs Dogs model reaches 97.85\%. Wider root-only CIFAR-10 networks generalize better. The width sweeps repeatedly show a validation-log-loss peak near interpolation followed by a decline, but do not establish classic double descent in classification error. Node visualizations, root-refitting controls and exact prediction-skipping bounds clarify what the branches contribute and what they do not.
+\end{abstract}
+\textbf{Private GitHub repository:} \input{repository.tex}
+
+\section{Question, approach and relation to the earlier assignment}
+The earlier assignment asked for a generic optimization formulation of a tree whose nodes can themselves be classifiers. The present task additionally requires neural nodes, near-perfect image-training accuracy, a search for double descent, receptive-field visualizations and size reduction. The structure used here follows the supplied class note \cite{class}: children \emph{correct a parent's decisions}. It is not a conventional decision tree that sends each image down exactly one path.
+
+The earlier supplied implementation defaulted to linear SVM nodes and heuristic correction weights. This implementation uses one-hidden-layer MLP nodes, a constrained output-layer optimization and an explicit acceptance check. Historical results in the previous submission are not treated as newly reproduced measurements. The present CIFAR-10 result also benefits from external ImageNet supervision, so it is not a controlled accuracy comparison with that earlier system.
+
+The practical choice was to spend image-processing effort once, cache the features, and study many inexpensive correction heads on an 8-GB M3 Mac. This makes the architecture and capacity study feasible without a large GPU. The investigation separates four questions: can branches remove residual training errors; do they improve held-out predictions; which branches remain necessary after fitting; and does increasing capacity produce the expected double-descent shape?
+
+\section{Architecture and optimization}
+\subsection{Shared features and small neural nodes}
+The encoder is the feature stack and global average pool of MobileNetV3-Small \cite{mobilepaper,mobile}, with its ImageNet classifier removed. It contains 927,008 frozen parameters. Official pretrained transforms resize to 256 pixels and centre-crop to $224\times224$, then apply ImageNet normalization. Upsampling CIFAR-10 does not recover missing detail. Cached vectors $z=\phi(x)\in\mathbb{R}^{576}$ are standardized by the training mean and standard deviation only; each standard deviation is floored at $10^{-5}$.
+
+At node $v$, with hidden width $h$,
+\begin{align}
+ r_v(z)&=\operatorname{ReLU}(W_vz+c_v), & s_v(z)&=u_v^\top r_v(z)+b_v,\\
+ F_v(z)&=s_v(z)+a_v H_A(z)-d_v H_B(z), & H_v(z)&=\ind[F_v(z)\geq0],\quad a_v,d_v\geq0.
+\end{align}
+An absent child contributes zero. Child decisions are themselves recursively corrected binary outputs. A node MLP has
+\begin{equation}
+P_{\mathrm{node}}=576h+h+h+1=578h+1
+\end{equation}
+parameters; each retained child connection adds one correction scalar. The count includes the trunk once, even though it is frozen. It excludes non-parameter buffers and Python/checkpoint overhead, so parameter reduction is not a direct measurement of file-size reduction.
+
+Cats vs Dogs uses one tree, with dog as class one. CIFAR-10 uses ten one-versus-rest (OVR) trees sharing the trunk and predicts $\arg\max_k F_k(z)$. Thus the multiclass implementation is a forest of correction trees. Correct binary classification for all OVR tasks is sufficient for a correct argmax, but is not necessary. A few local binary mistakes can coexist with zero multiclass training errors.
+
+\subsection{Targets inherited by the children}
+For each node's local labels $y_i\in\{0,1\}$, construct groups using its initial MLP prediction $\ind[s_v(z_i)\geq0]$:
+\begin{center}
+\begin{tabular}{ccccc}\toprule
+Group & Parent prediction & Desired label & Child $A$ target & Child $B$ target\\\midrule
+$C_1$ & 0 & 0 & 0 & don't care\\
+$C_2$ & 1 & 1 & don't care & 0\\
+$C_3$ & 0 & 1 & 1 & 0\\
+$C_4$ & 1 & 0 & 0 & 1\\\bottomrule
+\end{tabular}
+\end{center}
+$A$ repairs false negatives and excludes $C_2$ from its training set; $B$ repairs false positives and excludes $C_1$. Keeping the other groups teaches when a correction must remain inactive. Training children only on mistakes would omit this information. Growth stops at depth two, counting a root as depth zero, or when there are no errors or too few local examples. Single-class local targets use a constant decision.
+
+\subsection{Training and the constrained readout problem}
+Each MLP is trained by Adam on class-balanced binary cross-entropy (BCE). A class-$c$ example has weight $N/(2N_c)$. The final sweeps use learning rate $10^{-3}$, batch size 512, 100 epochs per learned node, no dropout or weight decay, and no stochastic image augmentation. These choices deliberately permit memorization. The shared encoder is never fine-tuned.
+
+Once children are trained, freeze the parent's hidden activations and child decisions. Refit the parent's output coefficients by
+\begin{align}
+\min_{u,b,a,d}\quad &\frac1N\sum_{i=1}^{N}\left[\log(1+e^{f_i})-y_if_i\right]
+ +\frac{\lambda}{2}\bigl(\|u\|_2^2+a^2+d^2\bigr),\label{eq:refit}\\
+\text{subject to}\quad &f_i=u^\top r_i+b+aH_A(z_i)-dH_B(z_i),\qquad a,d\geq0.
+\end{align}
+Here $\lambda=10^{-6}$; the bias is unregularized. This refit uses unweighted BCE, unlike the initial balanced MLP training. With fixed $r_i,H_A,H_B$, $f_i$ is affine in the unknowns and the logistic loss has second derivative $\sigma(f_i)(1-\sigma(f_i))\geq0$. The Hessian is a positive-semidefinite weighted Gram matrix plus the regularizer. Therefore this subproblem is convex on its feasible set. Representation learning and adaptive tree growth remain nonconvex.
+
+The code uses numerically stable logistic loss, analytic gradients and L-BFGS-B, with a 120-iteration cap; convergence information is recorded. A candidate is accepted only if its pair (number of training mistakes, unweighted BCE) is lexicographically better than the original parent. Rejected candidates lose their proposed children. A further float32 check prevents a rounding-induced increase in local error. This guarantees non-increase of accepted \emph{local error counts}; it does not guarantee preservation of every previously correct sample, improvement of multiclass argmax, or generalization.
+
+The class-note margin formulation can use $t_iF_i\geq1-q_i$, $q_i\geq0$, where $t_i=2y_i-1$. A positive $q_i$ signals a margin violation, which need not be a classification error. Equation~\eqref{eq:refit} is the smooth surrogate actually implemented; no claim is made that the code solves the original full mixed discrete/continuous margin problem globally.
+
+\section{Data, protocol and implementation checks}
+\begin{center}
+\begin{tabular}{lrrr}\toprule
+Dataset & Training & Validation & Test\\\midrule
+CIFAR-10 & 45,000 & 5,000 & 10,000\\
+Cats vs Dogs, cleaned & 17,476 & 3,745 & 3,745\\\bottomrule
+\end{tabular}
+\end{center}
+CIFAR-10 uses its official test set; 10\% of the official training set forms a stratified validation split \cite{cifar}. Cats vs Dogs uses the Microsoft PetImages archive \cite{cats}. Of 25,000 image files, two were unreadable, 26 were redundant same-label copies, and six belonged to two exact-pixel groups with conflicting labels. Every member of a conflicting group was excluded, before splitting. The remaining 24,966 images were stratified 70/15/15. Training contains 8,736 cats and 8,740 dogs; validation and test each contain 1,872 cats and 1,873 dogs. Exact RGB-pixel hashes include image dimensions. This does not detect near-duplicates or establish absence of overlap with ImageNet.
+
+The initial loader correctly detected conflicting labels but aborted preparation. It was revised to exclude entire ambiguous groups, record the reason for every excluded file, and preserve the original images. The final cleaning policy is included in cache metadata. The common split seed is 17; optimization seeds are 17, 29 and 43. There is one fixed split per dataset, so seed standard deviations measure optimization variability, not uncertainty over independent data splits.
+
+The CIFAR-10 sweep uses widths $2,4,8,16,32,64,128,256$; Cats vs Dogs uses $1,2,4,8,16,32,64,128$. This gives 48 width--seed configurations and 96 initial root/tree fits. Early stopping at zero errors is disabled in sweeps; ordinary pilot/main commands can stop early. Maximum depth, preprocessing and per-node epoch budget are fixed, but topology and total optimization work vary with width. The final comparison also includes a \emph{root + refit} control: retain the original root hidden layer and solve the same readout problem without children. This distinguishes branch effects from better output-layer optimization.
+
+A protocol chosen from training/validation results fixes 12 runs before final test evaluation: all three seeds for CIFAR-10 width 16 and Cats vs Dogs widths 8 and 16; seed 17 for CIFAR-10 widths 64 and 256 and Cats vs Dogs width 32. In each run, root, refitted root, tree and pruned variants receive test evaluation. Within-run validation selection is separately recorded (highest accuracy, then smallest parameter count); it can legitimately select a root-only model. The named tree comparisons below are prespecified scientific comparisons, not retrospectively selected test winners. Test scores were not used for another tuning round. Test features had already been cached; they did not fit the standardizer or the heads.
+
+The Mac records report MPS feature extraction and CPU head fitting with four threads. Main extraction took 109.44 seconds for CIFAR-10 and 79.04 seconds for Cats vs Dogs, excluding download/cleaning. Python 3.11.17, PyTorch 2.14.1 and torchvision 0.29.1 are recorded in the supplied run metadata. Cached-feature timings are not end-to-end image latency measurements.
+
+Validation includes 14 unit tests covering correction targets, refitting, forward agreement, pruning, certified predictions and data cleaning. The exported audit checks reloaded local checkpoints against recorded training/validation errors. During report preparation, all 472,268 exported rows across 15 audits were checked, and all 48 final test records agreed internally with their confusion-matrix totals. The report authoring environment did not rerun the user's unavailable image checkpoints; test verification here is an internal-consistency check of the exported evidence.
+
+\section{Results: interpolation, generalization and controls}
+\begin{table}[H]\centering\small
+\caption{Main controlled comparisons. Accuracy is mean $\pm$ sample SD in percent over seeds 17, 29 and 43. Training errors are the observed range across seeds. CIFAR-10 test size is 10,000; Cats vs Dogs test size is 3,745.}
+\begin{tabular}{lllrcc}\toprule
+Dataset & Width & Model & Train errors & Validation (\%) & Test (\%)\\\midrule
+\input{tables/main_rows.tex}
+\end{tabular}\label{tab:main}
+\end{table}
+The first tested width at which the \emph{tree} interpolates for every seed is 16 for CIFAR-10 and 8 for Cats vs Dogs. The root-only width-16 CIFAR models leave 1, 1 and 3 multiclass errors; their trees remove all of them. Root refitting alone leaves 1, 1 and 2. Similarly, Cats vs Dogs width-8 roots and refitted roots leave 5, 8 and 3 errors, while all trees fit perfectly. This supports a specific conclusion: these correction branches resolve residual training errors not removed by the chosen root-only refit. It does not show that no alternative optimizer could fit the smaller root.
+
+The held-out results give a different answer. CIFAR-10 width-16 trees average 88.10\% test accuracy versus 88.31\% for the corresponding roots. Cats vs Dogs width-8 trees average 97.52\% versus 97.59\% for the roots. The width-16 Cats vs Dogs trees average 97.85\%, a small increase over the roots' 97.82\%, with no strong superiority claim from three seeds. Exact interpolation is achieved, but fitting the final training exceptions need not improve generalization.
+
+For context, the prespecified seed-17 CIFAR root-only width-64 and width-256 models obtain 89.97\% and 90.29\% test accuracy, respectively. Their head sizes are 369,930 and 1,479,690 parameters. The width-256 root + refit obtains 90.30\%, but has lower validation accuracy than the original root; the 0.01-point test difference is not used to change selection. The seed-17 Cats vs Dogs width-32 root has 18,497 head parameters, zero training errors and 97.76\% test accuracy. Its refitted counterpart was the within-run validation winner but obtains 97.65\% on test. These cases illustrate why selection must precede test inspection.
+
+The earlier 2,000-image CIFAR pilot also reached interpolation, and its 25-node tree pruned to ten roots. However, a refitted root-only control already interpolated that pilot. Consequently, the pilot does not establish that branches were necessary. The larger controlled experiments provide the stronger evidence reported here.
+
+\section{Capacity curves and the double-descent question}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/capacity_curves.png}
+\caption{Width sweeps on the fixed main splits. Points and bars show means and sample SD over three seeds. The dotted line marks the first tested tree width with zero training errors in all seeds (16 for CIFAR-10, 8 for Cats vs Dogs). Training error uses a symmetric-log scale to display small nonzero errors and exact zero. These are validation curves; test scores did not choose widths.}\label{fig:capacity}
+\end{figure}
+Double descent is a capacity-dependent deterioration near interpolation followed by renewed improvement beyond it; a complete classical double-descent curve also contains an earlier descent \cite{dd}. Our results do not justify claiming that full pattern in classification error. Mean CIFAR-10 root validation error falls across the tested widths. The tree error curve has small reversals, but no clear interpolation peak. Cats vs Dogs classification-error differences are small and sensitive to seed.
+
+Log loss provides a more repeatable observation. CIFAR-10 tree validation log loss rises from 0.618 at width 2 to 1.687 at width 16, then falls to 0.977 at width 256. Cats vs Dogs rises from 0.092 at width 1 to 0.309 at width 8, then falls to about 0.092 at width 64. Peaks occur near the observed tree interpolation widths, and the decline persists across seeds. The appropriate description is \emph{an interpolation-associated validation-loss peak with post-interpolation descent}, rather than an established complete double-descent result.
+
+Classification accuracy depends on decision ordering or sign, whereas log loss penalizes confident mistakes. Output refitting can increase score magnitudes substantially while barely changing labels. For example, CIFAR-10 width-16 mean test log loss is 1.220 for roots, 2.056 for refitted roots and 1.863 for trees. The corresponding accuracies differ much less. Cats vs Dogs width-8 refitting leaves the test error count unchanged in every seed, but mean test log loss increases from 0.095 to 0.243. This supports concern about confidence, not a calibrated-probability claim. CIFAR log loss uses a softmax over independently trained OVR scores, which are not jointly calibrated.
+
+\begin{figure}[H]\centering
+\includegraphics[width=.96\linewidth]{figures/parameter_curves.png}
+\caption{The same validation classification errors against retained head parameters. Each thin curve is one seed, connected in increasing-width order. Adaptive growth makes parameter count nonmonotonic; a larger node can produce a smaller tree. The frozen trunk adds 927,008 parameters to every point.}\label{fig:parameters}
+\end{figure}
+At seed 17, moving CIFAR-10 width 8 to width 16 reduces the head from 203,534 to 166,490 parameters because node count falls from 44 to 18. Cats vs Dogs width 4 to width 8 similarly reduces the head from 16,197 to 13,877. Therefore width alone is not an ordered measure of realized tree complexity. A fixed-topology or explicitly parameter-budgeted study would be needed to separate this effect from classic width-based double descent. Epoch-wise double descent was not measured; no label noise was injected to manufacture a peak.
+
+\section{Minimizing size and avoiding unnecessary computation}
+\subsection{Greedy pruning with fixed constraints}
+For each candidate child removal, evaluate the full composed model. Accept it only when training accuracy does not decrease and validation accuracy falls by at most 0.5 percentage points relative to the original, unpruned reference. Using a fixed reference prevents the allowed loss from accumulating across removals. Parameters are not retrained during pruning.
+\begin{table}[H]\centering\small
+\caption{Pruning outcomes. Head and total savings use each run's unpruned tree as the denominator. Every listed pruned model retains zero training errors and the original validation error count.}
+\begin{tabular}{llrcrrr}\toprule
+Dataset & $h$ & Seed & Nodes & Head parameters & Head saved (\%) & Total saved (\%)\\\midrule
+\input{tables/prune_rows.tex}
+\end{tabular}\label{tab:prune}
+\end{table}
+CIFAR-10 trees retain only 1--2 correction nodes beyond the ten roots. Their final heads contain 101,740--110,990 parameters and their total models contain 1,028,748--1,037,998 parameters. Mean test accuracy changes by only $-0.0033$ percentage points after pruning: one extra test error for seed 17 and no error-count change for the other two seeds. Equal error counts alone do not establish identical predictions.
+
+The compact Cats vs Dogs trees reduce from three nodes to two in every seed, with 9,251 head parameters and 936,259 total parameters. They remove one-third of head parameters but only 0.49\% of total parameters because the frozen trunk dominates. Their reported test losses and error counts are unchanged. Width-16 Cats vs Dogs trees also finish with two nodes, 18,499 head parameters and 945,507 total parameters.
+
+Against the seed-17 interpolating CIFAR width-64 root-only model, the pruned width-16 tree uses about 70.0\% fewer head parameters (110,990 versus 369,930), but its test accuracy is 88.01\% versus 89.97\%. This is a size--accuracy trade-off. The compact Cats vs Dogs model halves the head relative to its seed-17 width-32 root-only comparator (9,251 versus 18,497), while test accuracy is 97.65\% versus 97.76\%. If near-perfect rather than exact training fit is acceptable, the root-only heads can be smaller still. No global minimum network size is proved.
+
+\subsection{Certified prediction skipping}
+Because each child contributes a hard zero or one,
+\begin{equation}
+ s_v-d_v\leq F_v\leq s_v+a_v.
+\end{equation}
+If the lower bound certifies positivity or the upper bound certifies negativity, descendants cannot change the binary decision. The implementation uses a conservative tolerance ($10^{-7}$) and otherwise evaluates the relevant children. For CIFAR-10, a root winner can be certified when its lower bound exceeds all other roots' upper bounds; otherwise exact scores are evaluated with recursive binary skipping. This preserves predictions under the bounds; it is not an approximation or a storage reduction.
+
+\begin{center}\small
+\begin{tabular}{lrrrr}\toprule
+Unpruned tree, seed 17 & Full node--image pairs & Evaluated pairs & Saved (\%) & Full / certified (ms)\\\midrule
+CIFAR-10, $h=16$ & 90,000 & 51,110 & 43.21 & 9.33 / 5.50\\
+Cats vs Dogs, $h=8$ & 11,235 & 3,784 & 66.32 & 1.12 / 0.46\\
+Cats vs Dogs, $h=16$ & 7,490 & 3,789 & 49.41 & 0.56 / 0.33\\\bottomrule
+\end{tabular}\end{center}
+All reported certified predictions match the full predictions on validation. Times are medians of three warmed-up cached-feature batch measurements, excluding the encoder. The submillisecond cases should not be interpreted as robust end-to-end speed benchmarks.
+
+\clearpage
+\section{Node receptive fields and interpretation}
+All nodes consume the same globally pooled features. They therefore do not acquire distinct architectural image receptive fields merely because they occupy different tree positions. We visualize \emph{effective local-score sensitivity} using Grad-CAM \cite{gradcam} at the last convolutional feature map and a $4\times4$ occlusion grid. Grad-CAM differentiates the local score $s_v$, not the hard full-tree decision; occlusion replaces a patch by the ImageNet normalization mean and measures its score drop. Positive drops support that score; negative drops mean the score increased after masking.
+
+\subsection{Cats vs Dogs: root, positive correction, correction of a correction}
+\begin{center}
+\includegraphics[width=.94\linewidth]{figures/cats_class_1.png}\\[2mm]
+\includegraphics[width=.94\linewidth]{figures/cats_class_1_A.png}\\[2mm]
+\includegraphics[width=.94\linewidth]{figures/cats_class_1_A_B.png}
+\end{center}
+\textbf{Figure 3.} Width-8, seed-17 unpruned tree. Rows show root $s$, child $A$, and grandchild $A.B$. Each node's highest-local-score validation example is selected independently; these are not controlled maps on the same image. The root emphasizes muzzle/ear regions; $A$ emphasizes parts of the white dog's head and surrounding boundaries. Grandchild $A.B$ emphasizes the boxer's face. Grad-CAM and occlusion overlap partly but do not agree everywhere.
+
+$A.B$ is a negative correction for the \emph{local task of $A$}; its high activation on a dog does not mean the system has discovered a ``cat detector.'' The grandchild is subsequently pruned without loss of training fit or reported validation accuracy. Visual prominence does not imply that a node is necessary in the final composed classifier. These few top-ranked examples do not establish a general semantic specialization.
+
+\clearpage
+\subsection{CIFAR-10: the bird tree and a non-activating example}
+\begin{center}
+\includegraphics[width=.94\linewidth]{figures/cifar_class_2.png}\\[2mm]
+\includegraphics[width=.94\linewidth]{figures/cifar_class_2_A.png}\\[2mm]
+\includegraphics[width=.94\linewidth]{figures/cifar_class_2_B.png}
+\end{center}
+\textbf{Figure 4.} Width-16, seed-17 bird-vs-rest tree: parent, positive child $A$, and negative child $B$. The parent map emphasizes the bird's upper body/head. The $B$ example is a truck, which is compatible with learning to suppress a bird false positive, but a high local score alone does not establish that this particular validation image was actually corrected by the full tree.
+
+The highest-ranked example shown for $A$ is an aircraft with local score $-0.485$. This leaf's decision is therefore zero on the displayed image: a bright heatmap must not be described as an active correction. The example demonstrates both the similarity of some image features and the distinction between score sensitivity and threshold activation. Enlarged $32\times32$ images and coarse feature maps limit spatial precision. Background-sensitive regions and disagreement with occlusion should temper semantic claims. The package contains all 23 node visualizations from the three prespecified seed-17 branched models, plus their high-activation examples and numeric occlusion records.
+
+\section{Conclusions, contributions and limitations}
+\textbf{What was achieved.} Neural correction nodes reach exact classification interpolation on both declared training splits, across three seeds. Pruning preserves this fit with 11--12 nodes for CIFAR-10 and two nodes for Cats vs Dogs. Root-refitting controls show that the retained corrections resolve errors left by the specified smaller-root optimization. The final test results quantify the price of enforcing perfect fit rather than assuming it improves generalization.
+
+\textbf{What the tree adds.} Small nodes can distribute the task over several correction stages. Some descendants help construct a fitted model but become removable after ancestor readouts have changed. This is consistent with a training-time role for temporary branches, but the experiment is not a causal proof that those branches were the only way to learn the final weights. In the final compact models, at least one correction branch remains.
+
+\textbf{Interpretations supported by the controls.} The final training exceptions can be expensive in parameters and confidence without improving held-out accuracy. Output refitting and interpolation substantially affect log loss even when class labels change little. Strong pretrained features make broad root-only networks sufficient at larger widths. On CIFAR-10, wider root-only models outperform the compact interpolating trees on test. Thus the contribution is a measured correction/compression mechanism, not a universal accuracy advantage.
+
+\textbf{Design contributions.} The assignment combines a constrained convex readout refit, empirical error acceptance, explicit root-refit ablations, fixed-reference pruning, exact recursive prediction bounds and data-provenance checks. These are useful implementation and analysis choices, not claims of previously unpublished algorithms. Adaptive Neural Trees \cite{ant} provides a related example of learned tree structure and representations, but uses a different routing architecture; this work implements the supplied correction construction rather than reproducing that paper.
+
+\textbf{Limits.} There are three optimization seeds on one split per dataset; the quoted SDs are not population confidence intervals. The encoder uses external supervised pretraining. Exact deduplication does not remove near-duplicates. Comparisons at equal node width do not generally match parameter count or total compute, and adaptive topology complicates double-descent claims. Pruning is greedy, interpretations use selected validation examples, and execution timing excludes feature extraction. No from-scratch trunk, joint fine-tuning, formal minimum-size solution, full calibration study or fixed-topology/epoch-wise double-descent study is claimed.
+
+\section{Future directions and reproducibility}
+The next useful experiments would be: (i) compare flat and branched heads at explicitly matched parameter and optimization budgets; (ii) hold topology fixed while sweeping width, with denser sampling near interpolation; (iii) fit calibration on a separate validation subset to distinguish confidence changes from classification changes; (iv) compress or replace the trunk, since it dominates the compact binary model; and (v) evaluate node sensitivities on matched images, including corrected and spoiled cases, rather than only top activations. A small shared trunk trained from scratch would quantify dependence on ImageNet transfer.
+
+The accompanying package contains unchanged experiment core files, the cleaned-data tests, control/finalization helpers, run configurations, split/exclusion manifests, prediction audits, confusion matrices, all figures, CSV summaries and this LaTeX source. Original pre-cleaning core source is retained under \texttt{provenance/source\_v0\_1} for the earlier baseline records. Binary checkpoints, downloaded datasets and feature caches remain on the experiment machine and are not included in this report bundle. The README gives commands to regenerate them into a separate results directory; they must not overwrite the recorded experiment evidence. Exact bitwise reproduction across different backends/library versions is not guaranteed.
+
+The final protocol is \texttt{results/final\_evaluation\_protocol.json}. The full per-model evidence is in each run's \texttt{metrics.json}; the table/plot builder reads these files without training. The private repository URL is given on the first page. Evaluator access must be granted before submission; an invitation or access confirmation is not included in this package.
+
+\begingroup\footnotesize
+\begin{thebibliography}{9}
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+\bibitem{class} Jayadeva. \emph{A Tree Type Neural Network}. Supplied ELL409 class note.
+\bibitem{mobilepaper} A. Howard et al. Searching for MobileNetV3. ICCV, 2019. \url{https://arxiv.org/abs/1905.02244}
+\bibitem{mobile} Torchvision. MobileNetV3-Small weights and preprocessing. \href{https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html}{Official model documentation}
+\bibitem{cifar} A. Krizhevsky, V. Nair and G. Hinton. CIFAR-10 dataset. \href{https://www.cs.toronto.edu/~kriz/cifar.html}{Official dataset page}
+\bibitem{cats} Microsoft. Kaggle Cats and Dogs Dataset, \texttt{kagglecatsanddogs\_5340.zip}. \href{https://www.microsoft.com/en-us/download/details.aspx?id=54765}{Microsoft Download Center}
+\bibitem{dd} P. Nakkiran et al. Deep Double Descent: Where Bigger Models and More Data Hurt. ICLR, 2020. \url{https://arxiv.org/abs/1912.02292}
+\bibitem{gradcam} R. R. Selvaraju et al. Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization. ICCV, 2017. \url{https://arxiv.org/abs/1610.02391}
+\bibitem{ant} R. Tanno et al. Adaptive Neural Trees. ICML, 2019. \url{https://proceedings.mlr.press/v97/tanno19a.html}
+\end{thebibliography}
+\endgroup
+
+\clearpage\appendix
+\section{Exact final evaluation records}
+\small
+C10 denotes CIFAR-10 ($N_{tr}=45,000$, $N_{val}=5,000$, $N_{te}=10,000$); C/D denotes Cats vs Dogs ($17,476$, $3,745$, $3,745$). Head parameters exclude the shared 927,008-parameter encoder. Error counts prevent rounded training accuracy from concealing residual mistakes. Test evaluation was limited to the fixed comparison set; other sweep points remain validation-only.
+\begin{longtable}{@{}lrrlrrrrr@{}}
+\toprule Dataset & $h$ & Seed & Model & Head params & Train err. & Val err. & Test err. & Test (\%)\\\midrule\endhead
+\input{tables/exact_rows.tex}
+\end{longtable}
+\end{document}

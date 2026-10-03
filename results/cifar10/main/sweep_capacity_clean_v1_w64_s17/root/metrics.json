@@ -1,0 +1,197 @@
+{
+  "dataset": "cifar10",
+  "profile": "main",
+  "kind": "root",
+  "config": {
+    "width": 64,
+    "depth": 0,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 17,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb",
+  "head_parameters": 369930,
+  "trunk_parameters": 927008,
+  "nodes": 10,
+  "train": {
+    "accuracy": 1.0,
+    "errors": 0,
+    "n": 45000,
+    "log_loss": 2.8296600539932917e-08,
+    "seconds": 0.08915633299329784
+  },
+  "val": {
+    "accuracy": 0.9086,
+    "errors": 457,
+    "n": 5000,
+    "log_loss": 1.0551573064984532,
+    "seconds": 0.008175541996024549
+  },
+  "training_seconds": 47.456929417006904,
+  "test": {
+    "accuracy": 0.8997,
+    "errors": 1003,
+    "n": 10000,
+    "log_loss": 1.1532869628480358,
+    "seconds": 0.016394749996834435,
+    "confusion_matrix": [
+      [
+        896,
+        8,
+        18,
+        9,
+        7,
+        3,
+        2,
+        5,
+        37,
+        15
+      ],
+      [
+        7,
+        945,
+        1,
+        5,
+        0,
+        1,
+        4,
+        0,
+        7,
+        30
+      ],
+      [
+        13,
+        0,
+        875,
+        23,
+        30,
+        12,
+        32,
+        10,
+        4,
+        1
+      ],
+      [
+        8,
+        2,
+        33,
+        812,
+        20,
+        84,
+        20,
+        9,
+        5,
+        7
+      ],
+      [
+        8,
+        1,
+        25,
+        19,
+        889,
+        10,
+        20,
+        27,
+        1,
+        0
+      ],
+      [
+        4,
+        2,
+        11,
+        91,
+        12,
+        854,
+        7,
+        14,
+        2,
+        3
+      ],
+      [
+        3,
+        0,
+        13,
+        19,
+        15,
+        10,
+        935,
+        3,
+        1,
+        1
+      ],
+      [
+        7,
+        1,
+        12,
+        13,
+        26,
+        19,
+        1,
+        917,
+        1,
+        3
+      ],
+      [
+        20,
+        12,
+        3,
+        1,
+        3,
+        2,
+        4,
+        1,
+        946,
+        8
+      ],
+      [
+        11,
+        39,
+        0,
+        4,
+        2,
+        2,
+        1,
+        3,
+        10,
+        928
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 1296938,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 50000,
+    "full_node_example_evaluations": 50000,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.006714415998430923,
+      "certified": 0.007099708003806882
+    }
+  },
+  "test_evaluation_note": "Evaluation after within-run validation selection was frozen; do not tune against these test results."
+}

@@ -1,0 +1,199 @@
+{
+  "dataset": "cifar10",
+  "profile": "main",
+  "kind": "root_refit",
+  "config": {
+    "width": 16,
+    "depth": 0,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 43,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": true,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb",
+  "head_parameters": 92490,
+  "trunk_parameters": 927008,
+  "nodes": 10,
+  "train": {
+    "accuracy": 0.9999555555555556,
+    "errors": 2,
+    "n": 45000,
+    "log_loss": 0.00016138049255455056,
+    "seconds": 0.046358332998352125
+  },
+  "val": {
+    "accuracy": 0.8926,
+    "errors": 537,
+    "n": 5000,
+    "log_loss": 1.8190335630153651,
+    "seconds": 0.004817167005967349
+  },
+  "training_seconds": 0.5567429999937303,
+  "test": {
+    "accuracy": 0.8826,
+    "errors": 1174,
+    "n": 10000,
+    "log_loss": 2.0122900577142446,
+    "seconds": 0.01007029099855572,
+    "confusion_matrix": [
+      [
+        881,
+        10,
+        18,
+        5,
+        14,
+        1,
+        2,
+        9,
+        43,
+        17
+      ],
+      [
+        9,
+        942,
+        0,
+        3,
+        0,
+        2,
+        5,
+        1,
+        7,
+        31
+      ],
+      [
+        15,
+        2,
+        846,
+        33,
+        39,
+        18,
+        31,
+        10,
+        5,
+        1
+      ],
+      [
+        8,
+        7,
+        36,
+        764,
+        22,
+        99,
+        26,
+        18,
+        8,
+        12
+      ],
+      [
+        9,
+        2,
+        26,
+        24,
+        868,
+        21,
+        19,
+        29,
+        2,
+        0
+      ],
+      [
+        2,
+        2,
+        13,
+        90,
+        18,
+        839,
+        8,
+        21,
+        3,
+        4
+      ],
+      [
+        5,
+        0,
+        18,
+        29,
+        15,
+        9,
+        921,
+        2,
+        1,
+        0
+      ],
+      [
+        8,
+        2,
+        10,
+        17,
+        31,
+        25,
+        2,
+        901,
+        1,
+        3
+      ],
+      [
+        19,
+        13,
+        3,
+        2,
+        3,
+        3,
+        2,
+        1,
+        946,
+        8
+      ],
+      [
+        12,
+        46,
+        1,
+        2,
+        2,
+        0,
+        2,
+        2,
+        15,
+        918
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "f9efc1a849247bef675e6d6cbb653176fcf231a182fe56ab15b76d4469167fd9",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 1019498,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 50000,
+    "full_node_example_evaluations": 50000,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.004740250005852431,
+      "certified": 0.004871666998951696
+    }
+  },
+  "training_seconds_note": "Incremental output-refit and metric time only; original MLP training cost is separate.",
+  "control": "Original root MLP, frozen hidden layer, constrained logistic output refit; no children",
+  "test_evaluation_note": "Evaluation after within-run validation selection was frozen; do not tune against these test results."
+}

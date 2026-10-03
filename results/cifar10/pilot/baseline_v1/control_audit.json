@@ -1,0 +1,94 @@
+{
+  "test_arrays_read": false,
+  "split_id_overlap": false,
+  "feature_checksums_verified": true,
+  "feature_extraction_seconds": 7.8010968750022585,
+  "feature_extraction_device": "mps",
+  "counts": {
+    "train": 2000,
+    "val": 500,
+    "test": 500
+  },
+  "comparisons": {
+    "train": {
+      "root_to_root_refit": {
+        "prediction_disagreements": 20,
+        "corrected": 20,
+        "spoiled": 0
+      },
+      "root_refit_to_tree": {
+        "prediction_disagreements": 0,
+        "corrected": 0,
+        "spoiled": 0
+      },
+      "tree_to_pruned": {
+        "prediction_disagreements": 0,
+        "corrected": 0,
+        "spoiled": 0
+      }
+    },
+    "val": {
+      "root_to_root_refit": {
+        "prediction_disagreements": 28,
+        "corrected": 9,
+        "spoiled": 16
+      },
+      "root_refit_to_tree": {
+        "prediction_disagreements": 12,
+        "corrected": 9,
+        "spoiled": 0
+      },
+      "tree_to_pruned": {
+        "prediction_disagreements": 3,
+        "corrected": 1,
+        "spoiled": 1
+      }
+    }
+  },
+  "metrics_recomputed_from_checkpoints": {
+    "train": {
+      "root": {
+        "errors": 20,
+        "n": 2000,
+        "accuracy": 0.99
+      },
+      "root_refit": {
+        "errors": 0,
+        "n": 2000,
+        "accuracy": 1.0
+      },
+      "tree": {
+        "errors": 0,
+        "n": 2000,
+        "accuracy": 1.0
+      },
+      "pruned": {
+        "errors": 0,
+        "n": 2000,
+        "accuracy": 1.0
+      }
+    },
+    "val": {
+      "root": {
+        "errors": 65,
+        "n": 500,
+        "accuracy": 0.87
+      },
+      "root_refit": {
+        "errors": 72,
+        "n": 500,
+        "accuracy": 0.856
+      },
+      "tree": {
+        "errors": 63,
+        "n": 500,
+        "accuracy": 0.874
+      },
+      "pruned": {
+        "errors": 63,
+        "n": 500,
+        "accuracy": 0.874
+      }
+    }
+  }
+}

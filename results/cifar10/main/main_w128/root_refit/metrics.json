@@ -1,0 +1,70 @@
+{
+  "dataset": "cifar10",
+  "profile": "main",
+  "kind": "root_refit",
+  "config": {
+    "width": 128,
+    "depth": 0,
+    "epochs": 100,
+    "batch_size": 512,
+    "lr": 0.001,
+    "seed": 17,
+    "min_samples": 16,
+    "device": "cpu",
+    "refit_l2": 1e-06,
+    "refit_iterations": 120,
+    "fixed_epochs": false,
+    "log_every": 10
+  },
+  "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb",
+  "head_parameters": 739850,
+  "trunk_parameters": 927008,
+  "nodes": 10,
+  "train": {
+    "accuracy": 1.0,
+    "errors": 0,
+    "n": 45000,
+    "log_loss": 1.3674329807925067e-08,
+    "seconds": 0.12330987500172341
+  },
+  "val": {
+    "accuracy": 0.9098,
+    "errors": 451,
+    "n": 5000,
+    "log_loss": 1.214309383593195,
+    "seconds": 0.012779290998878423
+  },
+  "training_seconds": 1.4126039580005454,
+  "test": null,
+  "environment": {
+    "python": "3.11.17 (main, Oct  1 2026, 20:09:52) [Clang 20.1.8 ]",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "versions": {
+      "torch": "2.14.1",
+      "torchvision": "0.29.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.2",
+      "Pillow": "12.3.0"
+    },
+    "mps": true,
+    "cuda": false,
+    "source_sha256": "c7c707c1e67d42656c3450f1d2b426e82b5bc9fe4942608c3f23d12ed716594a",
+    "package_version": "0.1.0"
+  },
+  "total_parameters": 1666858,
+  "certified_inference": {
+    "exact_agreement": true,
+    "node_example_evaluations": 50000,
+    "full_node_example_evaluations": 50000,
+    "fraction_saved": 0.0,
+    "median_seconds": {
+      "full": 0.01252133399975719,
+      "certified": 0.01221145800082013
+    }
+  },
+  "training_seconds_note": "Incremental output-refit and metric time only; original MLP training cost is separate.",
+  "control": "Original root MLP, frozen hidden layer, constrained logistic output refit; no children"
+}

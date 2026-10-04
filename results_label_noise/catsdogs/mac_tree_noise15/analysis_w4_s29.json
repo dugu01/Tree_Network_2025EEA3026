@@ -1,0 +1,175 @@
+{
+  "root_errors": 2573,
+  "root_errors_flipped_share": 0.8616401088223863,
+  "childA_positives": 1402,
+  "childA_flipped_share": 0.8316690442225392,
+  "childB_positives": 1171,
+  "childB_flipped_share": 0.8975234842015372,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 1078,
+  "tree_fixed_flipped_share": 0.8172541743970315,
+  "tree_spoiled": 466,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 2573,
+      "refit_accepted": true,
+      "fixed": 1078,
+      "spoiled": 466,
+      "final_errors": 1961,
+      "a": 2.786210276371523,
+      "b": 2.6823566141914625
+    },
+    {
+      "name": "class_1.A",
+      "n": 10125,
+      "positives": 1402,
+      "base_errors": 1958,
+      "refit_accepted": true,
+      "fixed": 1488,
+      "spoiled": 602,
+      "final_errors": 1072,
+      "a": 2.176962254282872,
+      "b": 1.7251056534680385
+    },
+    {
+      "name": "class_1.A.A",
+      "n": 8954,
+      "positives": 231,
+      "base_errors": 694,
+      "final_errors": 694,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.A.B",
+      "n": 3129,
+      "positives": 1727,
+      "base_errors": 803,
+      "final_errors": 803,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B",
+      "n": 9924,
+      "positives": 1171,
+      "base_errors": 2300,
+      "refit_accepted": true,
+      "fixed": 1930,
+      "spoiled": 530,
+      "final_errors": 900,
+      "a": 1.957475800938478,
+      "b": 2.6538263498683565
+    },
+    {
+      "name": "class_1.B.A",
+      "n": 8927,
+      "positives": 174,
+      "base_errors": 672,
+      "final_errors": 672,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B.B",
+      "n": 3297,
+      "positives": 2126,
+      "base_errors": 660,
+      "final_errors": 660,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.8876173037308308,
+      "val_accuracy": 0.8817089452603472
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.875371938658732,
+      "val_accuracy": 0.8568758344459279
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.8866445410849164,
+      "val_accuracy": 0.8750333778371161
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.8747425040054932,
+      "val_accuracy": 0.8555407209612818
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.8683909361409934,
+      "val_accuracy": 0.909479305740988
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.8722247653925383,
+      "val_accuracy": 0.8937249666221628
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.8876173037308308,
+      "val_accuracy": 0.8817089452603472
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.8779468986037995,
+      "val_accuracy": 0.8667556742323097
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.8864728770885786,
+      "val_accuracy": 0.8822429906542056
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.8738841840238041,
+      "val_accuracy": 0.8646194926568759
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.8671320668345159,
+      "val_accuracy": 0.9108144192256342
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.8525406271457999,
+      "val_accuracy": 0.9305740987983978
+    }
+  ]
+}

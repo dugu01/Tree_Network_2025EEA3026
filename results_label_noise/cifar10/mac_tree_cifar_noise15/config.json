@@ -1,0 +1,35 @@
+{
+  "dataset": "cifar10",
+  "noise": 0.15,
+  "noise_seed": 1234,
+  "epochs": 100,
+  "depth": 2,
+  "widths": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "n_flipped": 6750,
+  "cache_manifest_sha256": "d210c7e8cb653b0cc571204b8fbec5b6bc29638cf3bbfccde326c7f1863615fb",
+  "pruning": {
+    "train_preserving": "max_train_drop=0, max_val_drop=0.005 (original rule)",
+    "validation_only": "max_train_drop=1, max_val_drop=0 (keep a child only if removing it lowers val accuracy)"
+  },
+  "python": "3.11.17",
+  "torch": "2.14.1",
+  "numpy": "2.4.6",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "script_sha256": "dad51a661e98b845a959109e48d3ae3356e1fca72888bb80ecafe21b232badc0"
+}

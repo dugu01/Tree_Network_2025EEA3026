@@ -1,0 +1,51 @@
+\section{Label noise: double descent and what the corrections learn}\label{sec:noise}
+With clean labels the capacity sweeps show a log-loss peak but no peak in classification error (Section~\ref{sec:capacity}). The classical test-error peak appears when a model is only just able to memorize \emph{wrong} labels \cite{dd}, so this section repeats the capacity study with corrupted training labels, for both datasets and for the correction tree itself. The clean-label results above are unchanged.
+
+\subsection{Design}
+On the same cached features, exactly 15\% of the training labels are corrupted with a fixed noise seed shared by every run (Cats vs Dogs: 2,621 labels flipped; CIFAR-10: 6,750 labels moved to a uniformly random other class). Validation and test labels stay clean. Two model families are swept over width, each with optimization seeds 17, 29 and 43:
+\begin{itemize}
+\item \textbf{Fixed-topology root-only networks} (\texttt{extras/label\_noise\_double\_descent.py}). For Cats vs Dogs this is exactly the root-node model (one hidden ReLU layer, $578h+1$ parameters, class-balanced BCE). For CIFAR-10 a single softmax MLP ($587h+10$ parameters) replaces the ten one-vs-rest roots to keep the dense sweep tractable. Adam (learning rate $10^{-3}$, batch 512), no weight decay, 300 epochs without early stopping. Each noisy sweep has a matched clean-label control; Cats vs Dogs is repeated for two further noise draws and has an epoch-wise run (width 16, 1000 epochs).
+\item \textbf{The correction tree} (\texttt{extras/label\_noise\_tree.py}), using the unchanged \texttt{tree\_model.py} with the main-sweep settings (depth 2, 100 epochs per node, constrained refit). For each width and seed it records the root-only model (whose hidden layer was checked to be identical to the tree's root), the tree, the tree pruned by the original rule (no loss of training accuracy, at most 0.5 points of validation accuracy), and the tree pruned by a \emph{validation-only} rule (a child is kept only if removing it lowers validation accuracy).
+\end{itemize}
+Because nothing is selected, test error is reported at every width. All runs used the experiment Mac; \texttt{extras/build\_noise\_report.py} checks the records for completeness and regenerates every figure and table here.
+
+\subsection{Double descent appears under label noise}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/noise_root_curves.png}
+\caption{Fixed-topology root-only networks. Error bars are sample SD over three optimization seeds. Dotted vertical lines mark the first width whose mean noisy-train error is below 0.05\%. Dashed curves (left) are two further noise draws. Right: epoch-wise mean over three seeds.}\label{fig:noiseroot}
+\end{figure}
+\begin{table}[H]\centering\small
+\caption{Root-only width sweeps (mean over three seeds; test SD in parentheses). Bold marks the best width before the peak and the peak.}
+\begin{tabular}{lrrrrrr}\toprule
+& & & \multicolumn{2}{c}{15\% label noise} & \multicolumn{2}{c}{Clean labels}\\\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Data & Width & Params & Train err.\ (\%) & Test err.\ (\%) & Train err.\ (\%) & Test err.\ (\%)\\\midrule
+\input{tables/noise_root_rows.tex}
+\end{tabular}\label{tab:noiseroot}
+\end{table}
+\textbf{CIFAR-10 shows the complete classical curve} (Figure~\ref{fig:noiseroot}, middle). Test error first falls from 36.3\% to 14.7\% at width 8, then rises to 33.8\% at width 64, where the network fits all but 5.7\% of the noisy labels, and falls again once it interpolates, to 19.5\% at width 1024. The peak sits just before interpolation (width 96, about $5.6\times10^4$ parameters for 45,000 examples), as the double-descent account predicts. The clean control has a small bump at its own interpolation point (13.2\% at width 8, 14.8\% at width 16, then 10.6\% at width 512); noise turns this 1.6-point bump into a 19-point peak.
+
+\textbf{Cats vs Dogs shows the peak and the second descent but not the first descent.} Width 1 is already the best model (3.6\%), because the pretrained features make the task almost linearly separable. Test error then rises to 17.7\% at width 16, where noisy-label fit is nearly complete, and falls to 10.2\% at width 1024. Two other noise draws give the same shape (peaks of 18.7\% and 17.6\%; 8.9\% and 9.6\% at width 1024), while the clean control decreases steadily from 2.5\% to 1.9\% with no peak. The noise therefore causes the peak. Epoch-wise, width 16 reaches its best test error (2.5\%) after about 10 epochs and degrades to 18.4\% as it memorizes the flipped labels; no second epoch-wise descent occurs within 1000 epochs.
+
+Overparameterization recovers only part of the damage: the widest noisy models remain far worse than the clean ones (10.2\% versus 1.9\%; 19.5\% versus 10.6\%).
+
+\subsection{The correction tree under noise}
+\begin{figure}[H]\centering
+\includegraphics[width=\linewidth]{figures/noise_tree_curves.png}
+\caption{Correction trees with 15\% label noise (three seeds). Left: test error of the root-only model, the tree and the validation-pruned tree. Middle: median training error on the noisy labels. Right: share of flipped labels among the positive targets of the roots' children and among the training points the tree fixes, shown only where every root-only run has at least 100 noisy-train errors.}\label{fig:noisetree}
+\end{figure}
+\begin{table}[H]\centering\small
+\caption{Correction trees with 15\% label noise: mean test error (\%) over three seeds, mean noisy-train errors, and the percentage of flipped labels among child-A positive targets / among training points fixed by the tree (``--'' where the root has too few errors to measure).}
+\begin{tabular}{lrrrrrrrc}\toprule
+Data & Width & Root & Tree & Pruned (orig.) & Pruned (val.) & Root train err. & Tree train err. & Flipped A / fixed\\\midrule
+\input{tables/noise_tree_rows.tex}
+\end{tabular}\label{tab:noisetree}
+\end{table}
+\textbf{The tree shows the same peak and descent, shifted to smaller widths.} Test error rises from 4.4\% to about 15.4\% and falls to 10.5\% at width 512 on Cats vs Dogs, and rises from 13.8\% to 25.4\% at width 16 and falls to 16.6\% at width 512 on CIFAR-10. The corrections add capacity: the tree fits the noisy labels at much smaller widths than its own root (CIFAR-10 width 16: about 200 remaining noisy-train errors against 3,430 for the root), so its peak occurs earlier (width 16 against 32 for its own root-only model). The peak follows the point where the \emph{whole} model can fit the noise, which matches the effective-complexity view of double descent \cite{dd}.
+
+\textbf{Under noise, the children learn the noise.} Children are trained on their parent's mistakes. When labels are noisy those mistakes are mostly flipped labels: below the interpolation threshold (widths up to 24 on Cats vs Dogs and 16 on CIFAR-10), 76--89\% of child-A positive targets are flipped, against a 15\% noise rate. On Cats vs Dogs, 80--85\% of the training points the tree fixes at widths 4--24 are flipped labels, and the tree is worse than its root at every width (for example 13.9\% against 7.2\% at width 8). CIFAR-10 shows when corrections help. At widths 1--2 the root underfits the real signal, only 5--8\% of the fixed points are flipped, and the tree is slightly \emph{better} than its root (13.8\% against 14.2\% at width 1). From width 4 onward the fixed points are increasingly flipped labels (44\%, 66\%, 85\%, 97\%) and the tree becomes worse (25.4\% against 20.1\% at width 16). The share of flipped labels among the corrections thus predicts whether the branches help or hurt.
+
+\textbf{Pruning becomes denoising, but only with a validation criterion.} The original pruning rule forbids any loss of training accuracy, so it keeps the children that memorized noise, and its test error equals the tree's. The validation-only rule removes them: on Cats vs Dogs all but one of the 39 runs return to the single root node, and test error falls back to the root's level (13.9\% to 7.2\% at width 8; CIFAR-10 width 16: 25.4\% to 20.4\%). Under label noise, minimizing the network and generalizing better therefore coincide, provided the pruning criterion is held-out accuracy rather than training fit. This also explains the clean-label finding of Section~\ref{sec:results}: fitting the final training exceptions did not improve test accuracy there either.
+
+\textbf{Two by-products.} First, the child-target groups of Table~II act as a label-noise detector: at width 1 on Cats vs Dogs, 88\% of the root's training errors are flipped labels and they cover 95\% of all flipped labels. Second, the single noisy-train error that wide root-only Cats vs Dogs models keep is one pair of near-identical photographs (\texttt{Dog/9746.jpg} and \texttt{Dog/5733.jpg}, feature distance 0.55 against a median nearest-neighbour distance of 21.2) that the noise gave opposite labels. Exact pixel hashing cannot detect this pair, and the tree fits it with a correction node, which is memorization at its most literal.
+
+\textbf{Caveats.} Six runs ended with unusually many noisy-train errors, consistent with late training instability under Adam without weight decay: Cats vs Dogs root-only width 128 seed 43 (558); CIFAR-10 softmax width 128 seed 29 (520) and clean width 1024 seed 29 (487); and CIFAR-10 tree-sweep root-only width 128 seed 43 (203) and width 512 seeds 29 and 43 (987 and 700). They are kept in all means, which inflates the CIFAR root-only test error at width 512. The CIFAR root-only curve (single softmax MLP, 300 epochs) and the CIFAR tree sweep (ten one-vs-rest roots, 100 epochs per node) differ in architecture and training length, so their peak widths are not directly comparable. One noise rate is studied, the tree and CIFAR-10 sweeps use one noise draw, and the three seeds measure optimization variability only.

@@ -7,15 +7,17 @@ Repository: https://github.com/dugu01/Tree_Network_2025EEA3026 (public).
 
 ## Start here
 
-- `Tree_Network_2025EEA3026_Report.pdf`: 16-page report (including cover page), including exact test counts.
+- `Tree_Network_2025EEA3026_Report.pdf`: 17-page report (including cover page), including exact test counts.
 - `report/main.tex`: editable LaTeX source; compile inside `report/`.
 - `report/figures/`, `report/tables/`: report assets and numeric CSV summaries.
 - `results/`: original experiment evidence, including all sweep points and 48 final test evaluations.
 - `results/final_evaluation_protocol.json`: fixed test comparison set.
 - `provenance/report_audit.json`: consistency checks performed during report preparation.
-- `results_label_noise/`: additional label-noise width sweep and epoch-wise run (Cats vs Dogs).
-- `extras/label_noise_double_descent.py`: script that produces `results_label_noise/`.
-- `tests/`: 14 data/model tests, including conflicting-label group exclusion.
+- `results_label_noise/`: label-noise experiments for both datasets (root-only width
+  sweeps, clean controls, extra noise draws, epoch-wise run, correction trees).
+- `provenance/label_noise_audit.json`: completeness checks and key numbers for the noise study.
+- `tests/`: 14 original data/model tests plus four label-noise tests
+  (`python -m unittest discover -s tests -p "test_label_noise.py"`).
 
 This is a consolidated source/results package. Keep the original training folder
 on the Mac: it contains the large image data, feature caches and trained `.pkl`
@@ -35,12 +37,23 @@ Across optimization seeds 17, 29 and 43:
 
 A 927,008-parameter frozen ImageNet-pretrained trunk is shared by all nodes.
 The compact Cats vs Dogs head has 9,251 parameters; the total is 936,259.
-These are transfer-learning results. With clean labels, classification-error
-double descent was not established; repeatable validation-log-loss peaks occur
-near interpolation. With 15% training-label noise (Cats vs Dogs, fixed-topology
-root-only MLPs), test error peaks at the interpolation threshold (17.7% at width
-16) and then descends (10.1% at width 1024). Root-only CIFAR models can
-generalize better than the compact trees.
+These are transfer-learning results. Root-only CIFAR models can generalize better
+than the compact trees. With clean labels, the width sweeps show a validation
+log-loss peak near interpolation but no peak in classification error.
+
+With 15% training-label noise (validation/test labels clean, three seeds):
+
+| Model | Test error: before peak → peak → widest |
+|---|---|
+| CIFAR-10 softmax MLP | 14.7% (w8) → 33.8% (w64) → 19.5% (w1024): complete classical curve |
+| Cats vs Dogs root-only MLP | 3.6% (w1) → 17.7% (w16) → 10.2% (w1024) |
+| Cats vs Dogs correction tree | 4.4% (w1) → 15.4% (w32) → 10.5% (w512) |
+| CIFAR-10 correction trees (10 OVR) | 13.8% (w1) → 25.4% (w16) → 16.6% (w512) |
+
+Matched clean-label controls have no comparable peak. Under noise, 76–89% of the
+children's targets (below interpolation) are flipped labels, so corrections memorize
+noise; the original train-preserving pruning keeps them, while validation-only
+pruning removes them and restores root-level test error.
 
 ## Build the report
 
@@ -48,6 +61,7 @@ With the Python environment active:
 
 ```bash
 python extras/build_submission.py
+python extras/build_noise_report.py
 cd report
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
@@ -67,32 +81,44 @@ It is safe to regenerate tables: measurements always come from saved JSON files.
 
 ## Checkpoints
 
-Trained `.pkl` checkpoints are not committed. They remain in the original
-training folder on the experiment machine; the recorded metrics, confusion
-matrices and prediction audits in `results/` document the reported models.
-Dataset images and feature caches are never committed.
+Trained `.pkl` checkpoints are not committed; they remain in the original
+training folder on the experiment Mac. See `CHECKPOINTS.md` for how they could be
+distributed. The recorded metrics, confusion matrices and prediction audits in
+`results/` document the reported models.
 
 ## Label-noise experiment
 
-`extras/label_noise_double_descent.py` reuses the cached MobileNetV3 features
-(`cache/<dataset>/main`, verified against their recorded hashes) and writes only
-to `results_label_noise/`; it never touches `results/`. It is pure NumPy.
-Design: exactly 15% of training labels flipped with a fixed noise seed (1234)
-shared by every run; validation/test labels clean; root-only one-hidden-layer
-ReLU MLP (no children, refit or pruning); Adam, lr 1e-3, batch 512,
-class-balanced BCE, 300 epochs, no early stopping; seeds 17, 29, 43. Test error
-is recorded at every width and was not used for any selection.
+All label-noise runs were made on the experiment Mac from the verified feature cache
+(`cache/<dataset>/main`). Exactly 15% of training labels are corrupted with noise seed
+1234 (Cats vs Dogs: 2,621 flipped; CIFAR-10: 6,750 moved to a random other class);
+validation and test labels stay clean. Nothing is selected using test results.
+
+| Folder in `results_label_noise/` | What it is |
+|---|---|
+| `catsdogs/mac_noise15` | root-only MLP width sweep (17 widths × 3 seeds, 300 epochs) + epoch-wise run (width 16, 1000 epochs) |
+| `catsdogs/mac_noise0` | matched clean-label control |
+| `catsdogs/mac_noise15_ns5678`, `_ns9012` | two further noise draws |
+| `catsdogs/mac_tree_noise15` | correction tree: root / tree / pruned (original rule) / pruned (validation-only), with per-run analysis of what the children learn |
+| `catsdogs/near_duplicates.json` | near-duplicate training pair found in feature space |
+| `cifar10/mac_cifar_noise15`, `mac_cifar_noise0` | single softmax MLP width sweeps, noisy and clean |
+| `cifar10/mac_tree_cifar_noise15` | ten one-vs-rest correction trees under noise |
+
+Scripts (in `extras/`): `label_noise_double_descent.py` (NumPy root-only sweeps,
+epoch-wise runs), `label_noise_tree.py` (PyTorch, unchanged `tree_model.py`),
+`near_duplicate_check.py`, and the runners `run_noise_experiments.sh` (Cats vs Dogs)
+and `run_cifar_noise.sh` (CIFAR-10). From the repository root, with the cache present:
 
 ```bash
-python extras/label_noise_double_descent.py sweep --dataset catsdogs
-python extras/label_noise_double_descent.py epochwise --dataset catsdogs --width 16 --epochs 1000 --every 10
-python extras/label_noise_double_descent.py plot --dataset catsdogs
+QUICK=1 bash extras/run_noise_experiments.sh   # smoke test in /tmp
+bash extras/run_noise_experiments.sh           # Cats vs Dogs
+bash extras/run_cifar_noise.sh                 # CIFAR-10
+python extras/build_noise_report.py            # report figures/tables + provenance/label_noise_audit.json
 ```
 
-The archived records were produced on a Linux x86_64 CPU with NumPy (see
-`results_label_noise/catsdogs/environment.json`); reruns on other machines can
-differ slightly. `--dataset cifar10` uses a single softmax MLP rather than ten
-OVR roots and was not run for the report.
+To regenerate without touching the archived records, pass `TAG=rerun` (new run IDs)
+or `OUT=some_other_folder`. Six runs ended with unusually many noisy-train errors
+(late training instability without weight decay); they are kept in all averages and
+listed in the report and in the audit file.
 
 ## Reproduce training in a clean environment
 
@@ -168,12 +194,11 @@ under `extras/`. Existing run/configuration source mismatches are rejected.
 
 The shared splits are fixed. Repeated seeds are not independent test samples;
 means/SDs describe optimization variability. Original absolute file/cache paths in
-manifests describe the experiment machine. Dataset images, caches and checkpoints
-are intentionally excluded from the ZIP and from normal Git commits. To archive
-checkpoints privately, copy the original Mac files to suitable private storage
-or a release asset and document retrieval; never commit the dataset indiscriminately.
+manifests describe the experiment machine. Dataset images and caches are excluded. Trained checkpoints are unavailable in
+this package; see `CHECKPOINTS.md` before claiming full weight reproducibility.
 
 The repository-ready package includes literature links in the PDF and LaTeX.
 The original model code is preserved; no method was replaced after inspecting
 final test results. Tests and evidence audits support correctness but do not
 prove generalization, global optimization, or novel research priority.
+

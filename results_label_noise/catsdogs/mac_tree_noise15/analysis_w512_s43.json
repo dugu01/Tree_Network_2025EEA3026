@@ -1,0 +1,80 @@
+{
+  "root_errors": 1,
+  "root_errors_flipped_share": 1.0,
+  "childA_positives": 0,
+  "childA_flipped_share": NaN,
+  "childB_positives": 1,
+  "childB_flipped_share": 1.0,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 1,
+  "tree_fixed_flipped_share": 1.0,
+  "tree_spoiled": 0,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 1,
+      "refit_accepted": true,
+      "fixed": 1,
+      "spoiled": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 1.2793128917781753
+    },
+    {
+      "name": "class_1.B",
+      "n": 8754,
+      "positives": 1,
+      "base_errors": 1,
+      "refit_accepted": true,
+      "fixed": 1,
+      "spoiled": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 3.177426399043778
+    },
+    {
+      "name": "class_1.B.B",
+      "n": 2,
+      "positives": 1,
+      "base_errors": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.8870493991989319
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.8870493991989319
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.8870493991989319
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 1.0,
+      "val_accuracy": 0.8870493991989319
+    }
+  ]
+}

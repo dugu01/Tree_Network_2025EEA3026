@@ -1,0 +1,1026 @@
+{
+ "checks": [
+  "catsdogs/mac_noise15: complete 17 widths x 3 seeds",
+  "catsdogs/mac_noise15: noise 0.15, 300 epochs, verified cache",
+  "catsdogs/mac_noise0: complete 17 widths x 3 seeds",
+  "catsdogs/mac_noise0: noise 0.0, 300 epochs, verified cache",
+  "catsdogs/mac_noise15_ns5678: complete 17 widths x 3 seeds",
+  "catsdogs/mac_noise15_ns5678: noise 0.15, 300 epochs, verified cache",
+  "catsdogs/mac_noise15_ns9012: complete 17 widths x 3 seeds",
+  "catsdogs/mac_noise15_ns9012: noise 0.15, 300 epochs, verified cache",
+  "cifar10/mac_cifar_noise15: complete 13 widths x 3 seeds",
+  "cifar10/mac_cifar_noise15: noise 0.15, 300 epochs, verified cache",
+  "cifar10/mac_cifar_noise0: complete 13 widths x 3 seeds",
+  "cifar10/mac_cifar_noise0: noise 0.0, 300 epochs, verified cache",
+  "catsdogs/mac_tree_noise15: complete root records",
+  "catsdogs/mac_tree_noise15: complete tree records",
+  "catsdogs/mac_tree_noise15: complete pruned_train records",
+  "catsdogs/mac_tree_noise15: complete pruned_val records",
+  "catsdogs/mac_tree_noise15: 15% noise, seed 1234, 100 epochs/node, depth 2",
+  "catsdogs width 1: tree root hidden layer identical to root-only model",
+  "catsdogs width 2: tree root hidden layer identical to root-only model",
+  "catsdogs width 4: tree root hidden layer identical to root-only model",
+  "catsdogs width 8: tree root hidden layer identical to root-only model",
+  "catsdogs width 12: tree root hidden layer identical to root-only model",
+  "catsdogs width 16: tree root hidden layer identical to root-only model",
+  "catsdogs width 24: tree root hidden layer identical to root-only model",
+  "catsdogs width 32: tree root hidden layer identical to root-only model",
+  "catsdogs width 48: tree root hidden layer identical to root-only model",
+  "catsdogs width 64: tree root hidden layer identical to root-only model",
+  "catsdogs width 128: tree root hidden layer identical to root-only model",
+  "catsdogs width 256: tree root hidden layer identical to root-only model",
+  "catsdogs width 512: tree root hidden layer identical to root-only model",
+  "cifar10/mac_tree_cifar_noise15: complete root records",
+  "cifar10/mac_tree_cifar_noise15: complete tree records",
+  "cifar10/mac_tree_cifar_noise15: complete pruned_train records",
+  "cifar10/mac_tree_cifar_noise15: complete pruned_val records",
+  "cifar10/mac_tree_cifar_noise15: 15% noise, seed 1234, 100 epochs/node, depth 2",
+  "cifar10 width 1: tree root hidden layer identical to root-only model",
+  "cifar10 width 2: tree root hidden layer identical to root-only model",
+  "cifar10 width 4: tree root hidden layer identical to root-only model",
+  "cifar10 width 8: tree root hidden layer identical to root-only model",
+  "cifar10 width 16: tree root hidden layer identical to root-only model",
+  "cifar10 width 32: tree root hidden layer identical to root-only model",
+  "cifar10 width 64: tree root hidden layer identical to root-only model",
+  "cifar10 width 128: tree root hidden layer identical to root-only model",
+  "cifar10 width 256: tree root hidden layer identical to root-only model",
+  "cifar10 width 512: tree root hidden layer identical to root-only model"
+ ],
+ "anomalies": [
+  "catsdogs/mac_noise15: width 128 seed 43 ended with 558 noisy-train errors (neighbours <= 1)",
+  "cifar10/mac_cifar_noise15: width 128 seed 29 ended with 520 noisy-train errors (neighbours <= 0)",
+  "cifar10/mac_cifar_noise0: width 1024 seed 29 ended with 487 noisy-train errors (previous width <= 0)",
+  "cifar10/mac_tree_cifar_noise15: root-only width 128 seed 43 ended with 203 noisy-train errors",
+  "cifar10/mac_tree_cifar_noise15: root-only width 512 seed 29 ended with 987 noisy-train errors",
+  "cifar10/mac_tree_cifar_noise15: root-only width 512 seed 43 ended with 700 noisy-train errors"
+ ],
+ "summary": {
+  "catsdogs_root": {
+   "interp_width": 24,
+   "best": 1,
+   "test_by_width": {
+    "1": 3.58,
+    "2": 4.38,
+    "4": 7.65,
+    "8": 14.56,
+    "12": 16.93,
+    "16": 17.66,
+    "20": 17.31,
+    "24": 16.87,
+    "32": 15.57,
+    "40": 15.36,
+    "48": 14.53,
+    "64": 14.08,
+    "96": 13.23,
+    "128": 12.91,
+    "256": 11.11,
+    "512": 11.14,
+    "1024": 10.18
+   },
+   "other_noise_draws_test_by_width": [
+    {
+     "1": 3.71,
+     "2": 4.81,
+     "4": 7.97,
+     "8": 15.26,
+     "12": 18.71,
+     "16": 18.52,
+     "20": 17.72,
+     "24": 16.2,
+     "32": 15.9,
+     "40": 15.17,
+     "48": 15.02,
+     "64": 13.38,
+     "96": 12.5,
+     "128": 11.64,
+     "256": 10.7,
+     "512": 10.05,
+     "1024": 8.87
+    },
+    {
+     "1": 3.81,
+     "2": 4.49,
+     "4": 7.8,
+     "8": 14.07,
+     "12": 17.21,
+     "16": 17.07,
+     "20": 17.61,
+     "24": 17.11,
+     "32": 16.45,
+     "40": 15.87,
+     "48": 14.67,
+     "64": 14.26,
+     "96": 12.61,
+     "128": 12.22,
+     "256": 10.97,
+     "512": 9.9,
+     "1024": 9.55
+    }
+   ],
+   "clean_test_by_width": {
+    "1": 2.5,
+    "2": 2.57,
+    "4": 2.42,
+    "8": 2.44,
+    "12": 2.18,
+    "16": 2.19,
+    "20": 2.19,
+    "24": 2.23,
+    "32": 2.21,
+    "40": 2.17,
+    "48": 2.09,
+    "64": 2.06,
+    "96": 2.09,
+    "128": 2.04,
+    "256": 1.94,
+    "512": 1.96,
+    "1024": 1.92
+   }
+  },
+  "cifar10_root": {
+   "interp_width": 96,
+   "test_by_width": {
+    "2": 36.29,
+    "4": 19.13,
+    "8": 14.71,
+    "16": 15.48,
+    "32": 21.73,
+    "48": 29.12,
+    "64": 33.75,
+    "96": 32.14,
+    "128": 29.88,
+    "192": 25.94,
+    "256": 24.27,
+    "512": 21.2,
+    "1024": 19.51
+   },
+   "clean_test_by_width": {
+    "2": 34.03,
+    "4": 17.4,
+    "8": 13.2,
+    "16": 14.78,
+    "32": 14.4,
+    "48": 12.93,
+    "64": 12.44,
+    "96": 11.58,
+    "128": 11.36,
+    "192": 11.02,
+    "256": 10.87,
+    "512": 10.6,
+    "1024": 10.78
+   },
+   "clean_noisy_train_by_width": {
+    "2": 32.547,
+    "4": 15.188,
+    "8": 8.701,
+    "16": 3.613,
+    "32": 0.0,
+    "48": 0.0,
+    "64": 0.0,
+    "96": 0.0,
+    "128": 0.0,
+    "192": 0.0,
+    "256": 0.0,
+    "512": 0.0,
+    "1024": 0.361
+   }
+  },
+  "trees": {
+   "catsdogs": {
+    "1": {
+     "root": 3.12,
+     "tree": 4.38,
+     "pruned_train": 4.41,
+     "pruned_val": 3.27,
+     "root_noisy": [
+      2823,
+      2833,
+      2843
+     ],
+     "tree_noisy": [
+      2786,
+      2707,
+      2833
+     ],
+     "nodes_tree": [
+      7,
+      6,
+      4
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 88.7,
+     "childB_flipped_pct": 86.5,
+     "fixed_flipped_pct": 47.6,
+     "fixed": [
+      63,
+      370,
+      77
+     ],
+     "root_errors_flipped_pct": 87.6
+    },
+    "2": {
+     "root": 3.63,
+     "tree": 5.65,
+     "pruned_train": 5.5,
+     "pruned_val": 3.76,
+     "root_noisy": [
+      2831,
+      2792,
+      2779
+     ],
+     "tree_noisy": [
+      2818,
+      2634,
+      2675
+     ],
+     "nodes_tree": [
+      7,
+      7,
+      7
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 86.7,
+     "childB_flipped_pct": 89.2,
+     "fixed_flipped_pct": 68.3,
+     "fixed": [
+      97,
+      511,
+      246
+     ],
+     "root_errors_flipped_pct": 87.9
+    },
+    "4": {
+     "root": 5.01,
+     "tree": 12.25,
+     "pruned_train": 12.07,
+     "pruned_val": 5.46,
+     "root_noisy": [
+      2605,
+      2573,
+      2618
+     ],
+     "tree_noisy": [
+      1777,
+      1961,
+      1845
+     ],
+     "nodes_tree": [
+      7,
+      7,
+      7
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 85.6,
+     "childB_flipped_pct": 89.3,
+     "fixed_flipped_pct": 82.7,
+     "fixed": [
+      1204,
+      1078,
+      1169
+     ],
+     "root_errors_flipped_pct": 87.3
+    },
+    "8": {
+     "root": 7.16,
+     "tree": 13.9,
+     "pruned_train": 13.9,
+     "pruned_val": 7.23,
+     "root_noisy": [
+      2208,
+      2283,
+      2224
+     ],
+     "tree_noisy": [
+      692,
+      631,
+      691
+     ],
+     "nodes_tree": [
+      7,
+      7,
+      7
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 85.3,
+     "childB_flipped_pct": 86.0,
+     "fixed_flipped_pct": 83.5,
+     "fixed": [
+      1745,
+      1868,
+      1744
+     ],
+     "root_errors_flipped_pct": 85.6
+    },
+    "12": {
+     "root": 10.09,
+     "tree": 15.1,
+     "pruned_train": 15.1,
+     "pruned_val": 10.17,
+     "root_noisy": [
+      1679,
+      1748,
+      1691
+     ],
+     "tree_noisy": [
+      134,
+      157,
+      164
+     ],
+     "nodes_tree": [
+      6,
+      7,
+      7
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 83.8,
+     "childB_flipped_pct": 85.4,
+     "fixed_flipped_pct": 83.9,
+     "fixed": [
+      1605,
+      1660,
+      1594
+     ],
+     "root_errors_flipped_pct": 84.5
+    },
+    "16": {
+     "root": 12.13,
+     "tree": 15.31,
+     "pruned_train": 15.31,
+     "pruned_val": 12.27,
+     "root_noisy": [
+      1179,
+      1175,
+      1258
+     ],
+     "tree_noisy": [
+      27,
+      14,
+      10
+     ],
+     "nodes_tree": [
+      5,
+      7,
+      5
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 84.7,
+     "childB_flipped_pct": 85.4,
+     "fixed_flipped_pct": 84.9,
+     "fixed": [
+      1167,
+      1172,
+      1255
+     ],
+     "root_errors_flipped_pct": 85.0
+    },
+    "24": {
+     "root": 14.7,
+     "tree": 15.13,
+     "pruned_train": 15.13,
+     "pruned_val": 14.79,
+     "root_noisy": [
+      349,
+      441,
+      384
+     ],
+     "tree_noisy": [
+      14,
+      7,
+      10
+     ],
+     "nodes_tree": [
+      4,
+      5,
+      4
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 79.8,
+     "childB_flipped_pct": 80.6,
+     "fixed_flipped_pct": 80.0,
+     "fixed": [
+      348,
+      439,
+      382
+     ],
+     "root_errors_flipped_pct": 80.1
+    },
+    "32": {
+     "root": 15.37,
+     "tree": 15.43,
+     "pruned_train": 15.43,
+     "pruned_val": 15.42,
+     "root_noisy": [
+      88,
+      96,
+      37
+     ],
+     "tree_noisy": [
+      1,
+      1,
+      0
+     ],
+     "nodes_tree": [
+      4,
+      3,
+      4
+     ],
+     "nodes_pruned_val": [
+      1,
+      2,
+      1
+     ],
+     "childA_flipped_pct": 83.5,
+     "childB_flipped_pct": 81.0,
+     "fixed_flipped_pct": 81.6,
+     "fixed": [
+      88,
+      96,
+      37
+     ],
+     "root_errors_flipped_pct": 81.6
+    },
+    "48": {
+     "root": 14.57,
+     "tree": 15.17,
+     "pruned_train": 15.17,
+     "pruned_val": 15.17,
+     "root_noisy": [
+      1,
+      1,
+      0
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      3,
+      3,
+      1
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": 0.0,
+     "childB_flipped_pct": 100.0,
+     "fixed_flipped_pct": 50.0,
+     "fixed": [
+      1,
+      1,
+      0
+     ],
+     "root_errors_flipped_pct": 50.0
+    },
+    "64": {
+     "root": 13.14,
+     "tree": 13.65,
+     "pruned_train": 13.65,
+     "pruned_val": 13.65,
+     "root_noisy": [
+      0,
+      1,
+      1
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      1,
+      3,
+      3
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": NaN,
+     "childB_flipped_pct": 100.0,
+     "fixed_flipped_pct": 100.0,
+     "fixed": [
+      0,
+      1,
+      1
+     ],
+     "root_errors_flipped_pct": 100.0
+    },
+    "128": {
+     "root": 11.57,
+     "tree": 12.16,
+     "pruned_train": 12.16,
+     "pruned_val": 12.16,
+     "root_noisy": [
+      1,
+      1,
+      1
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      3,
+      3,
+      3
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": NaN,
+     "childB_flipped_pct": 100.0,
+     "fixed_flipped_pct": 100.0,
+     "fixed": [
+      1,
+      1,
+      1
+     ],
+     "root_errors_flipped_pct": 100.0
+    },
+    "256": {
+     "root": 10.84,
+     "tree": 11.22,
+     "pruned_train": 11.22,
+     "pruned_val": 11.22,
+     "root_noisy": [
+      1,
+      1,
+      1
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      3,
+      3,
+      3
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": NaN,
+     "childB_flipped_pct": 100.0,
+     "fixed_flipped_pct": 100.0,
+     "fixed": [
+      1,
+      1,
+      1
+     ],
+     "root_errors_flipped_pct": 100.0
+    },
+    "512": {
+     "root": 10.1,
+     "tree": 10.47,
+     "pruned_train": 10.47,
+     "pruned_val": 10.47,
+     "root_noisy": [
+      1,
+      1,
+      1
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      3,
+      3,
+      3
+     ],
+     "nodes_pruned_val": [
+      1,
+      1,
+      1
+     ],
+     "childA_flipped_pct": NaN,
+     "childB_flipped_pct": 100.0,
+     "fixed_flipped_pct": 100.0,
+     "fixed": [
+      1,
+      1,
+      1
+     ],
+     "root_errors_flipped_pct": 100.0
+    }
+   },
+   "cifar10": {
+    "1": {
+     "root": 14.15,
+     "tree": 13.76,
+     "pruned_train": 13.69,
+     "pruned_val": 14.07,
+     "root_noisy": [
+      11086,
+      10992,
+      11418
+     ],
+     "tree_noisy": [
+      10687,
+      10536,
+      10798
+     ],
+     "nodes_tree": [
+      49,
+      48,
+      49
+     ],
+     "nodes_pruned_val": [
+      15,
+      15,
+      22
+     ],
+     "childA_flipped_pct": 82.6,
+     "childB_flipped_pct": 28.6,
+     "fixed_flipped_pct": 5.0,
+     "fixed": [
+      881,
+      941,
+      1133
+     ],
+     "root_errors_flipped_pct": 37.3
+    },
+    "2": {
+     "root": 14.58,
+     "tree": 14.49,
+     "pruned_train": 14.35,
+     "pruned_val": 14.42,
+     "root_noisy": [
+      10695,
+      10553,
+      10812
+     ],
+     "tree_noisy": [
+      9827,
+      9767,
+      9863
+     ],
+     "nodes_tree": [
+      64,
+      67,
+      67
+     ],
+     "nodes_pruned_val": [
+      12,
+      12,
+      15
+     ],
+     "childA_flipped_pct": 85.7,
+     "childB_flipped_pct": 30.1,
+     "fixed_flipped_pct": 8.5,
+     "fixed": [
+      1385,
+      1354,
+      1492
+     ],
+     "root_errors_flipped_pct": 39.1
+    },
+    "4": {
+     "root": 15.5,
+     "tree": 17.05,
+     "pruned_train": 17.05,
+     "pruned_val": 16.2,
+     "root_noisy": [
+      9677,
+      9581,
+      9659
+     ],
+     "tree_noisy": [
+      7167,
+      6848,
+      7154
+     ],
+     "nodes_tree": [
+      66,
+      68,
+      69
+     ],
+     "nodes_pruned_val": [
+      16,
+      10,
+      12
+     ],
+     "childA_flipped_pct": 88.5,
+     "childB_flipped_pct": 31.5,
+     "fixed_flipped_pct": 44.0,
+     "fixed": [
+      3262,
+      3438,
+      3204
+     ],
+     "root_errors_flipped_pct": 39.6
+    },
+    "8": {
+     "root": 18.45,
+     "tree": 22.0,
+     "pruned_train": 21.99,
+     "pruned_val": 18.92,
+     "root_noisy": [
+      7694,
+      7536,
+      7650
+     ],
+     "tree_noisy": [
+      2520,
+      2481,
+      2514
+     ],
+     "nodes_tree": [
+      62,
+      65,
+      64
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      10
+     ],
+     "childA_flipped_pct": 88.7,
+     "childB_flipped_pct": 32.8,
+     "fixed_flipped_pct": 66.2,
+     "fixed": [
+      5692,
+      5538,
+      5620
+     ],
+     "root_errors_flipped_pct": 36.1
+    },
+    "16": {
+     "root": 20.07,
+     "tree": 25.41,
+     "pruned_train": 25.41,
+     "pruned_val": 20.44,
+     "root_noisy": [
+      3381,
+      3423,
+      3485
+     ],
+     "tree_noisy": [
+      195,
+      198,
+      214
+     ],
+     "nodes_tree": [
+      49,
+      49,
+      49
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      10
+     ],
+     "childA_flipped_pct": 76.4,
+     "childB_flipped_pct": 48.3,
+     "fixed_flipped_pct": 85.0,
+     "fixed": [
+      3254,
+      3290,
+      3346
+     ],
+     "root_errors_flipped_pct": 48.6
+    },
+    "32": {
+     "root": 20.95,
+     "tree": 21.81,
+     "pruned_train": 21.82,
+     "pruned_val": 21.48,
+     "root_noisy": [
+      167,
+      201,
+      218
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      32,
+      34,
+      31
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      10
+     ],
+     "childA_flipped_pct": 40.0,
+     "childB_flipped_pct": 80.0,
+     "fixed_flipped_pct": 96.9,
+     "fixed": [
+      167,
+      201,
+      218
+     ],
+     "root_errors_flipped_pct": 79.7
+    },
+    "64": {
+     "root": 19.17,
+     "tree": 20.77,
+     "pruned_train": 20.77,
+     "pruned_val": 20.77,
+     "root_noisy": [
+      0,
+      1,
+      6
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      22,
+      21,
+      27
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      11
+     ],
+     "childA_flipped_pct": 40.7,
+     "childB_flipped_pct": 63.1,
+     "fixed_flipped_pct": 83.3,
+     "fixed": [
+      0,
+      1,
+      6
+     ],
+     "root_errors_flipped_pct": 62.5
+    },
+    "128": {
+     "root": 17.48,
+     "tree": 17.85,
+     "pruned_train": 17.85,
+     "pruned_val": 17.91,
+     "root_noisy": [
+      0,
+      1,
+      203
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      12,
+      12,
+      16
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      10
+     ],
+     "childA_flipped_pct": 68.7,
+     "childB_flipped_pct": 68.5,
+     "fixed_flipped_pct": 38.7,
+     "fixed": [
+      0,
+      1,
+      203
+     ],
+     "root_errors_flipped_pct": 69.1
+    },
+    "256": {
+     "root": 16.22,
+     "tree": 16.8,
+     "pruned_train": 16.82,
+     "pruned_val": 16.82,
+     "root_noisy": [
+      1,
+      0,
+      9
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      13,
+      11,
+      19
+     ],
+     "nodes_pruned_val": [
+      10,
+      10,
+      10
+     ],
+     "childA_flipped_pct": 75.0,
+     "childB_flipped_pct": 70.7,
+     "fixed_flipped_pct": 38.9,
+     "fixed": [
+      1,
+      0,
+      9
+     ],
+     "root_errors_flipped_pct": 70.8
+    },
+    "512": {
+     "root": 17.88,
+     "tree": 16.59,
+     "pruned_train": 16.59,
+     "pruned_val": 16.59,
+     "root_noisy": [
+      1,
+      987,
+      700
+     ],
+     "tree_noisy": [
+      0,
+      0,
+      0
+     ],
+     "nodes_tree": [
+      11,
+      16,
+      14
+     ],
+     "nodes_pruned_val": [
+      10,
+      12,
+      12
+     ],
+     "childA_flipped_pct": 45.8,
+     "childB_flipped_pct": 37.3,
+     "fixed_flipped_pct": 25.4,
+     "fixed": [
+      1,
+      987,
+      700
+     ],
+     "root_errors_flipped_pct": 38.4
+    }
+   }
+  },
+  "near_duplicates": {
+   "median_nearest_neighbour_distance": 21.163342048160953,
+   "threshold": 2.1163342048160954,
+   "pairs": [
+    {
+     "indices": [
+      3666,
+      7344
+     ],
+     "distance": 0.5499206185340881,
+     "clean_labels": [
+      1,
+      1
+     ],
+     "noisy_labels": [
+      0,
+      1
+     ],
+     "conflict_after_noise": true,
+     "paths": [
+      "Dog/9746.jpg",
+      "Dog/5733.jpg"
+     ]
+    }
+   ]
+  }
+ }
+}

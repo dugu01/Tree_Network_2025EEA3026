@@ -1,0 +1,175 @@
+{
+  "root_errors": 2208,
+  "root_errors_flipped_share": 0.8392210144927537,
+  "childA_positives": 1150,
+  "childA_flipped_share": 0.8469565217391304,
+  "childB_positives": 1058,
+  "childB_flipped_share": 0.8308128544423441,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 1745,
+  "tree_fixed_flipped_share": 0.8120343839541547,
+  "tree_spoiled": 229,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 2208,
+      "refit_accepted": true,
+      "fixed": 1745,
+      "spoiled": 229,
+      "final_errors": 692,
+      "a": 5.216947790354043,
+      "b": 6.351771012338727
+    },
+    {
+      "name": "class_1.A",
+      "n": 9873,
+      "positives": 1150,
+      "base_errors": 1002,
+      "refit_accepted": true,
+      "fixed": 852,
+      "spoiled": 258,
+      "final_errors": 408,
+      "a": 6.775911898813901,
+      "b": 3.242776894793281
+    },
+    {
+      "name": "class_1.A.A",
+      "n": 8768,
+      "positives": 45,
+      "base_errors": 11,
+      "final_errors": 11,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.A.B",
+      "n": 2107,
+      "positives": 957,
+      "base_errors": 312,
+      "final_errors": 312,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B",
+      "n": 9811,
+      "positives": 1058,
+      "base_errors": 981,
+      "refit_accepted": true,
+      "fixed": 897,
+      "spoiled": 118,
+      "final_errors": 202,
+      "a": 4.971973134768715,
+      "b": 4.849751061312636
+    },
+    {
+      "name": "class_1.B.A",
+      "n": 8777,
+      "positives": 24,
+      "base_errors": 9,
+      "final_errors": 9,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B.B",
+      "n": 2015,
+      "positives": 957,
+      "base_errors": 160,
+      "final_errors": 160,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9582856488899062,
+      "val_accuracy": 0.8600801068090788
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9474708171206225,
+      "val_accuracy": 0.837917222963952
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.959201190203708,
+      "val_accuracy": 0.8587449933244325
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9380292973220417,
+      "val_accuracy": 0.8360480640854473
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9226939803158618,
+      "val_accuracy": 0.8854472630173564
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9114785992217899,
+      "val_accuracy": 0.890520694259012
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9582856488899062,
+      "val_accuracy": 0.8600801068090788
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9455252918287937,
+      "val_accuracy": 0.8400534045393858
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9570840009155414,
+      "val_accuracy": 0.860347129506008
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.934596017395285,
+      "val_accuracy": 0.8381842456608811
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9214923323414969,
+      "val_accuracy": 0.8857142857142857
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.873598077363241,
+      "val_accuracy": 0.9225634178905207
+    }
+  ]
+}

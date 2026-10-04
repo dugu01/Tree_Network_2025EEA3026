@@ -1,0 +1,103 @@
+{
+  "root_errors": 2843,
+  "root_errors_flipped_share": 0.8733731973267675,
+  "childA_positives": 1387,
+  "childA_flipped_share": 0.889689978370584,
+  "childB_positives": 1456,
+  "childB_flipped_share": 0.8578296703296703,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 77,
+  "tree_fixed_flipped_share": 0.5844155844155844,
+  "tree_spoiled": 67,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 2843,
+      "refit_accepted": true,
+      "fixed": 77,
+      "spoiled": 67,
+      "final_errors": 2833,
+      "a": 0.7691222676808749,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.A",
+      "n": 10110,
+      "positives": 1387,
+      "base_errors": 2344,
+      "refit_accepted": true,
+      "fixed": 1534,
+      "spoiled": 613,
+      "final_errors": 1423,
+      "a": 0.8167603258571033,
+      "b": 0.21897765767154134
+    },
+    {
+      "name": "class_1.A.A",
+      "n": 9415,
+      "positives": 692,
+      "base_errors": 5764,
+      "final_errors": 5764,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.A.B",
+      "n": 3039,
+      "positives": 1652,
+      "base_errors": 890,
+      "final_errors": 890,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.8374341954680705,
+      "val_accuracy": 0.9610146862483311
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.837949187457084,
+      "val_accuracy": 0.9586114819759679
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.8374341954680705,
+      "val_accuracy": 0.9628838451268358
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.8374341954680705,
+      "val_accuracy": 0.9610146862483311
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.8377203021286336,
+      "val_accuracy": 0.9607476635514018
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.8374341954680705,
+      "val_accuracy": 0.9628838451268358
+    }
+  ]
+}

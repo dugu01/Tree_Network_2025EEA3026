@@ -1,0 +1,175 @@
+{
+  "root_errors": 1175,
+  "root_errors_flipped_share": 0.8672340425531915,
+  "childA_positives": 620,
+  "childA_flipped_share": 0.8612903225806452,
+  "childB_positives": 555,
+  "childB_flipped_share": 0.8738738738738738,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 1172,
+  "tree_fixed_flipped_share": 0.8668941979522184,
+  "tree_spoiled": 11,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 1175,
+      "refit_accepted": true,
+      "fixed": 1172,
+      "spoiled": 11,
+      "final_errors": 14,
+      "a": 51.590526728157826,
+      "b": 50.309043309937586
+    },
+    {
+      "name": "class_1.A",
+      "n": 9343,
+      "positives": 620,
+      "base_errors": 79,
+      "refit_accepted": true,
+      "fixed": 79,
+      "spoiled": 0,
+      "final_errors": 0,
+      "a": 5.2658766516284095,
+      "b": 10.78880425708618
+    },
+    {
+      "name": "class_1.A.A",
+      "n": 8724,
+      "positives": 1,
+      "base_errors": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.A.B",
+      "n": 698,
+      "positives": 78,
+      "base_errors": 5,
+      "final_errors": 5,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B",
+      "n": 9308,
+      "positives": 555,
+      "base_errors": 81,
+      "refit_accepted": true,
+      "fixed": 81,
+      "spoiled": 1,
+      "final_errors": 1,
+      "a": 7.761911599129648,
+      "b": 8.210730507115317
+    },
+    {
+      "name": "class_1.B.A",
+      "n": 8754,
+      "positives": 1,
+      "base_errors": 1,
+      "final_errors": 1,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B.B",
+      "n": 635,
+      "positives": 80,
+      "base_errors": 8,
+      "final_errors": 8,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9991416800183108,
+      "val_accuracy": 0.8381842456608811
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9980544747081712,
+      "val_accuracy": 0.8373831775700935
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9991416800183108,
+      "val_accuracy": 0.8381842456608811
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9977683680476082,
+      "val_accuracy": 0.8376502002670227
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9648661020828565,
+      "val_accuracy": 0.8568758344459279
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9680132753490501,
+      "val_accuracy": 0.859279038718291
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.A",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9991416800183108,
+      "val_accuracy": 0.8381842456608811
+    },
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9979972533760586,
+      "val_accuracy": 0.8373831775700935
+    },
+    {
+      "parent": "class_1.B",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9990844586861982,
+      "val_accuracy": 0.8381842456608811
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9976539253833829,
+      "val_accuracy": 0.8376502002670227
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9648088807507439,
+      "val_accuracy": 0.8568758344459279
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.9336804760814832,
+      "val_accuracy": 0.878237650200267
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "root_errors": 1258,
+  "root_errors_flipped_share": 0.8195548489666137,
+  "childA_positives": 646,
+  "childA_flipped_share": 0.8281733746130031,
+  "childB_positives": 612,
+  "childB_flipped_share": 0.8104575163398693,
+  "base_rate": 0.14997711146715495,
+  "root_tree_same_hidden_layer": true,
+  "tree_fixed": 1255,
+  "tree_fixed_flipped_share": 0.8191235059760956,
+  "tree_spoiled": 7,
+  "nodes": [
+    {
+      "name": "class_1",
+      "n": 17476,
+      "positives": 8753,
+      "base_errors": 1258,
+      "refit_accepted": true,
+      "fixed": 1255,
+      "spoiled": 7,
+      "final_errors": 10,
+      "a": 46.884731831917044,
+      "b": 54.766933848673425
+    },
+    {
+      "name": "class_1.A",
+      "n": 9369,
+      "positives": 646,
+      "base_errors": 43,
+      "refit_accepted": true,
+      "fixed": 43,
+      "spoiled": 1,
+      "final_errors": 1,
+      "a": 0.0,
+      "b": 8.625611976624116
+    },
+    {
+      "name": "class_1.A.B",
+      "n": 689,
+      "positives": 43,
+      "base_errors": 2,
+      "final_errors": 2,
+      "a": 0.0,
+      "b": 0.0
+    },
+    {
+      "name": "class_1.B",
+      "n": 9365,
+      "positives": 612,
+      "base_errors": 53,
+      "refit_accepted": true,
+      "fixed": 53,
+      "spoiled": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 9.496767947338489
+    },
+    {
+      "name": "class_1.B.B",
+      "n": 665,
+      "positives": 53,
+      "base_errors": 0,
+      "final_errors": 0,
+      "a": 0.0,
+      "b": 0.0
+    }
+  ],
+  "pruned_train_events": [
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9985694666971847,
+      "val_accuracy": 0.8464619492656876
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9990272373540856,
+      "val_accuracy": 0.8459279038718291
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": false,
+      "train_accuracy": 0.9633783474479286,
+      "val_accuracy": 0.8576769025367156
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.965094987411307,
+      "val_accuracy": 0.8611481975967957
+    }
+  ],
+  "pruned_val_events": [
+    {
+      "parent": "class_1.A",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9985694666971847,
+      "val_accuracy": 0.8464619492656876
+    },
+    {
+      "parent": "class_1.B",
+      "child": "B",
+      "removed": false,
+      "train_accuracy": 0.9990272373540856,
+      "val_accuracy": 0.8459279038718291
+    },
+    {
+      "parent": "class_1",
+      "child": "A",
+      "removed": true,
+      "train_accuracy": 0.9633783474479286,
+      "val_accuracy": 0.8576769025367156
+    },
+    {
+      "parent": "class_1",
+      "child": "B",
+      "removed": true,
+      "train_accuracy": 0.9290455481803617,
+      "val_accuracy": 0.8718291054739653
+    }
+  ]
+}

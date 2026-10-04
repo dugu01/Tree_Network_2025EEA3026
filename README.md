@@ -45,15 +45,16 @@ With 15% training-label noise (validation/test labels clean, three seeds):
 
 | Model | Test error: before peak → peak → widest |
 |---|---|
-| CIFAR-10 softmax MLP | 14.7% (w8) → 33.8% (w64) → 19.5% (w1024): complete classical curve |
+| CIFAR-10 softmax MLP | 14.7% (w8) → 33.8% (w64) → 19.5% (w1024): complete decrease–increase–decrease curve (softmax MLP only) |
 | Cats vs Dogs root-only MLP | 3.6% (w1) → 17.7% (w16) → 10.2% (w1024) |
 | Cats vs Dogs correction tree | 4.4% (w1) → 15.4% (w32) → 10.5% (w512) |
 | CIFAR-10 correction trees (10 OVR) | 13.8% (w1) → 25.4% (w16) → 16.6% (w512) |
 
 Matched clean-label controls have no comparable peak. Under noise, 76–89% of the
 children's targets (below interpolation) are flipped labels, so corrections memorize
-noise; the original train-preserving pruning keeps them, while validation-only
-pruning removes them and restores root-level test error.
+noise; the original train-preserving pruning keeps them (test error stays close to
+the unpruned tree), while validation-only pruning removes them and restores
+root-level test error.
 
 ## Build the report
 
@@ -89,9 +90,10 @@ distributed. The recorded metrics, confusion matrices and prediction audits in
 ## Label-noise experiment
 
 All label-noise runs were made on the experiment Mac from the verified feature cache
-(`cache/<dataset>/main`). Exactly 15% of training labels are corrupted with noise seed
-1234 (Cats vs Dogs: 2,621 flipped; CIFAR-10: 6,750 moved to a random other class);
-validation and test labels stay clean. Nothing is selected using test results.
+(`cache/<dataset>/main`). 15% of training labels are corrupted with noise seed
+1234 (Cats vs Dogs: 2,621 of 17,476 flipped, approximately 15%; CIFAR-10: 6,750 moved to a random other class);
+validation and test labels stay clean. These are exploratory test curves; the clean-label
+evaluation protocol (`results/final_evaluation_protocol.json`) is separate and unaffected.
 
 | Folder in `results_label_noise/` | What it is |
 |---|---|

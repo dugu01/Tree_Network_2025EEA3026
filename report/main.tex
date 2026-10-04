@@ -35,7 +35,7 @@ Department of Electrical Engineering\\[0.2cm]
 \textbf{October 2026}
 \end{titlepage}
 \begin{abstract}
-This assignment implements the correction-tree construction from the class notes using small neural networks at every learned node. A frozen ImageNet-pretrained MobileNetV3-Small supplies a shared 576-dimensional representation. Children learn the false-negative and false-positive correction tasks of their parent; a constrained logistic output refit combines their decisions. Across three training seeds, trees with hidden width 16 on CIFAR-10 and width 8 on Cats vs Dogs achieve zero training errors on 45,000 and 17,476 images, respectively. Greedy pruning retains perfect training fit and reduces these models to 11--12 nodes and two nodes. Their mean test accuracies are 88.09\% and 97.52\%; a two-node width-16 Cats vs Dogs model reaches 97.85\%. Wider root-only CIFAR-10 networks generalize better. The width sweeps repeatedly show a validation-log-loss peak near interpolation followed by a decline, but do not establish classic double descent in classification error. Node visualizations, root-refitting controls and exact prediction-skipping bounds clarify what the branches contribute and what they do not.
+This assignment implements the correction-tree construction from the class notes using small neural networks at every learned node. A frozen ImageNet-pretrained MobileNetV3-Small supplies a shared 576-dimensional representation. Children learn the false-negative and false-positive correction tasks of their parent; a constrained logistic output refit combines their decisions. Across three training seeds, trees with hidden width 16 on CIFAR-10 and width 8 on Cats vs Dogs achieve zero training errors on 45,000 and 17,476 images, respectively. Greedy pruning retains perfect training fit and reduces these models to 11--12 nodes and two nodes. Their mean test accuracies are 88.09\% and 97.52\%; a two-node width-16 Cats vs Dogs model reaches 97.85\%. Wider root-only CIFAR-10 networks generalize better. With clean labels the width sweeps show a validation-log-loss peak near interpolation but no peak in classification error; with 15\% training-label noise on Cats vs Dogs, a fixed-topology width sweep shows a clear test-error peak at the interpolation threshold followed by descent (17.7\% at width 16 to 10.1\% at width 1024). Node visualizations, root-refitting controls and exact prediction-skipping bounds clarify what the branches contribute and what they do not.
 \end{abstract}
 \textbf{GitHub repository:} \input{repository.tex}
 \section{Question, approach and relation to the earlier assignment}
@@ -108,7 +108,7 @@ A protocol chosen from training/validation results fixes 12 runs before final te
 
 The Mac records report MPS feature extraction and CPU head fitting with four threads. Main extraction took 109.44 seconds for CIFAR-10 and 79.04 seconds for Cats vs Dogs, excluding download/cleaning. Python 3.11.17, PyTorch 2.14.1 and torchvision 0.29.1 are recorded in the supplied run metadata. Cached-feature timings are not end-to-end image latency measurements.
 
-Validation includes 14 unit tests covering correction targets, refitting, forward agreement, pruning, certified predictions and data cleaning. The exported audit checks reloaded local checkpoints against recorded training/validation errors. During report preparation, all 472,268 exported rows across 15 audits were checked, and all 48 final test records agreed internally with their confusion-matrix totals. The report authoring environment did not rerun the user's unavailable image checkpoints; test verification here is an internal-consistency check of the exported evidence.
+Validation includes 14 unit tests covering correction targets, refitting, forward agreement, pruning, certified predictions and data cleaning. An exported audit checks reloaded local checkpoints against the recorded training and validation errors. All 472,268 exported prediction rows across 15 audits were checked for internal consistency, and all 48 final test records agree with their confusion-matrix totals. The image checkpoints themselves were not re-run while preparing this report, so this is a consistency check of the saved evidence rather than a new measurement.
 
 \section{Results: interpolation, generalization and controls}
 \begin{table}[H]\centering\small
@@ -126,7 +126,7 @@ For context, the prespecified seed-17 CIFAR root-only width-64 and width-256 mod
 
 The earlier 2,000-image CIFAR pilot also reached interpolation, and its 25-node tree pruned to ten roots. However, a refitted root-only control already interpolated that pilot. Consequently, the pilot does not establish that branches were necessary. The larger controlled experiments provide the stronger evidence reported here.
 
-\section{Capacity curves and the double-descent question}
+\section{Capacity curves and the double-descent question}\label{sec:capacity}
 \begin{figure}[H]\centering
 \includegraphics[width=\linewidth]{figures/capacity_curves.png}
 \caption{Width sweeps on the fixed main splits. Points and bars show means and sample SD over three seeds. The dotted line marks the first tested tree width with zero training errors in all seeds (16 for CIFAR-10, 8 for Cats vs Dogs). Training error uses a symmetric-log scale to display small nonzero errors and exact zero. These are validation curves; test scores did not choose widths.}\label{fig:capacity}
@@ -141,7 +141,39 @@ Classification accuracy depends on decision ordering or sign, whereas log loss p
 \includegraphics[width=.96\linewidth]{figures/parameter_curves.png}
 \caption{The same validation classification errors against retained head parameters. Each thin curve is one seed, connected in increasing-width order. Adaptive growth makes parameter count nonmonotonic; a larger node can produce a smaller tree. The frozen trunk adds 927,008 parameters to every point.}\label{fig:parameters}
 \end{figure}
-At seed 17, moving CIFAR-10 width 8 to width 16 reduces the head from 203,534 to 166,490 parameters because node count falls from 44 to 18. Cats vs Dogs width 4 to width 8 similarly reduces the head from 16,197 to 13,877. Therefore width alone is not an ordered measure of realized tree complexity. A fixed-topology or explicitly parameter-budgeted study would be needed to separate this effect from classic width-based double descent. Epoch-wise double descent was not measured; no label noise was injected to manufacture a peak.
+At seed 17, moving CIFAR-10 width 8 to width 16 reduces the head from 203,534 to 166,490 parameters because node count falls from 44 to 18. Cats vs Dogs width 4 to width 8 similarly reduces the head from 16,197 to 13,877. Therefore width alone is not an ordered measure of realized tree complexity. A fixed-topology or explicitly parameter-budgeted study would be needed to separate this effect from classic width-based double descent. Epoch-wise behaviour and the effect of label noise are examined separately in Section~\ref{sec:noise}.
+
+\section{Additional experiment: label noise and the double-descent question}\label{sec:noise}
+Section~\ref{sec:capacity} found no classification-error peak with clean labels. The classical peak requires a model that is only just able to memorize \emph{corrupted} labels, so this section adds a separate, controlled experiment. The clean-label results above are unchanged.
+
+\textbf{Design.} On the cached Cats vs Dogs features, exactly $15\%$ of the training labels (2,621 of 17,476) were flipped using a fixed noise seed shared by every run; validation and test labels remain clean. The model is a root-only one-hidden-layer ReLU MLP of width $h$, with no children, refit or pruning, so topology is fixed and $h$ is the only capacity parameter ($578h+1$ parameters). Optimization matches the main experiments (Adam, learning rate $10^{-3}$, batch size 512, class-balanced BCE, no weight decay or dropout) for a fixed 300 epochs with no early stopping. Widths $1$ to $1024$ were run for three optimization seeds (17, 29, 43). Test error is reported at every width; no width or epoch was selected using it.
+
+\begin{figure}[tbp]\centering
+\includegraphics[width=\linewidth]{figures/noise_double_descent_noise15.png}
+\caption{Cats vs Dogs with 15\% training-label noise. Left: error versus width (mean $\pm$ sample SD over three seeds; train error is measured against the noisy labels). Middle: log loss. Right: epoch-wise curve at width 16, mean over three seeds. The dotted line marks the first width with noisy-train error below $0.05\%$ (24).}\label{fig:noise}
+\end{figure}
+
+\begin{table}[H]\centering\small
+\caption{Selected widths from the label-noise sweep (mean over three seeds; test SD in parentheses). Noisy-train error is measured against the corrupted training labels.}
+\begin{tabular}{rrrrrr}\toprule
+Width & Params & Noisy-train (\%) & Val. (\%) & Test (\%) & Test log loss\\\midrule
+1 & 579 & 16.21 & 3.89 & 3.58 (0.22) & 0.219\\
+4 & 2,313 & 14.24 & 8.06 & 7.53 (0.07) & 0.248\\
+8 & 4,625 & 8.66 & 14.60 & 14.36 (0.85) & 0.376\\
+\textbf{16} & 9,249 & 0.42 & 17.77 & \textbf{17.71} (0.20) & 0.847\\
+24 & 13,873 & 0.01 & 16.72 & 17.09 (0.05) & 1.039\\
+32 & 18,497 & 0.00 & 15.83 & 15.89 (0.34) & 0.921\\
+64 & 36,993 & 0.01 & 14.45 & 13.73 (1.60) & 0.702\\
+128 & 73,985 & 0.01 & 13.16 & 12.31 (0.95) & 0.581\\
+256 & 147,969 & 0.01 & 11.99 & 11.43 (0.60) & 0.507\\
+512 & 295,937 & 0.01 & 12.35 & 10.85 (0.43) & 0.451\\
+1024 & 591,873 & 0.00 & 11.54 & 10.13 (0.46) & 0.402\\\bottomrule
+\end{tabular}\label{tab:noise}
+\end{table}
+
+\textbf{Observations.} Test error is lowest at the smallest width (3.58\%), rises to a maximum of 17.71\% at width 16, where the network first nearly fits the noisy labels (0.42\% noisy-train error after 300 epochs), and then falls steadily to 10.13\% at width 1024, with every larger width interpolating. Log loss shows the same peak, at width 24 for the test set. The peak is far larger than the seed variation, and the decline beyond it holds in all three seeds. This is a clear interpolation-associated peak in classification error followed by descent in the overparameterized regime.
+
+\textbf{What this does and does not show.} The curve is a peak followed by descent, not the full classical shape: no earlier descent appears, because width 1 is already the best tested model on this nearly separable, strongly featurized problem. Overparameterization also recovers only part of the loss: width 1024 is still much worse on test than width 1, because the memorized noise is never fully harmless here. The epoch-wise curve at width 16 (1000 epochs, three seeds) shows test error falling to 2.49\% around epoch 10 and then rising to about 18.6\% as the noisy labels are memorized, with no second descent within 1000 epochs. An epoch-wise second descent at this width is therefore not observed. The result comes from one dataset (binary Cats vs Dogs), one noise level and one fixed noise realization; the three seeds measure only optimization variability. The interpolation threshold also falls at about $9\times10^{3}$ parameters, well below the 17,476 training examples, because the 576-dimensional features make the noisy labels easy to fit. The multiclass CIFAR-10 version was not run for this report.
 
 \section{Minimizing size and avoiding unnecessary computation}
 \subsection{Greedy pruning with fixed constraints}
@@ -200,7 +232,7 @@ $A.B$ is a negative correction for the \emph{local task of $A$}; its high activa
 The highest-ranked example shown for $A$ is an aircraft with local score $-0.485$. This leaf's decision is therefore zero on the displayed image: a bright heatmap must not be described as an active correction. The example demonstrates both the similarity of some image features and the distinction between score sensitivity and threshold activation. Enlarged $32\times32$ images and coarse feature maps limit spatial precision. Background-sensitive regions and disagreement with occlusion should temper semantic claims. The package contains all 23 node visualizations from the three prespecified seed-17 branched models, plus their high-activation examples and numeric occlusion records.
 
 \section{Conclusions, contributions and limitations}
-\textbf{What was achieved.} Neural correction nodes reach exact classification interpolation on both declared training splits, across three seeds. Pruning preserves this fit with 11--12 nodes for CIFAR-10 and two nodes for Cats vs Dogs. Root-refitting controls show that the retained corrections resolve errors left by the specified smaller-root optimization. The final test results quantify the price of enforcing perfect fit rather than assuming it improves generalization.
+\textbf{What was achieved.} Neural correction nodes reach exact classification interpolation on both declared training splits, across three seeds. Pruning preserves this fit with 11--12 nodes for CIFAR-10 and two nodes for Cats vs Dogs. Root-refitting controls show that the retained corrections resolve errors left by the specified smaller-root optimization. The final test results quantify the price of enforcing perfect fit rather than assuming it improves generalization. With 15\% training-label noise, a fixed-topology width sweep on Cats vs Dogs shows a clear test-error peak at the interpolation threshold followed by descent, which the clean-label sweeps did not.
 
 \textbf{What the tree adds.} Small nodes can distribute the task over several correction stages. Some descendants help construct a fitted model but become removable after ancestor readouts have changed. This is consistent with a training-time role for temporary branches, but the experiment is not a causal proof that those branches were the only way to learn the final weights. In the final compact models, at least one correction branch remains.
 
@@ -208,10 +240,12 @@ The highest-ranked example shown for $A$ is an aircraft with local score $-0.485
 
 \textbf{Design contributions.} The assignment combines a constrained convex readout refit, empirical error acceptance, explicit root-refit ablations, fixed-reference pruning, exact recursive prediction bounds and data-provenance checks. These are useful implementation and analysis choices, not claims of previously unpublished algorithms. Adaptive Neural Trees \cite{ant} provides a related example of learned tree structure and representations, but uses a different routing architecture; this work implements the supplied correction construction rather than reproducing that paper.
 
-\textbf{Limits.} There are three optimization seeds on one split per dataset; the quoted SDs are not population confidence intervals. The encoder uses external supervised pretraining. Exact deduplication does not remove near-duplicates. Comparisons at equal node width do not generally match parameter count or total compute, and adaptive topology complicates double-descent claims. Pruning is greedy, interpretations use selected validation examples, and execution timing excludes feature extraction. No from-scratch trunk, joint fine-tuning, formal minimum-size solution, full calibration study or fixed-topology/epoch-wise double-descent study is claimed.
+\textbf{Limits.} There are three optimization seeds on one split per dataset; the quoted SDs are not population confidence intervals. The encoder uses external supervised pretraining. Exact deduplication does not remove near-duplicates. Comparisons at equal node width do not generally match parameter count or total compute, and adaptive topology complicates double-descent claims. Pruning is greedy, interpretations use selected validation examples, and execution timing excludes feature extraction. No from-scratch trunk, joint fine-tuning, formal minimum-size solution or full calibration study is claimed. The fixed-topology label-noise study covers one dataset, one noise level and one noise realization; it was not run for CIFAR-10.
 
 \section{Future directions and reproducibility}
-The next useful experiments would be: (i) compare flat and branched heads at explicitly matched parameter and optimization budgets; (ii) hold topology fixed while sweeping width, with denser sampling near interpolation; (iii) fit calibration on a separate validation subset to distinguish confidence changes from classification changes; (iv) compress or replace the trunk, since it dominates the compact binary model; and (v) evaluate node sensitivities on matched images, including corrected and spoiled cases, rather than only top activations. A small shared trunk trained from scratch would quantify dependence on ImageNet transfer.
+The next useful experiments would be: (i) compare flat and branched heads at explicitly matched parameter and optimization budgets; (ii) repeat the fixed-topology label-noise study on CIFAR-10 and at other noise levels (for example 5\% and 25\%); (iii) fit calibration on a separate validation subset to distinguish confidence changes from classification changes; (iv) compress or replace the trunk, since it dominates the compact binary model; and (v) evaluate node sensitivities on matched images, including corrected and spoiled cases, rather than only top activations. A small shared trunk trained from scratch would quantify dependence on ImageNet transfer.
+
+\paragraph{Reproducibility.} The repository linked on the first page contains the experiment code, the 14 unit tests, the run configurations, all result records under \texttt{results/}, the label-noise records under \texttt{results\_label\_noise/} (with the script \texttt{extras/label\_noise\_double\_descent.py}), the provenance records under \texttt{provenance/}, and the LaTeX source of this report. The fixed test comparison set is recorded in \texttt{results/final\_evaluation\_protocol.json}. \texttt{README.md} gives the commands for installing the environment, regenerating the sweeps in a separate results directory (so the recorded evidence is not overwritten), and rebuilding this PDF. Image data and cached features are not stored in the repository. Trained checkpoints remain on the experiment machine; the recorded metrics, confusion matrices and prediction audits in \texttt{results/} document the reported models.
 \clearpage
 
 \begingroup\footnotesize

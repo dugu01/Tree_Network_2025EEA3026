@@ -1,17 +1,20 @@
 # Tree-Type Neural Networks — 2025EEA3026
 
-Durgesh Singh, IIT Delhi. Results compiled 3 October 2026.
+Durgesh Singh (2025EEA3026), IIT Delhi — ELL7285 Machine Learning and Optimization, Assignment 4.
+Results compiled October 2026.
 
-The experiments are complete.
+Repository: https://github.com/dugu01/Tree_Network_2025EEA3026 (public).
 
 ## Start here
 
-- `Tree_Network_2025EEA3026_Report.pdf`: curated 12-page report, including exact test counts.
+- `Tree_Network_2025EEA3026_Report.pdf`: 16-page report (including cover page), including exact test counts.
 - `report/main.tex`: editable LaTeX source; compile inside `report/`.
 - `report/figures/`, `report/tables/`: report assets and numeric CSV summaries.
 - `results/`: original experiment evidence, including all sweep points and 48 final test evaluations.
 - `results/final_evaluation_protocol.json`: fixed test comparison set.
 - `provenance/report_audit.json`: consistency checks performed during report preparation.
+- `results_label_noise/`: additional label-noise width sweep and epoch-wise run (Cats vs Dogs).
+- `extras/label_noise_double_descent.py`: script that produces `results_label_noise/`.
 - `tests/`: 14 data/model tests, including conflicting-label group exclusion.
 
 This is a consolidated source/results package. Keep the original training folder
@@ -32,9 +35,12 @@ Across optimization seeds 17, 29 and 43:
 
 A 927,008-parameter frozen ImageNet-pretrained trunk is shared by all nodes.
 The compact Cats vs Dogs head has 9,251 parameters; the total is 936,259.
-These are transfer-learning results. Classification-error double descent was
-not established; repeatable validation-log-loss peaks occur near interpolation.
-Root-only CIFAR models can generalize better than the compact trees.
+These are transfer-learning results. With clean labels, classification-error
+double descent was not established; repeatable validation-log-loss peaks occur
+near interpolation. With 15% training-label noise (Cats vs Dogs, fixed-topology
+root-only MLPs), test error peaks at the interpolation threshold (17.7% at width
+16) and then descends (10.1% at width 1024). Root-only CIFAR models can
+generalize better than the compact trees.
 
 ## Build the report
 
@@ -52,7 +58,8 @@ to Overleaf and compile `main.tex`; all generated assets are included.
 
 The repository address is stored in `report/repository.tex` and included in the
 compiled PDF. After rebuilding, copy `report/main.pdf` to
-`Tree_Network_2025EEA3026_Report.pdf`.
+`Tree_Network_2025EEA3026_Report.pdf`. The repository is public, so no access
+grant is needed. The cover page expects `report/iitd_logo.png`.
 
 `python run.py report` is the original automatic working-report generator. For the
 curated final report, use `extras/build_submission.py` and the commands above.
@@ -60,11 +67,32 @@ It is safe to regenerate tables: measurements always come from saved JSON files.
 
 ## Checkpoints
 
-Trained head checkpoints for the Cats vs Dogs models are in `checkpoints/`
-(CHOOSE: or "are not included"). The larger CIFAR-10 checkpoints are not
-committed to git; they are attached to the repository's Releases page as
-`cifar10_checkpoints.zip` (CHOOSE: or "remain on the experiment machine").
+Trained `.pkl` checkpoints are not committed. They remain in the original
+training folder on the experiment machine; the recorded metrics, confusion
+matrices and prediction audits in `results/` document the reported models.
 Dataset images and feature caches are never committed.
+
+## Label-noise experiment
+
+`extras/label_noise_double_descent.py` reuses the cached MobileNetV3 features
+(`cache/<dataset>/main`, verified against their recorded hashes) and writes only
+to `results_label_noise/`; it never touches `results/`. It is pure NumPy.
+Design: exactly 15% of training labels flipped with a fixed noise seed (1234)
+shared by every run; validation/test labels clean; root-only one-hidden-layer
+ReLU MLP (no children, refit or pruning); Adam, lr 1e-3, batch 512,
+class-balanced BCE, 300 epochs, no early stopping; seeds 17, 29, 43. Test error
+is recorded at every width and was not used for any selection.
+
+```bash
+python extras/label_noise_double_descent.py sweep --dataset catsdogs
+python extras/label_noise_double_descent.py epochwise --dataset catsdogs --width 16 --epochs 1000 --every 10
+python extras/label_noise_double_descent.py plot --dataset catsdogs
+```
+
+The archived records were produced on a Linux x86_64 CPU with NumPy (see
+`results_label_noise/catsdogs/environment.json`); reruns on other machines can
+differ slightly. `--dataset cifar10` uses a single softmax MLP rather than ten
+OVR roots and was not run for the report.
 
 ## Reproduce training in a clean environment
 
@@ -74,8 +102,8 @@ MPS extracts frozen features, while CPU is used for the small cached-feature MLP
 A CPU-only machine also works, but timings and exact numerical results may differ.
 
 ```bash
-conda create -n tree-revisited python=3.11 -y
-conda activate tree-revisited
+conda create -n tree-network python=3.11 -y
+conda activate tree-network
 python -m pip install -r requirements.txt
 python run.py doctor
 python run.py selftest

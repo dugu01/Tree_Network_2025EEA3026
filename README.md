@@ -5,6 +5,18 @@ Results compiled October 2026.
 
 Repository: https://github.com/dugu01/Tree_Network_2025EEA3026 (public).
 
+## Continuation — Assignment 5
+
+Augmentation, majority-vote ensembles, bias–variance across samples and epochs,
+and loss landscape, built on the Assignment 4 correction trees. Everything for it
+is in [`continuation/`](continuation/):
+
+- Report: [`continuation/Tree_Continuation_Report.pdf`](continuation/Tree_Continuation_Report.pdf)
+- Code, plans, per-run records, analysis outputs and instructions:
+  [`continuation/README.md`](continuation/README.md)
+
+The rest of this README describes Assignment 4.
+
 ## Start here
 
 - `Tree_Network_2025EEA3026_Report.pdf`: 17-page report (including cover page), including exact test counts.

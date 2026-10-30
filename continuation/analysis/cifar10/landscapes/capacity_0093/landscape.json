@@ -1,0 +1,107 @@
+{
+  "base_loss": {
+    "train": 0.008002218914458098,
+    "val": 0.23058232571855317
+  },
+  "slices": [
+    {
+      "direction_seed": 0,
+      "max_train_increase": 0.2880275480610037,
+      "max_val_increase": 0.26671794337857213
+    },
+    {
+      "direction_seed": 1,
+      "max_train_increase": 0.26992303943613627,
+      "max_val_increase": 0.2682109223330539
+    },
+    {
+      "direction_seed": 2,
+      "max_train_increase": 0.29261337160607437,
+      "max_val_increase": 0.29819467986353654
+    }
+  ],
+  "conditional_readout": [
+    {
+      "node": "class_0",
+      "smallest": 1e-06,
+      "largest": 0.0018546661121219394,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_1",
+      "smallest": 9.999999999999966e-07,
+      "largest": 0.03699920895107737,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_2",
+      "smallest": 9.999999999999159e-07,
+      "largest": 0.025906701743958795,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_3",
+      "smallest": 5.993421932587499e-05,
+      "largest": 0.03150573657674913,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_4",
+      "smallest": 9.999999999999159e-07,
+      "largest": 0.1595071019937111,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_5",
+      "smallest": 1.0000000000000243e-06,
+      "largest": 0.049970183766689734,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_6",
+      "smallest": 1.0000000000000004e-06,
+      "largest": 0.0005542239952036425,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_7",
+      "smallest": 9.999999999999997e-07,
+      "largest": 0.0012229545225277197,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_8",
+      "smallest": 1e-06,
+      "largest": 0.0042940177852755935,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    },
+    {
+      "node": "class_9",
+      "smallest": 9.999999999999997e-07,
+      "largest": 0.005941670407501107,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    }
+  ],
+  "objective": "Unweighted mean binary cross entropy across OVR root outputs; distinct from class-balanced local node training loss and multiclass softmax test log loss",
+  "interpretation": "Hard child decisions recomputed at every perturbation. A slice is not a global convexity/flatness proof; biases and edge scalars fixed. No global full-tree Hessian is claimed."
+}

@@ -1,0 +1,283 @@
+{
+  "job": {
+    "dataset": "catsdogs",
+    "phase": "pilot",
+    "width": 8,
+    "depth": 2,
+    "epochs": 10,
+    "fraction": 0.02,
+    "data_seed": 101,
+    "seed": 17,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "repeat",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "pilot_0002"
+  },
+  "training_seconds": 0.03849441600323189,
+  "n_original": 348,
+  "n_presented": 1392,
+  "nodes": 5,
+  "head_parameters": 23129,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 1392,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00018232757389594542,
+    "brier": 4.555146474795838e-06,
+    "confusion": [
+      [
+        696,
+        0
+      ],
+      [
+        0,
+        696
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 1392,
+      "positives": 696,
+      "seed": 17,
+      "mean_error_persistence": 0.014367816091954023,
+      "base_errors": 20,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 20,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.0383845409960486,
+      "a": 18.40888599972776,
+      "b": 8.786063247277134,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 164,
+          "loss": 0.5524991750717163
+        },
+        {
+          "epoch": 10,
+          "errors": 20,
+          "loss": 0.17338958382606506
+        }
+      ]
+    },
+    {
+      "name": "class_1.A",
+      "depth": 1,
+      "n": 704,
+      "positives": 8,
+      "seed": 35,
+      "mean_error_persistence": 0.13068181818181818,
+      "base_errors": 92,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 92,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.010835374996531755,
+      "a": 0.0,
+      "b": 3.9091184992409147,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 364,
+          "loss": 0.6961492896080017
+        },
+        {
+          "epoch": 10,
+          "errors": 92,
+          "loss": 0.29322901368141174
+        }
+      ]
+    },
+    {
+      "name": "class_1.A.B",
+      "depth": 2,
+      "n": 100,
+      "positives": 92,
+      "seed": 72,
+      "mean_error_persistence": 0.08,
+      "base_errors": 8,
+      "final_errors": 8,
+      "seconds": 0.0027062500012107193,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 28,
+          "loss": 0.6616055965423584
+        },
+        {
+          "epoch": 10,
+          "errors": 8,
+          "loss": 0.4912782311439514
+        }
+      ]
+    },
+    {
+      "name": "class_1.B",
+      "depth": 1,
+      "n": 708,
+      "positives": 12,
+      "seed": 36,
+      "mean_error_persistence": 0.07909604519774012,
+      "base_errors": 56,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 56,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.010623457987094298,
+      "a": 0.0,
+      "b": 6.749836840086592,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 268,
+          "loss": 0.6441220641136169
+        },
+        {
+          "epoch": 10,
+          "errors": 56,
+          "loss": 0.266153484582901
+        }
+      ]
+    },
+    {
+      "name": "class_1.B.B",
+      "depth": 2,
+      "n": 68,
+      "positives": 56,
+      "seed": 74,
+      "mean_error_persistence": 0.11764705882352941,
+      "base_errors": 8,
+      "final_errors": 8,
+      "seconds": 0.0025711249909363687,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 36,
+          "loss": 0.7369444370269775
+        },
+        {
+          "epoch": 10,
+          "errors": 8,
+          "loss": 0.4828076660633087
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 90,
+  "all_views_correct_fraction": 1.0,
+  "train_clean": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00018232757389594542,
+    "brier": 4.555146474795838e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00018232757389594542,
+    "brier": 4.555146474795838e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 3745,
+    "errors": 166,
+    "accuracy": 0.9556742323097464,
+    "log_loss": 0.5864967368905636,
+    "brier": 0.08210609250187549,
+    "confusion": [
+      [
+        1815,
+        57
+      ],
+      [
+        109,
+        1764
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 696,
+    "errors": 11,
+    "accuracy": 0.9841954022988506,
+    "log_loss": 0.1362279301899633,
+    "brier": 0.0284497833586144,
+    "confusion": [
+      [
+        343,
+        5
+      ],
+      [
+        6,
+        342
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 696,
+    "errors": 11,
+    "accuracy": 0.9841954022988506,
+    "log_loss": 0.1362279301899633,
+    "brier": 0.0284497833586144,
+    "confusion": [
+      [
+        343,
+        5
+      ],
+      [
+        6,
+        342
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.015804597701149427,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "a21efd15c6f517a74ec745f8a9005156b0e2e678c2f51f3ea421a115c8ade139",
+  "predictions_sha256": "0cb0ba1133ed808345300efda32735bb93c4a1fd0d4221f2bb5a1be99f10bbaa"
+}

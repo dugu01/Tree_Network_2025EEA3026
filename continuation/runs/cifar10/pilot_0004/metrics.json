@@ -1,0 +1,2380 @@
+{
+  "job": {
+    "dataset": "cifar10",
+    "phase": "pilot",
+    "width": 8,
+    "depth": 2,
+    "epochs": 10,
+    "fraction": 0.02,
+    "data_seed": 101,
+    "seed": 17,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "augment",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "pilot_0004"
+  },
+  "training_seconds": 0.9003687500080559,
+  "n_original": 900,
+  "n_presented": 3600,
+  "nodes": 56,
+  "head_parameters": 259046,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 3600,
+    "errors": 238,
+    "accuracy": 0.9338888888888889,
+    "log_loss": 0.20474796976342038,
+    "brier": 0.10165340701149098,
+    "confusion": [
+      [
+        339,
+        0,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        12,
+        4
+      ],
+      [
+        2,
+        342,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        1,
+        13
+      ],
+      [
+        3,
+        0,
+        337,
+        4,
+        10,
+        3,
+        1,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        4,
+        318,
+        3,
+        27,
+        6,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        4,
+        1,
+        335,
+        4,
+        3,
+        12,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        8,
+        23,
+        3,
+        318,
+        2,
+        3,
+        1,
+        0
+      ],
+      [
+        2,
+        3,
+        2,
+        13,
+        3,
+        0,
+        337,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        2,
+        1,
+        5,
+        5,
+        0,
+        346,
+        0,
+        0
+      ],
+      [
+        4,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        352,
+        3
+      ],
+      [
+        3,
+        12,
+        1,
+        4,
+        0,
+        0,
+        0,
+        0,
+        2,
+        338
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_0",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 17,
+      "mean_error_persistence": 0.125,
+      "base_errors": 450,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 55,
+      "refit_accepted": true,
+      "fixed": 430,
+      "spoiled": 35,
+      "final_errors": 55,
+      "seconds": 0.09350354099296965,
+      "a": 10.849012559613344,
+      "b": 2.07822927676895,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1248,
+          "loss": 0.6859132051467896
+        },
+        {
+          "epoch": 10,
+          "errors": 450,
+          "loss": 0.3529393970966339
+        }
+      ]
+    },
+    {
+      "name": "class_0.A",
+      "depth": 1,
+      "n": 3243,
+      "positives": 3,
+      "seed": 35,
+      "mean_error_persistence": 0.08446362515413071,
+      "base_errors": 274,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 274,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.031907750002574176,
+      "a": 0.0,
+      "b": 4.789258170627576,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 2031,
+          "loss": 0.7235932946205139
+        },
+        {
+          "epoch": 10,
+          "errors": 274,
+          "loss": 0.329369455575943
+        }
+      ]
+    },
+    {
+      "name": "class_0.A.B",
+      "depth": 2,
+      "n": 277,
+      "positives": 274,
+      "seed": 72,
+      "mean_error_persistence": 0.06066176470588235,
+      "base_errors": 12,
+      "final_errors": 12,
+      "seconds": 0.0034351670037722215,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 83,
+          "loss": 0.6555219292640686
+        },
+        {
+          "epoch": 10,
+          "errors": 12,
+          "loss": 0.48010745644569397
+        }
+      ]
+    },
+    {
+      "name": "class_0.B",
+      "depth": 1,
+      "n": 807,
+      "positives": 447,
+      "seed": 36,
+      "mean_error_persistence": 0.2092948717948718,
+      "base_errors": 162,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 71,
+      "refit_accepted": true,
+      "fixed": 119,
+      "spoiled": 28,
+      "final_errors": 71,
+      "seconds": 0.018884042001445778,
+      "a": 3.63142912653296,
+      "b": 2.422483621347511,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 226,
+          "loss": 0.6386476755142212
+        },
+        {
+          "epoch": 10,
+          "errors": 162,
+          "loss": 0.43862468004226685
+        }
+      ]
+    },
+    {
+      "name": "class_0.B.A",
+      "depth": 2,
+      "n": 474,
+      "positives": 114,
+      "seed": 73,
+      "mean_error_persistence": 0.19323671497584538,
+      "base_errors": 58,
+      "final_errors": 58,
+      "seconds": 0.004090874994290061,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 143,
+          "loss": 0.6372888088226318
+        },
+        {
+          "epoch": 10,
+          "errors": 58,
+          "loss": 0.42009520530700684
+        }
+      ]
+    },
+    {
+      "name": "class_0.B.B",
+      "depth": 2,
+      "n": 495,
+      "positives": 48,
+      "seed": 74,
+      "mean_error_persistence": 0.3324372759856631,
+      "base_errors": 158,
+      "final_errors": 158,
+      "seconds": 0.0037354579981183633,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 177,
+          "loss": 0.6560258865356445
+        },
+        {
+          "epoch": 10,
+          "errors": 158,
+          "loss": 0.5859872102737427
+        }
+      ]
+    },
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 1026,
+      "mean_error_persistence": 0.0475,
+      "base_errors": 171,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 37,
+      "refit_accepted": true,
+      "fixed": 159,
+      "spoiled": 25,
+      "final_errors": 37,
+      "seconds": 0.05162250000284985,
+      "a": 0.0,
+      "b": 3.070583370680975,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 537,
+          "loss": 0.5370864868164062
+        },
+        {
+          "epoch": 10,
+          "errors": 171,
+          "loss": 0.18722450733184814
+        }
+      ]
+    },
+    {
+      "name": "class_1.B",
+      "depth": 1,
+      "n": 531,
+      "positives": 171,
+      "seed": 2054,
+      "mean_error_persistence": 0.20807127882599577,
+      "base_errors": 94,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 52,
+      "refit_accepted": true,
+      "fixed": 67,
+      "spoiled": 25,
+      "final_errors": 52,
+      "seconds": 0.013412875006906688,
+      "a": 2.4603432030198706,
+      "b": 2.599585894604147,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 182,
+          "loss": 0.6456547379493713
+        },
+        {
+          "epoch": 10,
+          "errors": 94,
+          "loss": 0.4918968081474304
+        }
+      ]
+    },
+    {
+      "name": "class_1.B.A",
+      "depth": 2,
+      "n": 384,
+      "positives": 24,
+      "seed": 4109,
+      "mean_error_persistence": 0.08101851851851852,
+      "base_errors": 22,
+      "final_errors": 22,
+      "seconds": 0.0030984170007286593,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 26,
+          "loss": 0.5469245910644531
+        },
+        {
+          "epoch": 10,
+          "errors": 22,
+          "loss": 0.3452330529689789
+        }
+      ]
+    },
+    {
+      "name": "class_1.B.B",
+      "depth": 2,
+      "n": 241,
+      "positives": 70,
+      "seed": 4110,
+      "mean_error_persistence": 0.42105263157894735,
+      "base_errors": 81,
+      "final_errors": 81,
+      "seconds": 0.0027127080102218315,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 169,
+          "loss": 0.7866994142532349
+        },
+        {
+          "epoch": 10,
+          "errors": 81,
+          "loss": 0.6057071685791016
+        }
+      ]
+    },
+    {
+      "name": "class_2",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 2035,
+      "mean_error_persistence": 0.0763888888888889,
+      "base_errors": 275,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 50,
+      "refit_accepted": true,
+      "fixed": 256,
+      "spoiled": 31,
+      "final_errors": 50,
+      "seconds": 0.09302337501139846,
+      "a": 11.247596666562899,
+      "b": 3.708680666697995,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 641,
+          "loss": 0.5426811575889587
+        },
+        {
+          "epoch": 10,
+          "errors": 275,
+          "loss": 0.23580431938171387
+        }
+      ]
+    },
+    {
+      "name": "class_2.A",
+      "depth": 1,
+      "n": 3250,
+      "positives": 10,
+      "seed": 4071,
+      "mean_error_persistence": 0.07037943696450429,
+      "base_errors": 230,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 230,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.034366291991318576,
+      "a": 0.0,
+      "b": 5.1693109611153485,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1081,
+          "loss": 0.6565375328063965
+        },
+        {
+          "epoch": 10,
+          "errors": 230,
+          "loss": 0.3084578812122345
+        }
+      ]
+    },
+    {
+      "name": "class_2.A.B",
+      "depth": 2,
+      "n": 240,
+      "positives": 230,
+      "seed": 8144,
+      "mean_error_persistence": 0.2800687285223367,
+      "base_errors": 67,
+      "final_errors": 67,
+      "seconds": 0.003512166003929451,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 191,
+          "loss": 0.7452718019485474
+        },
+        {
+          "epoch": 10,
+          "errors": 67,
+          "loss": 0.644058883190155
+        }
+      ]
+    },
+    {
+      "name": "class_2.B",
+      "depth": 1,
+      "n": 625,
+      "positives": 265,
+      "seed": 4072,
+      "mean_error_persistence": 0.21973466003316752,
+      "base_errors": 116,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 69,
+      "refit_accepted": true,
+      "fixed": 69,
+      "spoiled": 22,
+      "final_errors": 69,
+      "seconds": 0.014363374997628853,
+      "a": 2.529104593968915,
+      "b": 2.9405831740750177,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 241,
+          "loss": 0.665287971496582
+        },
+        {
+          "epoch": 10,
+          "errors": 116,
+          "loss": 0.49799463152885437
+        }
+      ]
+    },
+    {
+      "name": "class_2.B.A",
+      "depth": 2,
+      "n": 409,
+      "positives": 49,
+      "seed": 8145,
+      "mean_error_persistence": 0.17276422764227642,
+      "base_errors": 71,
+      "final_errors": 71,
+      "seconds": 0.003304041994852014,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 207,
+          "loss": 0.695158839225769
+        },
+        {
+          "epoch": 10,
+          "errors": 71,
+          "loss": 0.5606259107589722
+        }
+      ]
+    },
+    {
+      "name": "class_2.B.B",
+      "depth": 2,
+      "n": 332,
+      "positives": 67,
+      "seed": 8146,
+      "mean_error_persistence": 0.31714628297362113,
+      "base_errors": 84,
+      "final_errors": 84,
+      "seconds": 0.0030275410099420696,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 200,
+          "loss": 0.7223387360572815
+        },
+        {
+          "epoch": 10,
+          "errors": 84,
+          "loss": 0.5774574875831604
+        }
+      ]
+    },
+    {
+      "name": "class_3",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 3044,
+      "mean_error_persistence": 0.15361111111111111,
+      "base_errors": 553,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 90,
+      "refit_accepted": true,
+      "fixed": 521,
+      "spoiled": 58,
+      "final_errors": 90,
+      "seconds": 0.09681149999960326,
+      "a": 12.411421715421742,
+      "b": 3.117694494122195,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1366,
+          "loss": 0.6764430999755859
+        },
+        {
+          "epoch": 10,
+          "errors": 553,
+          "loss": 0.36667510867118835
+        }
+      ]
+    },
+    {
+      "name": "class_3.A",
+      "depth": 1,
+      "n": 3251,
+      "positives": 11,
+      "seed": 6089,
+      "mean_error_persistence": 0.16850490196078433,
+      "base_errors": 550,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 550,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03583408299891744,
+      "a": 0.0,
+      "b": 9.43705365159931,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 2443,
+          "loss": 0.7648519277572632
+        },
+        {
+          "epoch": 10,
+          "errors": 550,
+          "loss": 0.4097134470939636
+        }
+      ]
+    },
+    {
+      "name": "class_3.A.B",
+      "depth": 2,
+      "n": 561,
+      "positives": 550,
+      "seed": 12180,
+      "mean_error_persistence": 0.17081447963800905,
+      "base_errors": 87,
+      "final_errors": 87,
+      "seconds": 0.006120292004197836,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 355,
+          "loss": 0.7295870780944824
+        },
+        {
+          "epoch": 10,
+          "errors": 87,
+          "loss": 0.49912962317466736
+        }
+      ]
+    },
+    {
+      "name": "class_3.B",
+      "depth": 1,
+      "n": 902,
+      "positives": 542,
+      "seed": 6090,
+      "mean_error_persistence": 0.2090443686006826,
+      "base_errors": 178,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 100,
+      "refit_accepted": true,
+      "fixed": 111,
+      "spoiled": 33,
+      "final_errors": 100,
+      "seconds": 0.019694540998898447,
+      "a": 2.7735189482100275,
+      "b": 2.5699870922601216,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 351,
+          "loss": 0.6602739691734314
+        },
+        {
+          "epoch": 10,
+          "errors": 178,
+          "loss": 0.5265607833862305
+        }
+      ]
+    },
+    {
+      "name": "class_3.B.A",
+      "depth": 2,
+      "n": 476,
+      "positives": 116,
+      "seed": 12181,
+      "mean_error_persistence": 0.23937360178970915,
+      "base_errors": 110,
+      "final_errors": 110,
+      "seconds": 0.0037020000017946586,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 135,
+          "loss": 0.6605996489524841
+        },
+        {
+          "epoch": 10,
+          "errors": 110,
+          "loss": 0.6051936149597168
+        }
+      ]
+    },
+    {
+      "name": "class_3.B.B",
+      "depth": 2,
+      "n": 604,
+      "positives": 62,
+      "seed": 12182,
+      "mean_error_persistence": 0.13766519823788545,
+      "base_errors": 79,
+      "final_errors": 79,
+      "seconds": 0.005575292001594789,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 62,
+          "loss": 0.5666489005088806
+        },
+        {
+          "epoch": 10,
+          "errors": 79,
+          "loss": 0.49739357829093933
+        }
+      ]
+    },
+    {
+      "name": "class_4",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 4053,
+      "mean_error_persistence": 0.22583333333333333,
+      "base_errors": 813,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 108,
+      "refit_accepted": true,
+      "fixed": 772,
+      "spoiled": 67,
+      "final_errors": 108,
+      "seconds": 0.10445099999196827,
+      "a": 9.656025890412506,
+      "b": 2.7635894544816275,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1477,
+          "loss": 0.6558067202568054
+        },
+        {
+          "epoch": 10,
+          "errors": 813,
+          "loss": 0.37671223282814026
+        }
+      ]
+    },
+    {
+      "name": "class_4.A",
+      "depth": 1,
+      "n": 3247,
+      "positives": 7,
+      "seed": 8107,
+      "mean_error_persistence": 0.07410824108241082,
+      "base_errors": 241,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 241,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03334437499870546,
+      "a": 0.0,
+      "b": 5.6254721665110665,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 88,
+          "loss": 0.5228074193000793
+        },
+        {
+          "epoch": 10,
+          "errors": 241,
+          "loss": 0.2951796054840088
+        }
+      ]
+    },
+    {
+      "name": "class_4.A.B",
+      "depth": 2,
+      "n": 248,
+      "positives": 241,
+      "seed": 16216,
+      "mean_error_persistence": 0.019230769230769232,
+      "base_errors": 7,
+      "final_errors": 7,
+      "seconds": 0.003305000005639158,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 9,
+          "loss": 0.5388620495796204
+        },
+        {
+          "epoch": 10,
+          "errors": 7,
+          "loss": 0.3768836259841919
+        }
+      ]
+    },
+    {
+      "name": "class_4.B",
+      "depth": 1,
+      "n": 1166,
+      "positives": 806,
+      "seed": 8108,
+      "mean_error_persistence": 0.20073529411764707,
+      "base_errors": 216,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 113,
+      "refit_accepted": true,
+      "fixed": 147,
+      "spoiled": 44,
+      "final_errors": 113,
+      "seconds": 0.02739254200423602,
+      "a": 2.2958293954061935,
+      "b": 1.8211920569851154,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 360,
+          "loss": 0.641927182674408
+        },
+        {
+          "epoch": 10,
+          "errors": 216,
+          "loss": 0.4342873990535736
+        }
+      ]
+    },
+    {
+      "name": "class_4.B.A",
+      "depth": 2,
+      "n": 536,
+      "positives": 176,
+      "seed": 16217,
+      "mean_error_persistence": 0.20833333333333331,
+      "base_errors": 105,
+      "final_errors": 105,
+      "seconds": 0.005725499999243766,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 217,
+          "loss": 0.6779879331588745
+        },
+        {
+          "epoch": 10,
+          "errors": 105,
+          "loss": 0.5572976469993591
+        }
+      ]
+    },
+    {
+      "name": "class_4.B.B",
+      "depth": 2,
+      "n": 846,
+      "positives": 40,
+      "seed": 16218,
+      "mean_error_persistence": 0.1871069182389937,
+      "base_errors": 138,
+      "final_errors": 138,
+      "seconds": 0.006332291988655925,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 429,
+          "loss": 0.6944157481193542
+        },
+        {
+          "epoch": 10,
+          "errors": 138,
+          "loss": 0.4466753304004669
+        }
+      ]
+    },
+    {
+      "name": "class_5",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 5062,
+      "mean_error_persistence": 0.23833333333333334,
+      "base_errors": 858,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 107,
+      "refit_accepted": true,
+      "fixed": 819,
+      "spoiled": 68,
+      "final_errors": 107,
+      "seconds": 0.10427962499670684,
+      "a": 10.388294564030755,
+      "b": 1.698242410773471,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1943,
+          "loss": 0.7399716973304749
+        },
+        {
+          "epoch": 10,
+          "errors": 858,
+          "loss": 0.4018406569957733
+        }
+      ]
+    },
+    {
+      "name": "class_5.A",
+      "depth": 1,
+      "n": 3244,
+      "positives": 4,
+      "seed": 10125,
+      "mean_error_persistence": 0.10793357933579335,
+      "base_errors": 351,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 351,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03341591599746607,
+      "a": 0.0,
+      "b": 3.0316698828764848,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1149,
+          "loss": 0.668618381023407
+        },
+        {
+          "epoch": 10,
+          "errors": 351,
+          "loss": 0.4075552523136139
+        }
+      ]
+    },
+    {
+      "name": "class_5.A.B",
+      "depth": 2,
+      "n": 355,
+      "positives": 351,
+      "seed": 20252,
+      "mean_error_persistence": 0.3875,
+      "base_errors": 139,
+      "final_errors": 139,
+      "seconds": 0.0035677090054377913,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 201,
+          "loss": 0.7207422256469727
+        },
+        {
+          "epoch": 10,
+          "errors": 139,
+          "loss": 0.6659256815910339
+        }
+      ]
+    },
+    {
+      "name": "class_5.B",
+      "depth": 1,
+      "n": 1214,
+      "positives": 854,
+      "seed": 10126,
+      "mean_error_persistence": 0.17029972752043596,
+      "base_errors": 206,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 120,
+      "refit_accepted": true,
+      "fixed": 124,
+      "spoiled": 38,
+      "final_errors": 120,
+      "seconds": 0.02719587500905618,
+      "a": 1.8518226906503235,
+      "b": 1.409012561640509,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 295,
+          "loss": 0.6236287951469421
+        },
+        {
+          "epoch": 10,
+          "errors": 206,
+          "loss": 0.38953641057014465
+        }
+      ]
+    },
+    {
+      "name": "class_5.B.A",
+      "depth": 2,
+      "n": 527,
+      "positives": 167,
+      "seed": 20253,
+      "mean_error_persistence": 0.304369918699187,
+      "base_errors": 115,
+      "final_errors": 115,
+      "seconds": 0.0060532089992193505,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 177,
+          "loss": 0.6556684374809265
+        },
+        {
+          "epoch": 10,
+          "errors": 115,
+          "loss": 0.5765573382377625
+        }
+      ]
+    },
+    {
+      "name": "class_5.B.B",
+      "depth": 2,
+      "n": 893,
+      "positives": 39,
+      "seed": 20254,
+      "mean_error_persistence": 0.2596700796359499,
+      "base_errors": 223,
+      "final_errors": 223,
+      "seconds": 0.006760624994058162,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 617,
+          "loss": 0.7607856392860413
+        },
+        {
+          "epoch": 10,
+          "errors": 223,
+          "loss": 0.5293849110603333
+        }
+      ]
+    },
+    {
+      "name": "class_6",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 6071,
+      "mean_error_persistence": 0.07583333333333334,
+      "base_errors": 273,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 45,
+      "refit_accepted": true,
+      "fixed": 256,
+      "spoiled": 28,
+      "final_errors": 45,
+      "seconds": 0.09950437500083353,
+      "a": 9.725769983068169,
+      "b": 3.9762940428062907,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1151,
+          "loss": 0.5813764333724976
+        },
+        {
+          "epoch": 10,
+          "errors": 273,
+          "loss": 0.20384646952152252
+        }
+      ]
+    },
+    {
+      "name": "class_6.A",
+      "depth": 1,
+      "n": 3242,
+      "positives": 2,
+      "seed": 12143,
+      "mean_error_persistence": 0.23522167487684728,
+      "base_errors": 764,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 764,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03666450000309851,
+      "a": 0.0,
+      "b": 4.685720209398828,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 3132,
+          "loss": 0.886476993560791
+        },
+        {
+          "epoch": 10,
+          "errors": 764,
+          "loss": 0.4993517994880676
+        }
+      ]
+    },
+    {
+      "name": "class_6.A.B",
+      "depth": 2,
+      "n": 766,
+      "positives": 764,
+      "seed": 24288,
+      "mean_error_persistence": 0.08452807646356034,
+      "base_errors": 57,
+      "final_errors": 57,
+      "seconds": 0.006533500010846183,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 181,
+          "loss": 0.6342471837997437
+        },
+        {
+          "epoch": 10,
+          "errors": 57,
+          "loss": 0.46585437655448914
+        }
+      ]
+    },
+    {
+      "name": "class_6.B",
+      "depth": 1,
+      "n": 631,
+      "positives": 271,
+      "seed": 12144,
+      "mean_error_persistence": 0.13800705467372135,
+      "base_errors": 92,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 57,
+      "refit_accepted": true,
+      "fixed": 61,
+      "spoiled": 26,
+      "final_errors": 57,
+      "seconds": 0.015087666994077154,
+      "a": 2.9144737416970683,
+      "b": 1.5227922494376518,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 351,
+          "loss": 0.6901853084564209
+        },
+        {
+          "epoch": 10,
+          "errors": 92,
+          "loss": 0.47633475065231323
+        }
+      ]
+    },
+    {
+      "name": "class_6.B.A",
+      "depth": 2,
+      "n": 375,
+      "positives": 15,
+      "seed": 24289,
+      "mean_error_persistence": 0.08838383838383838,
+      "base_errors": 35,
+      "final_errors": 35,
+      "seconds": 0.0032957500079646707,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 164,
+          "loss": 0.6871322989463806
+        },
+        {
+          "epoch": 10,
+          "errors": 35,
+          "loss": 0.3698825240135193
+        }
+      ]
+    },
+    {
+      "name": "class_6.B.B",
+      "depth": 2,
+      "n": 348,
+      "positives": 77,
+      "seed": 24290,
+      "mean_error_persistence": 0.42435897435897435,
+      "base_errors": 147,
+      "final_errors": 147,
+      "seconds": 0.0033786669955588877,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 263,
+          "loss": 0.761250913143158
+        },
+        {
+          "epoch": 10,
+          "errors": 147,
+          "loss": 0.6394816040992737
+        }
+      ]
+    },
+    {
+      "name": "class_7",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 7080,
+      "mean_error_persistence": 0.31222222222222223,
+      "base_errors": 1124,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 48,
+      "refit_accepted": true,
+      "fixed": 1106,
+      "spoiled": 30,
+      "final_errors": 48,
+      "seconds": 0.1099493329966208,
+      "a": 14.749623927413804,
+      "b": 1.820180896398289,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 2353,
+          "loss": 0.7868524789810181
+        },
+        {
+          "epoch": 10,
+          "errors": 1124,
+          "loss": 0.44082674384117126
+        }
+      ]
+    },
+    {
+      "name": "class_7.A",
+      "depth": 1,
+      "n": 3250,
+      "positives": 10,
+      "seed": 14161,
+      "mean_error_persistence": 0.10196560196560196,
+      "base_errors": 332,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 332,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03435195900965482,
+      "a": 0.0,
+      "b": 4.442156882971628,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 777,
+          "loss": 0.6272116303443909
+        },
+        {
+          "epoch": 10,
+          "errors": 332,
+          "loss": 0.3704218864440918
+        }
+      ]
+    },
+    {
+      "name": "class_7.A.B",
+      "depth": 2,
+      "n": 342,
+      "positives": 332,
+      "seed": 28324,
+      "mean_error_persistence": 0.6047297297297297,
+      "base_errors": 193,
+      "final_errors": 193,
+      "seconds": 0.003562833007890731,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 317,
+          "loss": 0.8155079483985901
+        },
+        {
+          "epoch": 10,
+          "errors": 193,
+          "loss": 0.7088381052017212
+        }
+      ]
+    },
+    {
+      "name": "class_7.B",
+      "depth": 1,
+      "n": 1474,
+      "positives": 1114,
+      "seed": 14162,
+      "mean_error_persistence": 0.17666666666666667,
+      "base_errors": 227,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 77,
+      "refit_accepted": true,
+      "fixed": 187,
+      "spoiled": 37,
+      "final_errors": 77,
+      "seconds": 0.03286270800163038,
+      "a": 2.811701678684137,
+      "b": 1.858299371568379,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 560,
+          "loss": 0.648289680480957
+        },
+        {
+          "epoch": 10,
+          "errors": 227,
+          "loss": 0.3455033600330353
+        }
+      ]
+    },
+    {
+      "name": "class_7.B.A",
+      "depth": 2,
+      "n": 573,
+      "positives": 213,
+      "seed": 28325,
+      "mean_error_persistence": 0.18783068783068782,
+      "base_errors": 100,
+      "final_errors": 100,
+      "seconds": 0.0062358340073842555,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 187,
+          "loss": 0.6711332201957703
+        },
+        {
+          "epoch": 10,
+          "errors": 100,
+          "loss": 0.470707505941391
+        }
+      ]
+    },
+    {
+      "name": "class_7.B.B",
+      "depth": 2,
+      "n": 1128,
+      "positives": 14,
+      "seed": 28326,
+      "mean_error_persistence": 0.2356164383561644,
+      "base_errors": 216,
+      "final_errors": 216,
+      "seconds": 0.010739958001067862,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 998,
+          "loss": 0.8207253217697144
+        },
+        {
+          "epoch": 10,
+          "errors": 216,
+          "loss": 0.4537205100059509
+        }
+      ]
+    },
+    {
+      "name": "class_8",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 8089,
+      "mean_error_persistence": 0.11972222222222222,
+      "base_errors": 431,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 44,
+      "refit_accepted": true,
+      "fixed": 411,
+      "spoiled": 24,
+      "final_errors": 44,
+      "seconds": 0.05287229100940749,
+      "a": 0.0,
+      "b": 1.1847491481854922,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 2129,
+          "loss": 0.7927587628364563
+        },
+        {
+          "epoch": 10,
+          "errors": 431,
+          "loss": 0.27109548449516296
+        }
+      ]
+    },
+    {
+      "name": "class_8.B",
+      "depth": 1,
+      "n": 791,
+      "positives": 431,
+      "seed": 16180,
+      "mean_error_persistence": 0.17996108949416342,
+      "base_errors": 131,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 72,
+      "refit_accepted": true,
+      "fixed": 88,
+      "spoiled": 29,
+      "final_errors": 72,
+      "seconds": 0.016899499998544343,
+      "a": 8.007249534775235,
+      "b": 1.221426381778083,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 286,
+          "loss": 0.6719794869422913
+        },
+        {
+          "epoch": 10,
+          "errors": 131,
+          "loss": 0.4363861680030823
+        }
+      ]
+    },
+    {
+      "name": "class_8.B.A",
+      "depth": 2,
+      "n": 463,
+      "positives": 103,
+      "seed": 32361,
+      "mean_error_persistence": 0.3218599033816425,
+      "base_errors": 92,
+      "final_errors": 92,
+      "seconds": 0.0038386660016840324,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 103,
+          "loss": 0.6087750196456909
+        },
+        {
+          "epoch": 10,
+          "errors": 92,
+          "loss": 0.41343438625335693
+        }
+      ]
+    },
+    {
+      "name": "class_8.B.B",
+      "depth": 2,
+      "n": 459,
+      "positives": 28,
+      "seed": 32362,
+      "mean_error_persistence": 0.35787037037037034,
+      "base_errors": 169,
+      "final_errors": 169,
+      "seconds": 0.0032789580000098795,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 67,
+          "loss": 0.6002052426338196
+        },
+        {
+          "epoch": 10,
+          "errors": 169,
+          "loss": 0.648845374584198
+        }
+      ]
+    },
+    {
+      "name": "class_9",
+      "depth": 0,
+      "n": 3600,
+      "positives": 360,
+      "seed": 9098,
+      "mean_error_persistence": 0.13361111111111112,
+      "base_errors": 481,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 70,
+      "refit_accepted": true,
+      "fixed": 451,
+      "spoiled": 40,
+      "final_errors": 70,
+      "seconds": 0.09367545798886567,
+      "a": 9.183269922019793,
+      "b": 2.5998937190989695,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1191,
+          "loss": 0.6183399558067322
+        },
+        {
+          "epoch": 10,
+          "errors": 481,
+          "loss": 0.2716248631477356
+        }
+      ]
+    },
+    {
+      "name": "class_9.A",
+      "depth": 1,
+      "n": 3244,
+      "positives": 4,
+      "seed": 18197,
+      "mean_error_persistence": 0.08169533169533169,
+      "base_errors": 266,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 266,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.03195520800363738,
+      "a": 0.0,
+      "b": 6.531560824988579,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 1466,
+          "loss": 0.6756806969642639
+        },
+        {
+          "epoch": 10,
+          "errors": 266,
+          "loss": 0.26925039291381836
+        }
+      ]
+    },
+    {
+      "name": "class_9.A.B",
+      "depth": 2,
+      "n": 270,
+      "positives": 266,
+      "seed": 36396,
+      "mean_error_persistence": 0.1794294294294294,
+      "base_errors": 44,
+      "final_errors": 44,
+      "seconds": 0.0032590000046184286,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 215,
+          "loss": 0.7958046793937683
+        },
+        {
+          "epoch": 10,
+          "errors": 44,
+          "loss": 0.521034836769104
+        }
+      ]
+    },
+    {
+      "name": "class_9.B",
+      "depth": 1,
+      "n": 837,
+      "positives": 477,
+      "seed": 18198,
+      "mean_error_persistence": 0.24353741496598638,
+      "base_errors": 166,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 74,
+      "refit_accepted": true,
+      "fixed": 122,
+      "spoiled": 30,
+      "final_errors": 74,
+      "seconds": 0.018630167003721,
+      "a": 3.0381099574721833,
+      "b": 1.7860897715113857,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 409,
+          "loss": 0.691538393497467
+        },
+        {
+          "epoch": 10,
+          "errors": 166,
+          "loss": 0.4734286963939667
+        }
+      ]
+    },
+    {
+      "name": "class_9.B.A",
+      "depth": 2,
+      "n": 496,
+      "positives": 136,
+      "seed": 36397,
+      "mean_error_persistence": 0.19838709677419353,
+      "base_errors": 75,
+      "final_errors": 75,
+      "seconds": 0.003984665992902592,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 130,
+          "loss": 0.6219319701194763
+        },
+        {
+          "epoch": 10,
+          "errors": 75,
+          "loss": 0.48640990257263184
+        }
+      ]
+    },
+    {
+      "name": "class_9.B.B",
+      "depth": 2,
+      "n": 507,
+      "positives": 30,
+      "seed": 36398,
+      "mean_error_persistence": 0.21577380952380953,
+      "base_errors": 93,
+      "final_errors": 93,
+      "seconds": 0.0035223330050939694,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 286,
+          "loss": 0.7079240083694458
+        },
+        {
+          "epoch": 10,
+          "errors": 93,
+          "loss": 0.4959620535373688
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 1970,
+  "all_views_correct_fraction": 0.8488888888888889,
+  "train_clean": {
+    "n": 900,
+    "errors": 53,
+    "accuracy": 0.9411111111111111,
+    "log_loss": 0.17485093020089854,
+    "brier": 0.08813148896968266,
+    "confusion": [
+      [
+        86,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        86,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        86,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        81,
+        0,
+        8,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        82,
+        2,
+        1,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        5,
+        0,
+        80,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        3,
+        1,
+        0,
+        84,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        0,
+        87,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        89,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        86
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 900,
+    "errors": 53,
+    "accuracy": 0.9411111111111111,
+    "log_loss": 0.17485093020089854,
+    "brier": 0.08813148896968266,
+    "confusion": [
+      [
+        86,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        86,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        1,
+        0,
+        86,
+        0,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        81,
+        0,
+        8,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        82,
+        2,
+        1,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        3,
+        5,
+        0,
+        80,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        3,
+        1,
+        0,
+        84,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        0,
+        87,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        89,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        86
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 5000,
+    "errors": 1101,
+    "accuracy": 0.7798,
+    "log_loss": 0.9877071129248199,
+    "brier": 0.35417935919598115,
+    "confusion": [
+      [
+        363,
+        19,
+        26,
+        3,
+        2,
+        5,
+        10,
+        1,
+        58,
+        13
+      ],
+      [
+        4,
+        449,
+        2,
+        2,
+        0,
+        3,
+        5,
+        1,
+        12,
+        22
+      ],
+      [
+        22,
+        1,
+        372,
+        16,
+        24,
+        25,
+        31,
+        3,
+        3,
+        3
+      ],
+      [
+        5,
+        5,
+        29,
+        304,
+        9,
+        96,
+        22,
+        10,
+        8,
+        12
+      ],
+      [
+        9,
+        0,
+        29,
+        28,
+        352,
+        15,
+        34,
+        29,
+        4,
+        0
+      ],
+      [
+        1,
+        1,
+        21,
+        61,
+        14,
+        375,
+        5,
+        16,
+        5,
+        1
+      ],
+      [
+        5,
+        0,
+        24,
+        24,
+        4,
+        16,
+        422,
+        1,
+        4,
+        0
+      ],
+      [
+        8,
+        1,
+        14,
+        21,
+        20,
+        27,
+        6,
+        393,
+        7,
+        3
+      ],
+      [
+        25,
+        10,
+        8,
+        2,
+        1,
+        0,
+        3,
+        0,
+        442,
+        9
+      ],
+      [
+        12,
+        44,
+        2,
+        1,
+        0,
+        4,
+        2,
+        1,
+        7,
+        427
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 1800,
+    "errors": 161,
+    "accuracy": 0.9105555555555556,
+    "log_loss": 0.2719232908093769,
+    "brier": 0.13362308105718376,
+    "confusion": [
+      [
+        169,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        7,
+        2
+      ],
+      [
+        1,
+        170,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        7
+      ],
+      [
+        2,
+        0,
+        160,
+        3,
+        7,
+        3,
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        148,
+        3,
+        14,
+        7,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        168,
+        3,
+        2,
+        5,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        5,
+        14,
+        1,
+        155,
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        3,
+        2,
+        3,
+        5,
+        2,
+        2,
+        162,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        2,
+        6,
+        1,
+        0,
+        168,
+        0,
+        1
+      ],
+      [
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        176,
+        0
+      ],
+      [
+        4,
+        9,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        163
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 1800,
+    "errors": 161,
+    "accuracy": 0.9105555555555556,
+    "log_loss": 0.2719232908093769,
+    "brier": 0.13362308105718376,
+    "confusion": [
+      [
+        169,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        7,
+        2
+      ],
+      [
+        1,
+        170,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        7
+      ],
+      [
+        2,
+        0,
+        160,
+        3,
+        7,
+        3,
+        1,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        5,
+        148,
+        3,
+        14,
+        7,
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        168,
+        3,
+        2,
+        5,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        5,
+        14,
+        1,
+        155,
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        3,
+        2,
+        3,
+        5,
+        2,
+        2,
+        162,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1,
+        2,
+        6,
+        1,
+        0,
+        168,
+        0,
+        1
+      ],
+      [
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        176,
+        0
+      ],
+      [
+        4,
+        9,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        2,
+        163
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.08555555555555555,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "ac8d1902bf14333d0ce0c93aa6c6d76fc3deeec7e886f3e30133e16371ab368b",
+  "predictions_sha256": "5a3cd381b05563885eab7d5b1b8ffa2b076a320b36f0b29df8899b42886c3d75"
+}

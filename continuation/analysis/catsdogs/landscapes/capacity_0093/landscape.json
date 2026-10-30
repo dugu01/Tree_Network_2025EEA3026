@@ -1,0 +1,35 @@
+{
+  "base_loss": {
+    "train": 3.0126023501805946e-05,
+    "val": 0.2673160371397062
+  },
+  "slices": [
+    {
+      "direction_seed": 0,
+      "max_train_increase": 0.5884304261374137,
+      "max_val_increase": 0.5535178998141929
+    },
+    {
+      "direction_seed": 1,
+      "max_train_increase": 0.32048373813837994,
+      "max_val_increase": 0.42758039887005406
+    },
+    {
+      "direction_seed": 2,
+      "max_train_increase": 0.47415015147757933,
+      "max_val_increase": 0.40812340034394534
+    }
+  ],
+  "conditional_readout": [
+    {
+      "node": "class_1",
+      "smallest": 5.125282587809756e-07,
+      "largest": 6.0350837002594326e-05,
+      "psd": true,
+      "samples": 512,
+      "scope": "conditional unweighted regularized readout, children and hidden features held fixed; subsample diagnostic not full-data optimizer Hessian"
+    }
+  ],
+  "objective": "Unweighted mean binary cross entropy across OVR root outputs; distinct from class-balanced local node training loss and multiclass softmax test log loss",
+  "interpretation": "Hard child decisions recomputed at every perturbation. A slice is not a global convexity/flatness proof; biases and edge scalars fixed. No global full-tree Hessian is claimed."
+}

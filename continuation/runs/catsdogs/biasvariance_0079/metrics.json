@@ -1,0 +1,283 @@
+{
+  "job": {
+    "dataset": "catsdogs",
+    "phase": "biasvariance",
+    "width": 4,
+    "depth": 2,
+    "epochs": 10,
+    "fraction": 0.5,
+    "data_seed": 101,
+    "seed": 29,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "augment",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "biasvariance_0079"
+  },
+  "training_seconds": 0.7328297500062035,
+  "n_original": 8738,
+  "n_presented": 34952,
+  "nodes": 5,
+  "head_parameters": 11569,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 34952,
+    "errors": 277,
+    "accuracy": 0.9920748455024033,
+    "log_loss": 0.03324651348257207,
+    "brier": 0.012869508449022274,
+    "confusion": [
+      [
+        17398,
+        74
+      ],
+      [
+        203,
+        17277
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 34952,
+      "positives": 17480,
+      "seed": 29,
+      "mean_error_persistence": 0.010814831769283589,
+      "base_errors": 378,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 277,
+      "refit_accepted": true,
+      "fixed": 267,
+      "spoiled": 166,
+      "final_errors": 277,
+      "seconds": 0.7325639159971615,
+      "a": 5.786422942321228,
+      "b": 1.1561472614441783,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 17472,
+          "loss": 0.493587851524353
+        },
+        {
+          "epoch": 10,
+          "errors": 378,
+          "loss": 0.3185499608516693
+        }
+      ]
+    },
+    {
+      "name": "class_1.A",
+      "depth": 1,
+      "n": 17610,
+      "positives": 138,
+      "seed": 59,
+      "mean_error_persistence": 0.0886950611690077,
+      "base_errors": 1566,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 67,
+      "refit_accepted": true,
+      "fixed": 1540,
+      "spoiled": 41,
+      "final_errors": 67,
+      "seconds": 0.2767018750018906,
+      "a": 2.2033942303195557,
+      "b": 2.0214700110005865,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 17472,
+          "loss": 0.8887925744056702
+        },
+        {
+          "epoch": 10,
+          "errors": 1566,
+          "loss": 0.6508047580718994
+        }
+      ]
+    },
+    {
+      "name": "class_1.A.A",
+      "depth": 2,
+      "n": 17476,
+      "positives": 4,
+      "seed": 119,
+      "mean_error_persistence": 0.004463263904783703,
+      "base_errors": 78,
+      "final_errors": 78,
+      "seconds": 0.11407991699525155,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 167,
+          "loss": 0.2181388884782791
+        },
+        {
+          "epoch": 10,
+          "errors": 78,
+          "loss": 0.025080814957618713
+        }
+      ]
+    },
+    {
+      "name": "class_1.A.B",
+      "depth": 2,
+      "n": 1700,
+      "positives": 1562,
+      "seed": 120,
+      "mean_error_persistence": 0.18644781144781145,
+      "base_errors": 325,
+      "final_errors": 325,
+      "seconds": 0.014235999988159165,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 617,
+          "loss": 0.6546703577041626
+        },
+        {
+          "epoch": 10,
+          "errors": 325,
+          "loss": 0.5570468902587891
+        }
+      ]
+    },
+    {
+      "name": "class_1.B",
+      "depth": 1,
+      "n": 17720,
+      "positives": 240,
+      "seed": 60,
+      "mean_error_persistence": 0.08824506979836029,
+      "base_errors": 1593,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 270,
+      "refit_accepted": true,
+      "fixed": 1537,
+      "spoiled": 214,
+      "final_errors": 270,
+      "seconds": 0.1473783330002334,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 7192,
+          "loss": 0.731536328792572
+        },
+        {
+          "epoch": 10,
+          "errors": 1593,
+          "loss": 0.2115827053785324
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 1780,
+  "all_views_correct_fraction": 0.9832913710231174,
+  "train_clean": {
+    "n": 8738,
+    "errors": 65,
+    "accuracy": 0.9925612268253605,
+    "log_loss": 0.030423731432248375,
+    "brier": 0.011514389654154196,
+    "confusion": [
+      [
+        4349,
+        19
+      ],
+      [
+        46,
+        4324
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 8738,
+    "errors": 65,
+    "accuracy": 0.9925612268253605,
+    "log_loss": 0.030423731432248375,
+    "brier": 0.011514389654154196,
+    "confusion": [
+      [
+        4349,
+        19
+      ],
+      [
+        46,
+        4324
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 3745,
+    "errors": 91,
+    "accuracy": 0.9757009345794393,
+    "log_loss": 0.1130636837711296,
+    "brier": 0.04173818666736299,
+    "confusion": [
+      [
+        1833,
+        39
+      ],
+      [
+        52,
+        1821
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 17476,
+    "errors": 154,
+    "accuracy": 0.9911879148546578,
+    "log_loss": 0.0326167325441715,
+    "brier": 0.014043684557882503,
+    "confusion": [
+      [
+        8694,
+        42
+      ],
+      [
+        112,
+        8628
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 17476,
+    "errors": 154,
+    "accuracy": 0.9911879148546578,
+    "log_loss": 0.0326167325441715,
+    "brier": 0.014043684557882503,
+    "confusion": [
+      [
+        8694,
+        42
+      ],
+      [
+        112,
+        8628
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.008812085145342183,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "138724b9fd867378c096a128b241b448da68dccfe2152b9147948a98fc7e6e64",
+  "predictions_sha256": "93dbad28b7d7ee400bea673abfa2e3254c0f653c373eafc93c5825946f234da9"
+}

@@ -1,0 +1,206 @@
+{
+  "job": {
+    "dataset": "catsdogs",
+    "phase": "capacity",
+    "width": 4,
+    "depth": 2,
+    "epochs": 100,
+    "fraction": 0.25,
+    "data_seed": 101,
+    "seed": 29,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "repeat",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "capacity_0127"
+  },
+  "training_seconds": 1.9040065000008326,
+  "n_original": 4369,
+  "n_presented": 17476,
+  "nodes": 2,
+  "head_parameters": 4627,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 17476,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 3.765900357568998e-05,
+    "brier": 2.5440851412452647e-07,
+    "confusion": [
+      [
+        8736,
+        0
+      ],
+      [
+        0,
+        8740
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 17476,
+      "positives": 8740,
+      "seed": 29,
+      "mean_error_persistence": 0.001373311970702678,
+      "base_errors": 24,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 24,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 1.9036165419965982,
+      "a": 14.63270938503686,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 8736,
+          "loss": 0.5111497640609741
+        },
+        {
+          "epoch": 50,
+          "errors": 32,
+          "loss": 0.15787078440189362
+        },
+        {
+          "epoch": 100,
+          "errors": 24,
+          "loss": 0.06269736588001251
+        }
+      ]
+    },
+    {
+      "name": "class_1.A",
+      "depth": 1,
+      "n": 8760,
+      "positives": 24,
+      "seed": 59,
+      "mean_error_persistence": 0.0,
+      "base_errors": 0,
+      "final_errors": 0,
+      "seconds": 0.6332202500052517,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 8736,
+          "loss": 0.8176588416099548
+        },
+        {
+          "epoch": 50,
+          "errors": 0,
+          "loss": 0.4054478406906128
+        },
+        {
+          "epoch": 100,
+          "errors": 0,
+          "loss": 0.22824983298778534
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 5300,
+  "all_views_correct_fraction": 1.0,
+  "train_clean": {
+    "n": 4369,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 3.765900357568998e-05,
+    "brier": 2.5440851412452647e-07,
+    "confusion": [
+      [
+        2184,
+        0
+      ],
+      [
+        0,
+        2185
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 4369,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 3.765900357568998e-05,
+    "brier": 2.5440851412452647e-07,
+    "confusion": [
+      [
+        2184,
+        0
+      ],
+      [
+        0,
+        2185
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 3745,
+    "errors": 108,
+    "accuracy": 0.9711615487316422,
+    "log_loss": 0.21706561162288096,
+    "brier": 0.054561583826997814,
+    "confusion": [
+      [
+        1810,
+        62
+      ],
+      [
+        46,
+        1827
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 8738,
+    "errors": 51,
+    "accuracy": 0.9941634241245136,
+    "log_loss": 0.03172453974374374,
+    "brier": 0.009921553843735024,
+    "confusion": [
+      [
+        4348,
+        20
+      ],
+      [
+        31,
+        4339
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 8738,
+    "errors": 51,
+    "accuracy": 0.9941634241245136,
+    "log_loss": 0.03172453974374374,
+    "brier": 0.009921553843735024,
+    "confusion": [
+      [
+        4348,
+        20
+      ],
+      [
+        31,
+        4339
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.005836575875486381,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "e2c9ff812e9bc590153517645914165c50300c90e7dd6e18514cb601bfe7f211",
+  "predictions_sha256": "98cd42ccb119a091f79151238d23127dfce98cfca1c38b4285dfeb421f077f17"
+}

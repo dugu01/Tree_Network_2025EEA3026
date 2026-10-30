@@ -1,0 +1,283 @@
+{
+  "job": {
+    "dataset": "catsdogs",
+    "phase": "pilot",
+    "width": 8,
+    "depth": 2,
+    "epochs": 10,
+    "fraction": 0.02,
+    "data_seed": 101,
+    "seed": 17,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "none",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "pilot_0000"
+  },
+  "training_seconds": 0.6149494580022292,
+  "n_original": 348,
+  "n_presented": 348,
+  "nodes": 5,
+  "head_parameters": 23129,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00019580298715765832,
+    "brier": 2.7880780727603875e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 348,
+      "positives": 174,
+      "seed": 17,
+      "mean_error_persistence": 0.031609195402298854,
+      "base_errors": 11,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 11,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.6148208329977933,
+      "a": 16.42231698487729,
+      "b": 13.541157140271018,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 84,
+          "loss": 0.6251342296600342
+        },
+        {
+          "epoch": 10,
+          "errors": 11,
+          "loss": 0.37349244952201843
+        }
+      ]
+    },
+    {
+      "name": "class_1.A",
+      "depth": 1,
+      "n": 181,
+      "positives": 7,
+      "seed": 35,
+      "mean_error_persistence": 0.19337016574585636,
+      "base_errors": 35,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 35,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.01202508300775662,
+      "a": 0.0,
+      "b": 10.910402871144827,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 116,
+          "loss": 0.7315376996994019
+        },
+        {
+          "epoch": 10,
+          "errors": 35,
+          "loss": 0.4792487323284149
+        }
+      ]
+    },
+    {
+      "name": "class_1.A.B",
+      "depth": 2,
+      "n": 42,
+      "positives": 35,
+      "seed": 72,
+      "mean_error_persistence": 0.023809523809523808,
+      "base_errors": 1,
+      "final_errors": 1,
+      "seconds": 0.002504833013517782,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 13,
+          "loss": 0.6580623388290405
+        },
+        {
+          "epoch": 10,
+          "errors": 1,
+          "loss": 0.47947007417678833
+        }
+      ]
+    },
+    {
+      "name": "class_1.B",
+      "depth": 1,
+      "n": 178,
+      "positives": 4,
+      "seed": 36,
+      "mean_error_persistence": 0.1348314606741573,
+      "base_errors": 24,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 24,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.005636750007397495,
+      "a": 0.0,
+      "b": 12.242223459825963,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 82,
+          "loss": 0.6812888383865356
+        },
+        {
+          "epoch": 10,
+          "errors": 24,
+          "loss": 0.43017578125
+        }
+      ]
+    },
+    {
+      "name": "class_1.B.B",
+      "depth": 2,
+      "n": 28,
+      "positives": 24,
+      "seed": 74,
+      "mean_error_persistence": 0.0,
+      "base_errors": 0,
+      "final_errors": 0,
+      "seconds": 0.0022176669881446287,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 18,
+          "loss": 0.7423887252807617
+        },
+        {
+          "epoch": 10,
+          "errors": 0,
+          "loss": 0.47777774930000305
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 50,
+  "all_views_correct_fraction": 1.0,
+  "train_clean": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00019580298715765832,
+    "brier": 2.7880780727603875e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00019580298715765832,
+    "brier": 2.7880780727603875e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 3745,
+    "errors": 195,
+    "accuracy": 0.9479305740987984,
+    "log_loss": 0.5015483742895966,
+    "brier": 0.09673514290855004,
+    "confusion": [
+      [
+        1789,
+        83
+      ],
+      [
+        112,
+        1761
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 696,
+    "errors": 12,
+    "accuracy": 0.9827586206896551,
+    "log_loss": 0.13179107619156077,
+    "brier": 0.030471900706050093,
+    "confusion": [
+      [
+        342,
+        6
+      ],
+      [
+        6,
+        342
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 696,
+    "errors": 12,
+    "accuracy": 0.9827586206896551,
+    "log_loss": 0.13179107619156077,
+    "brier": 0.030471900706050093,
+    "confusion": [
+      [
+        342,
+        6
+      ],
+      [
+        6,
+        342
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.017241379310344827,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "5b732b63d31d79d12704867a8ee00807d61b50c262484633d17d6af38db2a348",
+  "predictions_sha256": "23a808066b3b4268048afd348487747db90edb46c93e05a1b1931c00fd757db3"
+}

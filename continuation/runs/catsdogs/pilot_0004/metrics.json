@@ -1,0 +1,283 @@
+{
+  "job": {
+    "dataset": "catsdogs",
+    "phase": "pilot",
+    "width": 8,
+    "depth": 2,
+    "epochs": 10,
+    "fraction": 0.02,
+    "data_seed": 101,
+    "seed": 17,
+    "noise": 0.0,
+    "noise_seed": 1234,
+    "mode": "augment",
+    "views": 3,
+    "bank_id": 0,
+    "ensemble_family": null,
+    "id": "pilot_0004"
+  },
+  "training_seconds": 0.0406866249977611,
+  "n_original": 348,
+  "n_presented": 1392,
+  "nodes": 5,
+  "head_parameters": 23129,
+  "trunk_parameters": 927008,
+  "train_bank": {
+    "n": 1392,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.0001723397386247468,
+    "brier": 5.536707490464009e-06,
+    "confusion": [
+      [
+        696,
+        0
+      ],
+      [
+        0,
+        696
+      ]
+    ]
+  },
+  "node_stats": [
+    {
+      "name": "class_1",
+      "depth": 0,
+      "n": 1392,
+      "positives": 696,
+      "seed": 17,
+      "mean_error_persistence": 0.020833333333333332,
+      "base_errors": 29,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 29,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.04056991598918103,
+      "a": 13.974011489175401,
+      "b": 21.054174418584505,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 144,
+          "loss": 0.5553684234619141
+        },
+        {
+          "epoch": 10,
+          "errors": 29,
+          "loss": 0.1757337599992752
+        }
+      ]
+    },
+    {
+      "name": "class_1.A",
+      "depth": 1,
+      "n": 705,
+      "positives": 9,
+      "seed": 35,
+      "mean_error_persistence": 0.15112994350282485,
+      "base_errors": 107,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 107,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.011562166997464374,
+      "a": 0.0,
+      "b": 5.2925358563856175,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 430,
+          "loss": 0.7208434343338013
+        },
+        {
+          "epoch": 10,
+          "errors": 107,
+          "loss": 0.3420165181159973
+        }
+      ]
+    },
+    {
+      "name": "class_1.A.B",
+      "depth": 2,
+      "n": 116,
+      "positives": 107,
+      "seed": 72,
+      "mean_error_persistence": 0.08783783783783784,
+      "base_errors": 7,
+      "final_errors": 7,
+      "seconds": 0.0028196670027682558,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 39,
+          "loss": 0.6611142754554749
+        },
+        {
+          "epoch": 10,
+          "errors": 7,
+          "loss": 0.5257233381271362
+        }
+      ]
+    },
+    {
+      "name": "class_1.B",
+      "depth": 1,
+      "n": 716,
+      "positives": 20,
+      "seed": 36,
+      "mean_error_persistence": 0.08559782608695653,
+      "base_errors": 63,
+      "refit_success": true,
+      "refit_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "refit_candidate_errors": 0,
+      "refit_accepted": true,
+      "fixed": 63,
+      "spoiled": 0,
+      "final_errors": 0,
+      "seconds": 0.011561958002857864,
+      "a": 0.0,
+      "b": 12.866135423174988,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 284,
+          "loss": 0.6474462151527405
+        },
+        {
+          "epoch": 10,
+          "errors": 63,
+          "loss": 0.28479912877082825
+        }
+      ]
+    },
+    {
+      "name": "class_1.B.B",
+      "depth": 2,
+      "n": 83,
+      "positives": 63,
+      "seed": 74,
+      "mean_error_persistence": 0.12239583333333333,
+      "base_errors": 7,
+      "final_errors": 7,
+      "seconds": 0.0026275830023223534,
+      "a": 0.0,
+      "b": 0.0,
+      "history": [
+        {
+          "epoch": 1,
+          "errors": 45,
+          "loss": 0.7101674675941467
+        },
+        {
+          "epoch": 10,
+          "errors": 7,
+          "loss": 0.4776908755302429
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit",
+    "torch": "2.14.1",
+    "numpy": "2.4.6"
+  },
+  "optimizer_updates": 90,
+  "all_views_correct_fraction": 1.0,
+  "train_clean": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00017165774609592937,
+    "brier": 4.793993749475342e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "train_original_fit_labels": {
+    "n": 348,
+    "errors": 0,
+    "accuracy": 1.0,
+    "log_loss": 0.00017165774609592937,
+    "brier": 4.793993749475342e-06,
+    "confusion": [
+      [
+        174,
+        0
+      ],
+      [
+        0,
+        174
+      ]
+    ]
+  },
+  "val_clean": {
+    "n": 3745,
+    "errors": 171,
+    "accuracy": 0.9543391188251001,
+    "log_loss": 0.6162946551810458,
+    "brier": 0.08551525679039024,
+    "confusion": [
+      [
+        1822,
+        50
+      ],
+      [
+        121,
+        1752
+      ]
+    ]
+  },
+  "unseen_views_clean": {
+    "n": 696,
+    "errors": 3,
+    "accuracy": 0.9956896551724138,
+    "log_loss": 0.007762261266891601,
+    "brier": 0.0055377527056005614,
+    "confusion": [
+      [
+        348,
+        0
+      ],
+      [
+        3,
+        345
+      ]
+    ]
+  },
+  "unseen_views_fit_labels": {
+    "n": 696,
+    "errors": 3,
+    "accuracy": 0.9956896551724138,
+    "log_loss": 0.007762261266891601,
+    "brier": 0.0055377527056005614,
+    "confusion": [
+      [
+        348,
+        0
+      ],
+      [
+        3,
+        345
+      ]
+    ]
+  },
+  "probe_disagreement_with_original": 0.004310344827586207,
+  "root_epoch_trajectory": [],
+  "checkpoint_sha256": "55bd363a576b17adefaac936055cb8b80f1a6e83018f1e4d62fe2cd1f771cc0f",
+  "predictions_sha256": "216402421a6ddeeb2fca60a827be524a18706420d43fc0e987ca76e004b28232"
+}
